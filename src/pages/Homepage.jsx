@@ -54,13 +54,13 @@ const HomePage=()=>{
         <section className=" w-full h-fit px-6 py-12 md:px-28 md:py-24 md:flex md:gap-16 items-center justify-center">
         <div className="w-full h-[300px] bg-[url('./src/images/consult.jpg')] bg-cover bg-center font-semibold relative">
             {/* TO ADD IMAGE CONTAINER TO BE USED AS IF IT WAS A BACKGROUND */}
-            <span className="flex flex-col md:flex-row items-center gap-2 bg-white p-4 shadow-lg absolute -top-6 right-8 z-30 rounded">
+            <span className="flex flex-col md:flex-row items-center gap-2 bg-white p-4 shadow-lg drop-shadow absolute -top-6 right-8 z-30 rounded">
                 <p>Innovation</p>
             </span>
-            <span className="flex flex-col md:flex-row items-center gap-2 bg-white py-14 px-2 shadow-lg absolute top-24 -left-8 z-30 rounded">
+            <span className="flex flex-col md:flex-row items-center gap-2 bg-white py-14 px-2 shadow absolute top-24 -left-8 z-30 rounded">
             <p>Experts</p>
             </span>
-            <span className="flex flex-col md:flex-row items-center gap-2 bg-white p-4 shadow-lg absolute -bottom-6 right-24 z-30 rounded">
+            <span className="flex flex-col md:flex-row items-center gap-2 bg-white p-4 shadow absolute -bottom-6 right-24 z-30 rounded">
             <p>Human-focused</p>
             </span>
             <span className="flex flex-col md:flex-row items-center gap-2 py-10 px-20 bg-red-800 absolute -bottom-6 -left-4 -z-10 rounded"></span>
@@ -73,7 +73,7 @@ const HomePage=()=>{
             <p className="text-xl ">Solving social problems requires leaders from foundations, businesses, nonprofits, and governments to reimagine the systems and relationships that shape our world. We strive for a deep understanding of how to create social change.</p>
             <div className="flex items-center gap-2">
                     <p className="md:text-lg">Read more</p>
-                    <FiArrowRight className=" text-xl text-orange-500 hover:text-white"/>
+                    <FiArrowRight className=" text-xl text-orange-500 hover:text-blue-950"/>
                 </div>
         </div>
         </section>
