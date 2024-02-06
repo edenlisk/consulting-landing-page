@@ -8,7 +8,7 @@ const HomePage=()=>{
         <>
         {/* HEADER */}
         <section className=" w-full h-fit bg-red-400  px-6 py-4 lg:px-28 lg:grid flex lg:grid-cols-12 items-center justify-between ">
-            <h1 className=" text-4xl bg-lime-200 col-start-1 col-end-3">Bite mwaa</h1>
+            <h1 className=" text-4xl bg-lime-200 col-start-1 col-end-3">Helllo!</h1>
             <GiHamburgerMenu className=" lg:hidden" />
             <ul className="hidden col-start-6 col-end-13 px-1 lg:flex items-center justify-between">
                 <li className="flex justify-start items-center gap-1">
