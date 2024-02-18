@@ -16,9 +16,9 @@ const MobileMenu = ({ isMobileMenu, setIsMobileMenu }) => {
       {/* MOBILE MENU */}
       {menuLinks.map(({ name,sublinks }) => (
         <li key={name} className=" w-full flex flex-col gap-4 text-md font-bold text-white">
-          <div className="flex justify-between items-center w-full px-8">
+          <div className="flex justify-between items-center w-full px-8 uppercase">
             <NavLink
-              to="/home"
+              to={`/${name}`}
               onClick={() => setIsMobileMenu(!isMobileMenu)}
               className={({ isActive }) =>
                 isActive ? "text-orange-300 " : " "
@@ -28,7 +28,7 @@ const MobileMenu = ({ isMobileMenu, setIsMobileMenu }) => {
             </NavLink>
             <FaPlus
               className={` text-xl ${
-                isMobileSubMenu && heading === name ? "rotate-45" : ""
+                isMobileSubMenu && heading === name ? "rotate-45 duration-300 text-orange-300" : ""
               }`}
               onClick={() => {
                 setIsMobileSubMenu(!isMobileSubMenu);
@@ -38,9 +38,9 @@ const MobileMenu = ({ isMobileMenu, setIsMobileMenu }) => {
           </div>
 
           {isMobileSubMenu && heading === name && (
-            <div className="w-full col-span-full flex flex-col gap-8 bg-white text-black py-6 px-10">
+            <div className="w-full col-span-full flex flex-col duration-500 transition-all gap-8 bg-white text-black py-6 px-10">
              {sublinks.map(({name,link})=>(
-                <p key={name}>{name}</p>
+                <p key={name} className=" hover:text-orange-600">{name}</p>
              ))}
             </div>
           )}

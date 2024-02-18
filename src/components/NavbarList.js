@@ -1,6 +1,6 @@
 export const menuLinks = [
     {
-      name: "HOME",
+      name: "home",
       submenu: true,
       sublinks: [
             { name: "Our product", link: "/" },
@@ -11,7 +11,7 @@ export const menuLinks = [
       ],
     },
     {
-      name: "SERVICES",
+      name: "services",
       submenu: true,
       sublinks: [
             { name: "Our product 1", link: "/" },
@@ -22,7 +22,7 @@ export const menuLinks = [
       ],
     },
     {
-      name: "CONTACTS",
+      name: "contacts",
       submenu: true,
       sublinks: [
             { name: "Our product 2", link: "/" },
