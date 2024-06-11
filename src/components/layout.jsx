@@ -91,7 +91,7 @@ const Layout = () => {
           TEAM
         </NavLink>
         <NavLink
-          to="/contacts"
+          to="/contact-us"
           className={({ isActive }) =>
             isActive
               ? " text-md text-orange-400 font-bold relative"

@@ -5,6 +5,7 @@ import Layout from './components/layout'
 import About from './pages/AboutPage'
 import Services from './pages/ServicesPage'
 import Team from './pages/TeamPage'
+import Contacts from './pages/ContactsPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,7 @@ function App() {
         <Route path='/about-us' element={<About/>}></Route>
         <Route path='/services' element={<Services/>}></Route>
         <Route path='/our-team' element={<Team/>}></Route>
+        <Route path='/contact-us' element={<Contacts/>}></Route>
         </Route>
       </Routes>
       </BrowserRouter>
