@@ -1,0 +1,59 @@
+type Query {
+    team: [Member],
+    gallery: [Photo]
+}
+
+
+type Member {
+    id: ID!,
+    fullName: String!,
+    phoneNumber: String,
+    background: String,
+    position: String,
+    socials: [Socials],
+    profile: Photo
+}
+
+
+type Photo {
+    fileId: ID,
+    filePath: String,
+    description: String,
+    year: String,
+    createdAt: String,
+    showInGallery: Boolean
+}
+
+type Address {
+    country: String,
+    province: String,
+    district: String,
+    sector: String,
+    street: String,
+    mapCoords: MapCoords
+}
+
+type MapCoords {
+    lat: String,
+    lng: String
+}
+
+type Company {
+    name: String,
+    logo: Photo,
+    address: Address,
+    socials: [Socials]
+}
+
+type Socials {
+    name: String,
+    iconLink: String,
+    socialMediaLink: String
+}
+
+type Services {
+    id: ID!,
+    title: String,
+    description: String,
+    slug: String
+}
