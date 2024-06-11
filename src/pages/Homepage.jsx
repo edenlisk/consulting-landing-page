@@ -4,9 +4,12 @@ import { TfiLocationPin } from "react-icons/tfi";
 import { FiArrowRight } from "react-icons/fi";
 import { BiSolidTimeFive } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { BsTwitter } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import { Spin as Hamburger } from "hamburger-react";
 import MobileMenu from "../components/MobileMenu";
+
 const HomePage = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isMobileSubMenu, setIsMobileSubMenu] = useState(false);
@@ -19,8 +22,10 @@ const HomePage = () => {
           <Hamburger
             size={27}
             toggled={isMobileMenu}
-            toggle={()=>{setIsMobileMenu(!isMobileMenu);
-            setIsMobileSubMenu(false)} }
+            toggle={() => {
+              setIsMobileMenu(!isMobileMenu);
+              setIsMobileSubMenu(false);
+            }}
           />
         </span>
         <ul className="hidden col-start-6 col-end-13 px-1 lg:flex items-center justify-between">
@@ -38,59 +43,11 @@ const HomePage = () => {
           </li>
         </ul>
       </section>
-      {/* MOBILE MENU */}
-      {/* <menu
-        className={`w-full h-screen md:hidden flex flex-col absolute bg-red-400 duration-500 items-start gap-10 py-8 overflow-x-none z-50 ${
-          isMobileMenu ? `left-0 top-18 ` : ` -left-full`
-        }`}
-      >
-        <li className=" w-full flex flex-col gap-4 text-md font-bold text-white ">
-          <div className="flex justify-between items-center w-full px-8">
-          <NavLink
-            to="/home"
-            onClick={() => setIsMobileMenu(!isMobileMenu)}
-            className={({ isActive }) =>
-              isActive
-                ? "text-orange-300 "
-                : " "
-            }
-          >
-            HOME 
-          </NavLink>
-          <FaPlus className={` text-xl ${isMobileSubMenu?'rotate-45':''}`}  onClick={()=>setIsMobileSubMenu(!isMobileSubMenu)}/>
-          </div>
-         
-        {  isMobileSubMenu&&(<div className="w-full col-span-full flex flex-col gap-8 bg-white text-black py-6 px-10">
-            <p>weee</p>
-            <p>weee</p>
-            <p>weee</p>
-          </div>)}
-        </li>
 
-        <NavLink
-          to="/services"
-          onClick={() => setIsMobileMenu(!isMobileMenu)}
-          className={({ isActive }) =>
-            isActive
-              ? " text-md text-orange-400 font-bold"
-              : "text-md text-white font-bold"
-          }
-        >
-          SERVICES
-        </NavLink>
-        <NavLink
-          to="/contacts"
-          onClick={() => setIsMobileMenu(!isMobileMenu)}
-          className={({ isActive }) =>
-            isActive
-              ? " text-md text-orange-400 font-bold"
-              : "text-md text-white font-bold"
-          }
-        >
-          CONTACTS
-        </NavLink>
-      </menu> */}
-      <MobileMenu isMobileMenu={isMobileMenu} setIsMobileMenu={setIsMobileMenu}/>
+      <MobileMenu
+        isMobileMenu={isMobileMenu}
+        setIsMobileMenu={setIsMobileMenu}
+      />
       {/* DESKTOP ONLY HEADER */}
       <menu className=" w-full h-fit bg-red-600 px-6 py-2 lg:px-28 hidden md:flex items-center justify-between group ">
         <NavLink
@@ -133,7 +90,7 @@ const HomePage = () => {
       </menu>
 
       {/* 1ST SECTION */}
-      <section className=" w-full h-[800px] bg-[url('./src/images/office.jpg')] bg-cover bg-center flex items-center text-white font-semibold">
+      <section className=" w-full h-[800px] bg-[url('./src/images/office.webp')] bg-cover bg-center flex items-center text-white font-semibold">
         <div className="w-full h-fit py-24 px-4 lg:px-28 space-y-6">
           <div className="flex  items-center gap-3 py-1">
             <span className="w-[70px] p-[1.8px] rounded-full bg-red-500"></span>
@@ -161,7 +118,7 @@ const HomePage = () => {
       </section>
       {/* 2ND SECTION */}
       <section className=" w-full h-fit px-6 py-12 md:px-28 md:py-24 md:flex md:gap-16 md:items-center justify-center">
-        <div className="w-full h-[300px] mb-10 md:h-[400px] lg:h-[300px] bg-[url('./src/images/consult.jpg')] bg-cover bg-center font-semibold relative">
+        <div className="w-full h-[300px] mb-10 md:h-[400px] lg:h-[300px] bg-[url('./src/images/consult.webp')] bg-cover bg-center font-semibold relative">
           {/* TO ADD IMAGE CONTAINER TO BE USED AS IF IT WAS A BACKGROUND */}
           <span className="flex flex-col md:flex-row items-center gap-2 bg-white p-4 shadow-lg drop-shadow absolute -top-6 right-8 z-30 rounded">
             <p>Innovation</p>
@@ -223,7 +180,7 @@ const HomePage = () => {
         </ul>
       </section>
       {/* 6TH PAGE CONTACTS */}
-      <section className="  w-full h-fit px-6 py-12 md:px-28 md:py-24 md:grid md:grid-cols-2 gap-3 items-center justify-center bg-[url('./src/images/buildings.jpg')] bg-cover bg-center">
+      <section className="  w-full h-fit px-6 py-12 md:px-28 md:py-24 md:grid md:grid-cols-2 gap-3 items-center justify-center bg-[url('./src/images/buildings.webp')] bg-cover bg-center">
         <div className="w-full h-[400px] bg-orange-300 space-y-1 flex flex-col items-start"></div>
         <div className="w-full h-[400px] bg-orange-500 "></div>
       </section>
@@ -235,7 +192,7 @@ const HomePage = () => {
         <ul className="w-full h-fit md:grid grid-cols-1 md:grid-cols-12">
           <li className=" md:w-[90%] col-span-4 h-fit space-y-2 bg-white shadow-lg rounded-md relative">
             <img
-              src="./src/images/blackimage.jpg"
+              src="./src/images/blackimage.webp"
               alt="people in office"
               className="w-full h-[220px] object-cover bg-center"
             />
@@ -251,6 +208,79 @@ const HomePage = () => {
             </div>
           </li>
         </ul>
+      </section>
+
+      {/* FOOTER SECTION */}
+
+      <section className=" h-fit w-full bg-blue-950 py-12 text-white">
+        <div className="px-6 grid grid-cols-1 md:grid-cols-3">
+          <div className="">
+            <p className=" text-3xl font-bold">consulting</p>
+            <p>Lorem ipsum, dolor sit amet consectetur 
+              <br />
+              adipisicing elit.</p>
+
+            <div className=""></div>
+            <div className="flex gap-2 items-center">
+              <BsTwitter />
+              <BsTwitter />
+              <BsTwitter />
+            </div>
+          </div>
+
+          <div className="">
+            <p className="pb-1 text-3xl font-bold">extra links</p>
+            <ul className="grid grid-cols-2 gap-y-3">
+              <li>
+                <a href="">About</a>
+              </li>
+              <li>
+                <a href="">About</a>
+              </li>
+              <li>
+                <a href="">About</a>
+              </li>
+              <li>
+                <a href="">About</a>
+              </li>
+              <li>
+                <a href="">About</a>
+              </li>
+              <li>
+                <a href="">About</a>
+              </li>
+              <li>
+                <a href="">About</a>
+              </li>
+              <li>
+                <a href="">About</a>
+              </li>
+              <li>
+                <a href="">About</a>
+              </li>
+              <li>
+                <a href="">About</a>
+              </li>
+            </ul>
+          </div>
+          <div className="">
+            <p className="text-3xl font-bold">subscribe</p>
+            <p>Sign up for Alerts, Special Offers, Education
+              <br />
+                and Updates</p>
+
+            <div className="flex items-center w-full">
+            <input className="p-2 rounded-sm" type="text" name="" id="" placeholder="enter-your email" />
+            <div className="h-10 p-2 bg-orange-500 flex items-center rounded-sm">
+            <FaArrowRightLong />
+            </div>
+            <div>
+
+            </div>
+          </div>
+          </div>
+         
+        </div>
       </section>
     </>
   );
