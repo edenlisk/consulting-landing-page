@@ -25,7 +25,7 @@ const Team = () => {
               </p>
               <p>Companies dislike the term ‘turnaround consulting’ because it represents failure. The truth is that turnaround consulting represents success.</p>
               <span className="w-full flex gap-1 items-center font-semibold">
-                <p>read more</p>
+                <p>View Profile</p>
                 <GoChevronRight />
               </span>
             </div>
@@ -46,7 +46,7 @@ const Team = () => {
               </p>
               <p>Companies dislike the term ‘turnaround consulting’ because it represents failure. The truth is that turnaround consulting represents success.</p>
               <span className="w-full flex gap-1 items-center font-semibold">
-                <p>read more</p>
+                <p>View Profile</p>
                 <GoChevronRight />
               </span>
             </div>
@@ -67,7 +67,7 @@ const Team = () => {
               </p>
               <p>Companies dislike the term ‘turnaround consulting’ because it represents failure. The truth is that turnaround consulting represents success.</p>
               <span className="w-full flex gap-1 items-center font-semibold">
-                <p>read more</p>
+                <p>View Profile</p>
                 <GoChevronRight />
               </span>
             </div>
@@ -88,7 +88,7 @@ const Team = () => {
               </p>
               <p>Companies dislike the term ‘turnaround consulting’ because it represents failure. The truth is that turnaround consulting represents success.</p>
               <span className="w-full flex gap-1 items-center font-semibold">
-                <p>read more</p>
+                <p>View Profile</p>
                 <GoChevronRight />
               </span>
             </div>
@@ -109,7 +109,7 @@ const Team = () => {
               </p>
               <p>Companies dislike the term ‘turnaround consulting’ because it represents failure. The truth is that turnaround consulting represents success.</p>
               <span className="w-full flex gap-1 items-center font-semibold">
-                <p>read more</p>
+                <p>View Profile</p>
                 <GoChevronRight />
               </span>
             </div>

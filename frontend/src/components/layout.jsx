@@ -6,19 +6,33 @@ import { BiSolidTimeFive } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { BsTwitter } from "react-icons/bs";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { Spin as Hamburger } from "hamburger-react";
 import MobileMenu from "../components/MobileMenu";
+import office from '../images/office.webp'
+
 
 const Layout = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isMobileSubMenu, setIsMobileSubMenu] = useState(false);
+  const [isModel,setIsModel]=useState(false);
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
+  const location=useLocation();
+
+  console.log(location)
+
+  const handleMouseEnter = (event) => {
+    const rect = event.target.getBoundingClientRect();
+    setModalPosition({ top: rect.bottom, left: rect.left });
+    setIsModel(true);
+  };
   return (
-    <div className="w-[100%] h-[100%] p-0 m-0 relative">
+    <div className="w-[100%] h-[100%] p-0 m-0 overflow-hidden">
       {/* HEADER */}
-      <section className=" w-full h-fit bg-red-400  px-6 py-4 lg:px-28 lg:grid flex lg:grid-cols-12 items-center justify-between  ">
-        <h1 className=" text-4xl bg-lime-200 col-start-1 col-end-3">Helllo!</h1>
-        <span className="md:hidden">
+      <header className=" w-full bg-cover bg-[url(./images/office.webp)] h-fit px-6 py-4 lg:px-28 lg:grid flex lg:grid-cols-12 items-center justify-between relative">
+        <div src={office} alt="" style={{filter:'blur(3px)'}} className="w-full h-full object-cover bg-black/5 backdrop-blur-sm absolute z-10"> </div> 
+        <h1 className=" text-4xl bg-lime-200 col-start-1 col-end-3 z-20">Helllo!</h1>
+        <span className="md:hidden z-20">
           <Hamburger
             size={27}
             toggled={isMobileMenu}
@@ -28,7 +42,7 @@ const Layout = () => {
             }}
           />
         </span>
-        <ul className="hidden col-start-6 col-end-13 px-1 lg:flex items-center justify-between">
+        <ul className="hidden col-start-6 col-end-13 px-1 lg:flex items-center justify-between z-20">
           <li className="flex justify-start items-center gap-1">
             <TfiLocationPin className="text-2xl text-white font-semibold" />
             <p className="text-lg text-white font-semibold">Kigali,Rwanda</p>
@@ -42,79 +56,105 @@ const Layout = () => {
             <p className="text-lg text-white font-semibold">Kigali,Rwanda</p>
           </li>
         </ul>
-      </section>
+      </header>
 
       <MobileMenu
         isMobileMenu={isMobileMenu}
         setIsMobileMenu={setIsMobileMenu}
       />
       {/* DESKTOP ONLY HEADER */}
-      <menu className=" w-full h-fit bg-red-600 px-6 py-2 lg:px-28 hidden md:flex items-center justify-between group ">
+      <menu className=" w-full h-fit bg-[#03274a] px-6 lg:px-28 hidden md:flex items-center justify-between group overflow-hidden">
         <NavLink
+        onMouseEnter={(event)=>handleMouseEnter(event)}
+        onMouseLeave={()=>{
+          setIsModel(false)
+        }}
           to="/"
           className={({ isActive }) =>
             isActive
-              ? " text-md text-orange-400 font-bold relative"
-              : "text-md text-white font-bold relative"
+              ? " text-md text-orange-400 font-bold py-2 relative"
+              : "text-md text-white font-bold py-2 relative"
           }
         >
           HOME
         </NavLink>
         <NavLink
+             onMouseEnter={(event)=>handleMouseEnter(event)}
+             onMouseLeave={()=>{
+               setIsModel(false)
+             }}
           to="/services"
           className={({ isActive }) =>
             isActive
-              ? " text-md text-orange-400 font-bold relative"
-              : "text-md text-white font-bold relative"
+              ? " text-md text-orange-400 font-bold py-2 relative"
+              : "text-md text-white font-bold py-2 relative hover:text-orange-400"
           }
         >
           SERVICES
         </NavLink>
         <NavLink
+             onMouseEnter={(event)=>handleMouseEnter(event)}
+             onMouseLeave={()=>{
+               setIsModel(false)
+             }}
           to="/about-us"
           className={({ isActive }) =>
             isActive
-              ? " text-md text-orange-400 font-bold relative"
-              : "text-md text-white font-bold relative"
+              ? " text-md text-orange-400 font-bold py-2 relative"
+              : "text-md text-white font-bold py-2 relative hover:text-orange-400"
           }
         >
           ABOUT US
         </NavLink>
         <NavLink
+             onMouseEnter={(event)=>handleMouseEnter(event)}
+             onMouseLeave={()=>{
+               setIsModel(false)
+             }}
           to="/our-team"
           className={({ isActive }) =>
             isActive
-              ? " text-md text-orange-400 font-bold relative"
-              : "text-md text-white font-bold relative"
+              ? " text-md text-orange-400 font-bold py-2 relative"
+              : "text-md text-white font-bold py-2 relative hover:text-orange-400"
           }
         >
           TEAM
         </NavLink>
         <NavLink
+             onMouseEnter={(event)=>handleMouseEnter(event)}
+             onMouseLeave={()=>{
+               setIsModel(false)
+             }}
           to="/contact-us"
           className={({ isActive }) =>
             isActive
-              ? " text-md text-orange-400 font-bold relative"
-              : "text-md text-white font-bold relative"
+              ? " text-md text-orange-400 font-bold py-2 relative"
+              : "text-md text-white font-bold py-2 relative hover:text-orange-400"
           }
         >
           CONTACTS
+          
         </NavLink>
-        {/* <ul className=" w-4/6 p-2 hidden group-hover:lg:grid hover:grid grid-cols-2 h-72 gap-2 bg-white absolute top-28">
+        <ul
+        onMouseEnter={()=>setIsModel(true)}
+        onMouseLeave={()=>setIsModel(false)}
+        style={{left: `${modalPosition.left}px`}} className={`w-fit p-2 ${isModel? 'grid':'hidden'} grid-cols-2 h-72 gap-2 shadow-lg bg-white absolute top-28 z-50 `}>
           <li className=" border-r-2 px-6">
             <p>web dev</p>
             <p>app dev</p>
           </li>
           <li className="px-6">yoola</li>
-        </ul> */}
+        </ul>
+        
       </menu>
+     
       <>
         <Outlet />
       </>
 
       <footer className="  w-full bg-blue-950 py-12 px-6 lg:px-28 text-white">
         <div className=" grid grid-cols-1 md:grid-cols-3">
-          <div className="">
+          <div className="flex flex-col gap-12">
             <p className=" text-3xl font-bold">consulting</p>
             <p>
               Lorem ipsum, dolor sit amet consectetur
@@ -123,27 +163,27 @@ const Layout = () => {
             </p>
 
             <div className=""></div>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-4 items-center">
               <BsTwitter />
               <BsTwitter />
               <BsTwitter />
             </div>
           </div>
 
-          <div className="">
+          <div className="flex flex-col gap-8">
             <p className="pb-1 text-3xl font-bold">extra links</p>
-            <ul className="grid grid-cols-2 gap-y-3">
+            <ul className="grid grid-cols-2 gap-y-4">
               <li>
-                <a href="">About</a>
+                <a href="/about-us">About us</a>
               </li>
               <li>
-                <a href="">About</a>
+                <a href="/contact-us">Contacts</a>
               </li>
               <li>
-                <a href="">About</a>
+                <a href="/services">Services</a>
               </li>
               <li>
-                <a href="">About</a>
+                <a href="/our-team">Team</a>
               </li>
               <li>
                 <a href="">About</a>
@@ -165,7 +205,7 @@ const Layout = () => {
               </li>
             </ul>
           </div>
-          <div className="">
+          <div className=" flex flex-col gap-8">
             <p className="text-3xl font-bold">subscribe</p>
             <p>
               Sign up for Alerts, Special Offers, Education
@@ -175,7 +215,7 @@ const Layout = () => {
 
             <div className="flex items-center w-full">
               <input
-                className="p-2 rounded-sm"
+                className="p-2 rounded-sm lg:min-w-46"
                 type="text"
                 name=""
                 id=""
