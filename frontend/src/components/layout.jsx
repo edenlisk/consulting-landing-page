@@ -51,7 +51,7 @@ const Layout = () => {
       {/* DESKTOP ONLY HEADER */}
       <menu className=" w-full h-fit bg-red-600 px-6 py-2 lg:px-28 hidden md:flex items-center justify-between group ">
         <NavLink
-          to="/home"
+          to="/"
           className={({ isActive }) =>
             isActive
               ? " text-md text-orange-400 font-bold relative"

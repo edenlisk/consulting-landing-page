@@ -74,19 +74,60 @@ const HomePage = () => {
       <section className=" w-full h-fit px-6 py-12 md:px-28 md:py-24 space-y-6 bg-slate-200">
         <h2 className="m-0 text-4xl">Our services</h2>
         <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>
-        <li className="w-full h-fit grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <ul className="w-full h-[250px] space-y-2 bg-white"></ul>
-          <ul className="w-full h-[250px] space-y-2 bg-white"></ul>
-          <ul className="w-full h-[250px] space-y-2 bg-white"></ul>
-        </li>
+        <ul className="w-full h-fit grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <li className="w-full h-[250px] flex flex-col gap-3">
+            {/* frontend\src\assets\icons\strategy.svg */}
+            <object type="image/svg+xml" data="/icons/talk.svg" className="h-16 w-12"></object>
+            <a href="" className="text-lg font-semibold">Business Unit Strategy</a>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat in dolore nihil.</p>
+            <span className="flex items-center gap-2 font-semibold">
+              <p>Learn more</p>
+              <FiArrowRight/>
+            </span>
+          </li>
+          <li className="w-full h-[250px] flex flex-col gap-3">
+            {/* frontend\src\assets\icons\strategy.svg */}
+            <object type="image/svg+xml" data="/icons/strategy.svg" className="h-16 w-12"></object>
+            <a href="" className="text-lg font-semibold">Turnaround Consulting</a>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat in dolore nihil.</p>
+            <span className="flex items-center gap-2 font-semibold">
+              <p>Learn more</p>
+              <FiArrowRight/>
+            </span>
+          </li>
+          <li className="w-full h-[250px] flex flex-col gap-3">
+            {/* frontend\src\assets\icons\strategy.svg */}
+            <object type="image/svg+xml" data="/icons/bonds.svg" className="h-16 w-12"></object>
+            <a href="" className="text-lg font-semibold">Bonds & Commodities</a>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat in dolore nihil.</p>
+            <span className="flex items-center gap-2 font-semibold">
+              <p>Learn more</p>
+              <FiArrowRight/>
+            </span>
+          </li>
+        </ul>
       </section>
-      {/* 4TH SECTION */}
-      <section className="  w-full h-fit px-6 py-12 md:px-28 md:py-40 md:grid md:grid-cols-2 gap-3 items-center justify-center relative">
-        <div className="w-full h-[513px] bg-orange-300 space-y-1 flex flex-col items-start"></div>
-        <div className="w-full h-[513px] bg-orange-500 "></div>
+        {/* 4TH SECTION */}
+        <section className="  w-full h-fit px-6 py-12 md:px-28 md:py-40 md:grid md:grid-cols-2 gap-3 items-center justify-center relative">
+          <div className="w-full h-[413px] flex flex-col gap-4 items-start">
+            <p className="text-4xl font-bold pb-2">Completed cases</p>
+            <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>
+            <p>Bussiness services</p>
+            <p className="text-xl font-semibold">
+            Increased sales productivity frees selling time and saves millions
+            </p>
+            <p className="text-md">If you are an excellent company with a bad image or appearance then you may have loyal clients but new clients will be hard to get</p>
+            <span className="flex items-center gap-2 font-semibold">
+              <p>Read more</p>
+              <FiArrowRight/>
+            </span>
+        </div>
+        <div className="w-full h-[413px] bg-cover relative">
+          <img src="https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2022/09/slide1-1.jpg" alt="" className="w-full absolute bottom-0 rounded-md " />
+        </div>
         <div className=" w-2/4 h-fit bg-transparent grid grid-cols-2 gap-8 items-center justify-start absolute bottom-12 left-28">
-          <div className="w-full h-[200px] rounded bg-orange-700 hidden lg:block"></div>
-          <div className="w-full h-[200px] rounded bg-orange-900 hidden lg:block"></div>
+          <div className="w-full h-[200px] rounded bg-cover bg-[url('https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2022/09/caseimg1-3.png')] hidden lg:block"></div>
+          <div className="w-full h-[200px] rounded bg-cover bg-[url('https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2022/09/caseimg2-3.png')] hidden lg:block"></div>
         </div>
       </section>
       {/* 5TH PAGE CONTACTS */}
