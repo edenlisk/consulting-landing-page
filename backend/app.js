@@ -8,6 +8,7 @@ import { config } from "dotenv";
 import { resolvers } from './resolvers.js';
 import cors from 'cors';
 import { connectDb } from './utils/dbConnection.js';
+import {login, signup} from "./controllers/authControllers.js";
 config();
 const PORT = process.env.PORT;
 const app = express();
@@ -20,7 +21,10 @@ const server = new ApolloServer({typeDefs, resolvers, csrfPrevention: false});
 await connectDb();
 
 await server.start();
-app.use('/graphql', apolloMiddleware(server));
+
+app.use('/api/auth/login', login);
+app.use('/api/auth/signup', signup);
+app.use('/api/graphql', apolloMiddleware(server));
 
 app.listen({port: PORT}, () => {
     console.log(`Server is listening on port ${PORT}`);

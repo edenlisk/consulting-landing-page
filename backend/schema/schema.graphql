@@ -1,8 +1,26 @@
 type Query {
     team: [Member],
-    gallery: [Photo]
+    gallery: [Photo],
+    service(serviceId: ID!): Service,
+    services: [Service],
 }
 
+
+type Mutation {
+    addService(input: ServiceInput!): Service,
+    updateService(input: ServiceInput, serviceId: ID!): Service,
+    deleteService(serviceId: ID!): Service,
+    singleUpload(file: Upload!): File!
+}
+
+
+
+
+input ServiceInput {
+    title: String!,
+    description: String!,
+    display: Boolean
+}
 
 type Member {
     id: ID!,
@@ -51,9 +69,33 @@ type Socials {
     socialMediaLink: String
 }
 
-type Services {
+
+
+type Service {
     id: ID!,
     title: String,
-    description: String,
+    description: String
     slug: String
+    display: Boolean
 }
+
+
+scalar Upload
+
+type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+}
+
+#type Query {
+#    # This is only here to satisfy the requirement that at least one
+#    # field be present within the 'Query' type.  This example does not
+#    # demonstrate how to fetch uploads back.
+#    otherFields: Boolean!
+#}
+#
+#type Mutation {
+#    # Multiple uploads are supported. See graphql-upload docs for details.
+#    singleUpload(file: Upload!): File!
+#}

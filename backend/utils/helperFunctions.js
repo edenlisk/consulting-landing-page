@@ -3,7 +3,7 @@ import * as path from "path";
 import {GraphQLError} from 'graphql';
 import {expressjwt} from "express-jwt";
 
-export function appError(message, code) {
+export function graphQlError(message, code) {
     return new GraphQLError(message, { extensions: { code } });
 }
 
@@ -23,9 +23,9 @@ const multerFilter = (req, file, cb) => {
     const fileExtension = path.extname(file.originalname);
     const allowedExtensions = ['.png', '.jpg', 'pdf', '.jpeg'];
     if (allowedExtensions.includes(fileExtension)) {
-        cb(null, true)
+        cb(null, true);
     } else {
-        cb(throw appError("Not a .jpg, .jpeg, .png or pdf file selected", 'INVALID_INPUT'), false);
+        cb(graphQlError("Not a .jpg, .jpeg, .png or pdf file selected", 'INVALID_INPUT'), false);
     }
 }
 
@@ -41,11 +41,13 @@ export function getContext({req}) {
     return {  }
 }
 
-export const authMiddleware = expressjwt(
-    {
-        secret: process.env.JWT_SECRET,
-        algorithms: ['HS256'],
-        credentialsRequired: false
-    }
-)
+// export const authMiddleware = expressjwt(
+//     {
+//         secret: process.env.JWT_SECRET,
+//         algorithms: ['HS256'],
+//         credentialsRequired: false
+//     }
+// )
+
+
 
