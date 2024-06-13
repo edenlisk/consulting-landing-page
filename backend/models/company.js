@@ -1,5 +1,5 @@
 import mongoose, { model } from "mongoose";
-import {socialsSchema} from "./members.js";
+import {socialsSchema} from "./users.js";
 
 
 const companySchema = new mongoose.Schema(
