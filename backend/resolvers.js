@@ -3,6 +3,7 @@ import { finished } from 'stream/promises';
 // import { GraphQLUpload } from 'graphql-upload';
 import GraphQLUpload from "graphql-upload/GraphQLUpload.mjs";
 import * as fs from 'fs';
+import {getUsers} from "./controllers/userControllers.js";
 
 export const resolvers = {
     Upload: GraphQLUpload,
@@ -12,7 +13,10 @@ export const resolvers = {
         },
         services: () => {
             return getServices();
-        }
+        },
+        users: () => {
+            return getUsers();
+        },
     },
     Mutation: {
         addService: (_root, { input: { title, description } }) => {

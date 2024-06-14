@@ -1,5 +1,5 @@
 type Query {
-    team: [Member],
+    users: [User],
     gallery: [Photo],
     service(serviceId: ID!): Service,
     services: [Service],
@@ -15,14 +15,13 @@ type Mutation {
 
 
 
-
 input ServiceInput {
     title: String!,
     description: String!,
     display: Boolean
 }
 
-type Member {
+type User {
     id: ID!,
     fullName: String!,
     phoneNumber: String,

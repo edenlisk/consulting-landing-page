@@ -43,3 +43,14 @@ export async function signup(req, res, next) {
     )
     createSendToken(user, 200, res);
 }
+
+export async function login(req, res, next) {
+    const { email, password } = req.body;
+    if (!email || password) return next(new AppError("username or password is missing", "BAD_INPUTS"));
+    const user = await User.findOne({email}).select('+password');
+    if (!user || !(await user.verifyPassword(password))) {
+        return next(new AppError("Invalid username or password", 400));
+    }
+    user.password = undefined;
+    createSendToken(user, 200, res)
+}
