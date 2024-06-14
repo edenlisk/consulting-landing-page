@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  overflow-x:hidden;
+}
+
 .vertical-line-with-dots {
   position: relative;
   border: 1px #f6f6f6 solid;
