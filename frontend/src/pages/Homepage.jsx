@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { BiSolidTimeFive } from "react-icons/bi";
 import { IoAddSharp } from "react-icons/io5";
+import {useQuery} from "@apollo/client";
+import {GET_SERVICES} from "../api/graphql.js";
 
 const HomePage = () => {
+  const { data, loading, error } = useQuery(GET_SERVICES);
+
+  useEffect(() => {
+    if (data) console.log('[data]', data);
+  }, []);
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isMobileSubMenu, setIsMobileSubMenu] = useState(false);
   return (
