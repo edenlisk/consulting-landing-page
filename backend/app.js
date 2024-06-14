@@ -28,7 +28,7 @@ app.use('/api/graphql', apolloMiddleware(server));
 
 app.listen({port: PORT}, () => {
     console.log(`Server is listening on port ${PORT}`);
-    console.log(`Graphql server is listening on http://localhost:${PORT}/graphql`);
+    console.log(`Graphql server is listening on http://localhost:${PORT}/api/graphql`);
 })
 
 
