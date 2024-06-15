@@ -1,6 +1,8 @@
 import User from "../models/users.js";
 import jwt from "jsonwebtoken";
 import AppError from '../utils/appError.js';
+import {addPhoto, graphQlError} from "../utils/helperFunctions.js";
+import Gallery from "../models/gallery.js";
 
 const createSendToken = (user, statusCode, res) => {
     const token = signToken(user._id);
@@ -28,21 +30,40 @@ const signToken = id => {
 }
 
 
-export async function signup(req, res, next) {
-    const existingUser = await User.findOne({email: req.body.email});
-    if (existingUser) return next(new AppError("User with email:  " + req.body.email + " already exists", 400));
-    const user = await User.create(
+export async function signup({email, fullName, password, socials, phoneNumber, position, background, file}) {
+    const existingUser = await User.findOne({email});
+    if (existingUser) throw graphQlError("User with email:  " + email + " already exists")
+    const user = new User(
         {
-            name: req.body.fullName,
-            username: req.body.username,
-            password: req.body.password,
-            phoneNumber: req.body.phoneNumber,
-            position: req.body.position,
-            background: req.body.background,
+            fullName,
+            password,
+            phoneNumber,
+            position,
+            background,
+            email,
+            socials
         }
     )
-    createSendToken(user, 200, res);
+    if (file) {
+        const { fileId, url } = await addPhoto({file, category: '/user-profiles'});
+        if (fileId || url) {
+            const addedPhoto = await Gallery.create(
+                {
+                    fileId,
+                    filePath: url,
+                    year: new Date().getFullYear(),
+                    description: `${fullName}_profile_picture`,
+                    showInGallery: false
+                }
+            )
+            if (addedPhoto) {
+                user.profile = addedPhoto._id;
+            }
+        }
+    }
+    return await user.save({validateModifiedOnly: true});
 }
+
 
 export async function login(req, res, next) {
     const { email, password } = req.body;
