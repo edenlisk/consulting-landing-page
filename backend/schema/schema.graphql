@@ -1,8 +1,9 @@
 type Query {
     users: [User],
-    gallery: [Photo],
+    getGallery: [Photo],
     service(serviceId: ID!): Service,
     services: [Service],
+    getMessages: [Message]
 }
 
 
@@ -10,15 +11,56 @@ type Mutation {
     addService(input: ServiceInput!): Service,
     updateService(input: ServiceInput, serviceId: ID!): Service,
     deleteService(serviceId: ID!): Service,
+    addPhotoToGallery(file: Upload, input: PhotoInput): Photo,
+    removeFromGallery(photoId: ID!, fileId: ID!): Photo,
+    sendMessage(input: MessageInput): Message,
+    addUser(input: UserInput, file: Upload): User
     singleUpload(file: Upload!): File!
 }
 
+
+input MessageInput {
+    senderEmail: String,
+    senderName: String!,
+    senderPhoneNumber: String!,
+    textMessage: String!
+}
+
+type Message {
+    senderEmail: String,
+    senderName: String,
+    senderPhoneNumber: String,
+    textMessage: String,
+    createdAt: String
+}
+
+
+input PhotoInput {
+    description: String,
+    year: String,
+    showInGallery: Boolean
+}
 
 
 input ServiceInput {
     title: String!,
     description: String!,
     display: Boolean
+}
+
+input SocialsInput {
+    name: String,
+    iconLink: String,
+    socialMediaLink: String
+}
+
+input UserInput {
+    fullName: String!,
+    phoneNumber: String,
+    background: String,
+    position: String,
+    password: String,
+    socials: [SocialsInput]
 }
 
 type User {

@@ -4,6 +4,10 @@ import { finished } from 'stream/promises';
 import GraphQLUpload from "graphql-upload/GraphQLUpload.mjs";
 import * as fs from 'fs';
 import {getUsers} from "./controllers/userControllers.js";
+import {addToGallery, getAllGallery, removePhoto} from "./controllers/galleryControllers.js";
+import {addPhoto, deletePhoto} from "./utils/helperFunctions.js";
+import {addMessage, getMessages} from "./controllers/messageControllers.js";
+import {signup} from "./controllers/authControllers.js";
 
 export const resolvers = {
     Upload: GraphQLUpload,
@@ -17,6 +21,12 @@ export const resolvers = {
         users: () => {
             return getUsers();
         },
+        getGallery: () => {
+            return getAllGallery();
+        },
+        getMessages: () => {
+            return getMessages();
+        },
     },
     Mutation: {
         addService: (_root, { input: { title, description } }) => {
@@ -27,6 +37,24 @@ export const resolvers = {
         },
         deleteService: (_root, { serviceId }) => {
             return removeService({serviceId});
+        },
+        addPhotoToGallery: async (_root, { file, input: { description, year, showInGallery } }) => {
+            const { fileId, url } = await addPhoto({file, category: '/gallery'});
+            return addToGallery({fileId, filePath: url, description, year, showInGallery});
+        },
+        removeFromGallery: async (_root, { photoId, fileId }) => {
+            const response = await deletePhoto({fileId});
+            if (response) {
+                return removePhoto({photoId});
+            } else {
+                return null;
+            }
+        },
+        sendMessage: (_root, { input: { senderEmail, senderName, senderPhoneNumber, textMessage } }) => {
+            return addMessage({senderEmail, senderName, senderPhoneNumber, textMessage});
+        },
+        addUser: async (_root, { input, file }) => {
+            return signup({...input, file});
         },
         singleUpload: async (_root, { file }) => {
             const { createReadStream, filename, mimetype, encoding } = await file;
