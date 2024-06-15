@@ -2,6 +2,7 @@ import multer from "multer";
 import * as path from "path";
 import {GraphQLError} from 'graphql';
 import {expressjwt} from "express-jwt";
+import imagekit from "./imagekit.js";
 
 export function graphQlError(message, code) {
     return new GraphQLError(message, { extensions: { code } });
@@ -35,6 +36,26 @@ export const upload = multer(
         fileFilter: multerFilter
     }
 )
+
+export async function addPhoto({ file, category }){
+    const { createReadStream, filename, mimetype, encoding } = await file;
+    const stream = createReadStream();
+    return await imagekit.upload(
+        {
+            file: stream,
+            fileName: filename,
+            folder: category
+        }
+    );
+    // const out = fs.createWriteStream('local-file-output.txt');
+    // stream.pipe(out);
+    // await finished(out);
+    // return { filename, mimetype, encoding };
+}
+
+export async function deletePhoto({fileId}) {
+    return await imagekit.deleteFile(fileId);
+}
 
 export function getContext({req}) {
     console.log('[getContext]')
