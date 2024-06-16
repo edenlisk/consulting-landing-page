@@ -1,10 +1,69 @@
 type Query {
-    team: [Member],
-    gallery: [Photo]
+    users: [User],
+    getGallery: [Photo],
+    service(serviceId: ID!): Service,
+    services: [Service],
+    getMessages: [Message]
 }
 
 
-type Member {
+type Mutation {
+    addService(input: ServiceInput!): Service,
+    updateService(input: ServiceInput, serviceId: ID!): Service,
+    deleteService(serviceId: ID!): Service,
+    addPhotoToGallery(file: Upload, input: PhotoInput): Photo,
+    removeFromGallery(photoId: ID!, fileId: ID!): Photo,
+    sendMessage(input: MessageInput): Message,
+    addUser(input: UserInput, file: Upload): User
+    singleUpload(file: Upload!): File!
+}
+
+
+input MessageInput {
+    senderEmail: String,
+    senderName: String!,
+    senderPhoneNumber: String!,
+    textMessage: String!
+}
+
+type Message {
+    senderEmail: String,
+    senderName: String,
+    senderPhoneNumber: String,
+    textMessage: String,
+    createdAt: String
+}
+
+
+input PhotoInput {
+    description: String,
+    year: String,
+    showInGallery: Boolean
+}
+
+
+input ServiceInput {
+    title: String!,
+    description: String!,
+    display: Boolean
+}
+
+input SocialsInput {
+    name: String,
+    iconLink: String,
+    socialMediaLink: String
+}
+
+input UserInput {
+    fullName: String!,
+    phoneNumber: String,
+    background: String,
+    position: String,
+    password: String,
+    socials: [SocialsInput]
+}
+
+type User {
     id: ID!,
     fullName: String!,
     phoneNumber: String,
@@ -51,9 +110,33 @@ type Socials {
     socialMediaLink: String
 }
 
-type Services {
+
+
+type Service {
     id: ID!,
     title: String,
-    description: String,
+    description: String
     slug: String
+    display: Boolean
 }
+
+
+scalar Upload
+
+type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+}
+
+#type Query {
+#    # This is only here to satisfy the requirement that at least one
+#    # field be present within the 'Query' type.  This example does not
+#    # demonstrate how to fetch uploads back.
+#    otherFields: Boolean!
+#}
+#
+#type Mutation {
+#    # Multiple uploads are supported. See graphql-upload docs for details.
+#    singleUpload(file: Upload!): File!
+#}
