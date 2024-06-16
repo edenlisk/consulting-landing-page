@@ -11,6 +11,7 @@ import { createApolloClient } from "./api/graphql.js";
 import Dummy from './pages/DumyPgae'
 import BreadCrumb from './components/BreadCrumb'
 import Footer from './components/Footer'
+import DummyPage from './pages/DummyPage.jsx'
 
 function App() {
     const [count, setCount] = useState(0)
@@ -28,6 +29,9 @@ function App() {
                             <Route path='/' element={<HomePage/>}></Route>
                             <Route path='/about-us' element={<About/>}></Route>
                             <Route path='/services' element={<Services/>}></Route>
+                            <Route path='/services/careers' element={<DummyPage/>}></Route>
+                            <Route path='/services/partners' element={<DummyPage/>}></Route>
+                            <Route path='/services/company-history' element={<DummyPage/>}></Route>
                             <Route path='/our-team' element={<Team/>}></Route>
                             <Route path='/contact-us' element={<Contacts/>}></Route>
                         <Route path='/well' element={<Dummy/>}></Route>

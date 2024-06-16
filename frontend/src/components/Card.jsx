@@ -16,7 +16,7 @@ return(
     <div className="absolute m-0 w-full h-[220px] overflow-hidden text-white bg-black/50 flex items-center justify-center top-0 opacity-0 transition-all duration-300 hover:opacity-100">
     <IoAddSharp className="text-5xl"/>
     </div>
-    <div className="flex flex-col gap-2">
+    <div className=" p-2 flex flex-col gap-2">
       <div className="w-[50px] p-[1.8px] rounded-full bg-red-500"></div>
       <Link to={link} className=" font-semibold text-xl py-2 hover:text-orange-400">
         {title}
@@ -98,11 +98,12 @@ return(
 )
 };
  export const SidenavCard=({title,link})=>{
-    const path=useLocation();
-    console.log(path)
+    const {pathname}=useLocation();
+    const arr=pathname.split('/').filter((x)=>x).pop().replace(/-/g, ' ');
+    console.log(arr)
 return(
 
-     <Link to={link} className={` p-4 hover:border-l-4 border-orange-500 bg-zinc-200 ${(path)?"border-orange-500":""}`}>
+     <Link to={`/services/${link}`} className={` p-4 hover:border-l-4 border-orange-500 bg-zinc-200 ${(arr===title.toLowerCase())? "border-l-4 border-orange-500":""}`}>
            {title}
           </Link>
 )
