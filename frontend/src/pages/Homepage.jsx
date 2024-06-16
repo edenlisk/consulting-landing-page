@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { BiSolidTimeFive } from "react-icons/bi";
 import { IoAddSharp } from "react-icons/io5";
+import { cardsArray } from "../components/ArraysObj";
+import { NewsCard } from "../components/Card";
+
 
 const HomePage = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
@@ -147,69 +150,19 @@ const HomePage = () => {
 
       {/* 7TH PAGE CONTACTS */}
       <section className="hidden md:block w-full h-fit px-6 py-12 md:px-28 md:py-24 space-y-6">
-        <h2 className="m-0 text-4xl">Our Products</h2>
+        <h2 className="m-0 text-4xl">Latest News</h2>
         <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>
-        <ul className="w-full h-fit md:grid grid-cols-1 md:grid-cols-12">
-          <li className=" md:w-[90%] col-span-4 h-fit bg-white shadow-lg rounded-md relative">
-            <img
-              src="./src/images/blackimage.webp"
-              alt="people in office"
-              className="w-full h-[220px] object-cover bg-center"
-            />
-            <div className="absolute m-0 w-full h-[220px] overflow-hidden text-white bg-black/50 flex items-center justify-center top-0 opacity-0 transition-all duration-300 hover:opacity-100">
-            <IoAddSharp className="text-5xl"/>
-            </div>
-            <div className="p-2">
-              <div className="w-[50px] p-[1.8px] rounded-full bg-red-500"></div>
-              <p className=" font-semibold text-xl py-2">
-                Narrow Your Focus to Prevent Overanalysis
-              </p>
-              <span className="w-full flex gap-2 items-center">
-                <BiSolidTimeFive />
-                <p>October 27, 2023</p>
-              </span>
-            </div>
-          </li>
-          <li className=" md:w-[90%] col-span-4 h-fit bg-white shadow-lg rounded-md relative">
-            <img
-              src="./src/images/consult.webp"
-              alt="people in office"
-              className="w-full h-[220px] object-cover bg-center"
-            />
-            <div className="absolute m-0 w-full h-[220px] overflow-hidden text-white bg-black/50 flex items-center justify-center top-0 opacity-0 transition-all duration-300 hover:opacity-100">
-            <IoAddSharp className="text-5xl"/>
-            </div>
-            <div className="p-2">
-              <div className="w-[50px] p-[1.8px] rounded-full bg-red-500"></div>
-              <p className=" font-semibold text-xl py-2">
-                Narrow Your Focus to Prevent Overanalysis
-              </p>
-              <span className="w-full flex gap-2 items-center">
-                <BiSolidTimeFive />
-                <p>October 27, 2023</p>
-              </span>
-            </div>
-          </li>
-          <li className=" md:w-[90%] col-span-4 h-fit bg-white shadow-lg rounded-md relative">
-            <img
-              src="./src/images/buildings.webp"
-              alt="people in office"
-              className="w-full h-[220px] object-cover bg-center"
-            />
-            <div className="absolute m-0 w-full h-[220px] overflow-hidden text-white bg-black/50 flex items-center justify-center top-0 opacity-0 transition-all duration-300 hover:opacity-100">
-            <IoAddSharp className="text-5xl"/>
-            </div>
-            <div className="p-2">
-              <div className="w-[50px] p-[1.8px] rounded-full bg-red-500"></div>
-              <p className=" font-semibold text-xl py-2">
-                Narrow Your Focus to Prevent Overanalysis
-              </p>
-              <span className="w-full flex gap-2 items-center">
-                <BiSolidTimeFive />
-                <p>October 27, 2023</p>
-              </span>
-            </div>
-          </li>
+        <ul className="w-full h-fit md:grid grid-cols-1 md:grid-cols-12 gap-y-6 ">
+          {cardsArray.map(({img,title,date,id})=>{
+            return(
+
+              <NewsCard key={id} img={img}
+              title={title}
+              date={date}
+
+              />
+            )
+          })}
         </ul>
       </section>
 

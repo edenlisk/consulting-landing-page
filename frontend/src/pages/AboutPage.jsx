@@ -1,5 +1,6 @@
 import { FaRegFilePdf } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
@@ -94,11 +95,11 @@ const About = () => {
 {/* SECOND GRID */}
       <div className="lg:col-span-3 hidden flex-col gap-10  md:flex">
         <ul className="grid grid-cols-1 gap-[1px]">
+          <Link to='/well' className=" p-4 hover:border-l-2 border-orange-500 bg-zinc-200">
+            Company overview
+          </Link>
           <li className=" p-4 hover:border-l-2 border-orange-500 bg-zinc-200">
-            <a href="">Company overview</a>
-          </li>
-          <li className=" p-4 hover:border-l-2 border-orange-500 bg-zinc-200">
-            <a href="">Company overview</a>
+            <a href="/contact">Company overview</a>
           </li>
         </ul>
 
@@ -107,13 +108,13 @@ const About = () => {
           <p>Company presentation</p>
         </div>
 
-        <div className="p-4 bg-blue-950 text-white">
+        <div className="p-4 bg-blue-950 text-white flex flex-col gap-3">
           <p className="font-bold">How can we help you?</p>
           <p>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure eum
             qui et.
           </p>
-          <button className="p-2 bg-white flex items-center gap-2 rounded-sm text-black hover:text-white hover:bg-orange-500">
+          <button className="p-2 bg-white flex items-center gap-2 w-fit rounded-sm text-black hover:text-white hover:bg-orange-500">
             <IoCall />
             <p>contacts</p>
           </button>

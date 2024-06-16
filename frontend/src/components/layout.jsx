@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TfiLocationPin } from "react-icons/tfi";
 import { FiArrowRight } from "react-icons/fi";
 import { BiSolidTimeFive } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { BsTwitter } from "react-icons/bs";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { Spin as Hamburger } from "hamburger-react";
 import MobileMenu from "../components/MobileMenu";
 import office from '../images/office.webp'
+import { navigations } from "./ArraysObj";
 
 
 const Layout = () => {
@@ -17,9 +16,7 @@ const Layout = () => {
   const [isMobileSubMenu, setIsMobileSubMenu] = useState(false);
   const [isModel,setIsModel]=useState(false);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
-  const location=useLocation();
 
-  console.log(location)
 
   const handleMouseEnter = (event) => {
     const rect = event.target.getBoundingClientRect();
@@ -34,6 +31,7 @@ const Layout = () => {
         <h1 className=" text-4xl bg-lime-200 col-start-1 col-end-3 z-20">Helllo!</h1>
         <span className="md:hidden z-20">
           <Hamburger
+          style={{color:'white'}}
             size={27}
             toggled={isMobileMenu}
             toggle={() => {
@@ -64,78 +62,26 @@ const Layout = () => {
       />
       {/* DESKTOP ONLY HEADER */}
       <menu className=" w-full h-fit bg-[#03274a] px-6 lg:px-28 hidden md:flex items-center justify-between group overflow-hidden">
-        <NavLink
-        onMouseEnter={(event)=>handleMouseEnter(event)}
-        onMouseLeave={()=>{
-          setIsModel(false)
-        }}
-          to="/"
-          className={({ isActive }) =>
-            isActive
-              ? " text-md text-orange-400 font-bold py-2 relative"
-              : "text-md text-white font-bold py-2 relative"
-          }
-        >
-          HOME
-        </NavLink>
-        <NavLink
-             onMouseEnter={(event)=>handleMouseEnter(event)}
-             onMouseLeave={()=>{
-               setIsModel(false)
-             }}
-          to="/services"
-          className={({ isActive }) =>
-            isActive
-              ? " text-md text-orange-400 font-bold py-2 relative"
-              : "text-md text-white font-bold py-2 relative hover:text-orange-400"
-          }
-        >
-          SERVICES
-        </NavLink>
-        <NavLink
-             onMouseEnter={(event)=>handleMouseEnter(event)}
-             onMouseLeave={()=>{
-               setIsModel(false)
-             }}
-          to="/about-us"
-          className={({ isActive }) =>
-            isActive
-              ? " text-md text-orange-400 font-bold py-2 relative"
-              : "text-md text-white font-bold py-2 relative hover:text-orange-400"
-          }
-        >
-          ABOUT US
-        </NavLink>
-        <NavLink
-             onMouseEnter={(event)=>handleMouseEnter(event)}
-             onMouseLeave={()=>{
-               setIsModel(false)
-             }}
-          to="/our-team"
-          className={({ isActive }) =>
-            isActive
-              ? " text-md text-orange-400 font-bold py-2 relative"
-              : "text-md text-white font-bold py-2 relative hover:text-orange-400"
-          }
-        >
-          TEAM
-        </NavLink>
-        <NavLink
-             onMouseEnter={(event)=>handleMouseEnter(event)}
-             onMouseLeave={()=>{
-               setIsModel(false)
-             }}
-          to="/contact-us"
-          className={({ isActive }) =>
-            isActive
-              ? " text-md text-orange-400 font-bold py-2 relative"
-              : "text-md text-white font-bold py-2 relative hover:text-orange-400"
-          }
-        >
-          CONTACTS
-          
-        </NavLink>
-        <ul
+
+        {navigations.map(({id,text,path,submenu})=>{
+          return(
+            <Fragment key={id}>
+              <NavLink 
+            onMouseEnter={(event)=>handleMouseEnter(event)}
+            onMouseLeave={()=>{
+              setIsModel(false)
+            }}
+              to={path}
+              className={({ isActive }) =>
+                isActive
+                  ? " text-md text-orange-400 font-bold py-2 relative"
+                  : "text-md text-white font-bold py-2 relative"
+              }
+            >
+              {text}
+            </NavLink>
+
+            <ul
         onMouseEnter={()=>setIsModel(true)}
         onMouseLeave={()=>setIsModel(false)}
         style={{left: `${modalPosition.left}px`}} className={`w-fit p-2 ${isModel? 'grid':'hidden'} grid-cols-2 h-72 gap-2 shadow-lg bg-white absolute top-28 z-50 `}>
@@ -145,90 +91,17 @@ const Layout = () => {
           </li>
           <li className="px-6">yoola</li>
         </ul>
+            </Fragment>
+          
+          )
+          
+        })}
+       
         
       </menu>
-     
       <>
         <Outlet />
       </>
-
-      <footer className="  w-full bg-blue-950 py-12 px-6 lg:px-28 text-white">
-        <div className=" grid grid-cols-1 md:grid-cols-3">
-          <div className="flex flex-col gap-12">
-            <p className=" text-3xl font-bold">consulting</p>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur
-              <br />
-              adipisicing elit.
-            </p>
-
-            <div className=""></div>
-            <div className="flex gap-4 items-center">
-              <BsTwitter />
-              <BsTwitter />
-              <BsTwitter />
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-8">
-            <p className="pb-1 text-3xl font-bold">extra links</p>
-            <ul className="grid grid-cols-2 gap-y-4">
-              <li>
-                <a href="/about-us">About us</a>
-              </li>
-              <li>
-                <a href="/contact-us">Contacts</a>
-              </li>
-              <li>
-                <a href="/services">Services</a>
-              </li>
-              <li>
-                <a href="/our-team">Team</a>
-              </li>
-              <li>
-                <a href="">About</a>
-              </li>
-              <li>
-                <a href="">About</a>
-              </li>
-              <li>
-                <a href="">About</a>
-              </li>
-              <li>
-                <a href="">About</a>
-              </li>
-              <li>
-                <a href="">About</a>
-              </li>
-              <li>
-                <a href="">About</a>
-              </li>
-            </ul>
-          </div>
-          <div className=" flex flex-col gap-8">
-            <p className="text-3xl font-bold">subscribe</p>
-            <p>
-              Sign up for Alerts, Special Offers, Education
-              <br />
-              and Updates
-            </p>
-
-            <div className="flex items-center w-full">
-              <input
-                className="p-2 rounded-sm lg:min-w-46"
-                type="text"
-                name=""
-                id=""
-                placeholder="enter-your email"
-              />
-              <div className="h-10 p-2 bg-orange-500 flex items-center rounded-sm">
-                <FaArrowRightLong />
-              </div>
-              <div></div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

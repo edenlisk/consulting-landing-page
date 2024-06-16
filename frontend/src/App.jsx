@@ -6,6 +6,9 @@ import About from './pages/AboutPage'
 import Services from './pages/ServicesPage'
 import Team from './pages/TeamPage'
 import Contacts from './pages/ContactsPage'
+import Dummy from './pages/DumyPgae'
+import BreadCrumb from './components/BreadCrumb'
+import Footer from './components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,15 +16,21 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <>
+      <Layout/>
+      <BreadCrumb/>
       <Routes>
-        <Route element={<Layout/>}>
+        {/* <Route element={}> */}
         <Route path='/' element={<HomePage/>}></Route>
         <Route path='/about-us' element={<About/>}></Route>
         <Route path='/services' element={<Services/>}></Route>
         <Route path='/our-team' element={<Team/>}></Route>
         <Route path='/contact-us' element={<Contacts/>}></Route>
-        </Route>
+        <Route path='/well' element={<Dummy/>}></Route>
+        {/* </Route> */}
       </Routes>
+      <Footer/>
+      </>
       </BrowserRouter>
     </>
   )
