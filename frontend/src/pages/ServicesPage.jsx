@@ -1,10 +1,14 @@
 import { FaRegFilePdf } from "react-icons/fa6";
 import { IoCall,IoAddSharp } from "react-icons/io5";
 import { servicesArray } from "../components/ArraysObj";
-import { ServiceCard } from "../components/Card";
+import { ServiceCard, SidenavCard } from "../components/Card";
+import { Link, useLocation } from "react-router-dom";
+import { aboutNavs } from "../components/NavbarList";
 
 
 const Services = () => {
+  const path=useLocation()
+
   return (
     <section className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-2 p-6 lg:px-32">
       {/* FIRST GRID */}
@@ -26,12 +30,15 @@ const Services = () => {
       {/* SECOND GRID */}
       <div className="lg:col-span-3 hidden flex-col gap-10  md:flex">
         <ul className="grid grid-cols-1 gap-[1px]">
-          <li className=" p-4 hover:border-l-2 border-orange-500 bg-zinc-200">
-            <a href="">Company overview</a>
-          </li>
-          <li className=" p-4 hover:border-l-2 border-orange-500 bg-zinc-200">
-            <a href="">Company overview</a>
-          </li>
+          {aboutNavs.map(({id,title,link})=>{
+            return(
+
+            <SidenavCard key={id}
+            title={title}
+            link={link}
+            />
+            )
+          })}
         </ul>
 
         <div className=" rounded-md p-4 flex items-center gap-2 bg-orange-400 text-white hover:bg-blue-950">

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BiSolidTimeFive } from "react-icons/bi";
 import { IoAddSharp } from "react-icons/io5";
 import { GoChevronRight } from "react-icons/go";
@@ -11,7 +11,7 @@ return(
     <img
       src={img}
       alt="people in office"
-      className="w-full h-[220px] object-cover bg-center rounded-md"
+      className="w-full h-[220px] object-cover bg-center"
     />
     <div className="absolute m-0 w-full h-[220px] overflow-hidden text-white bg-black/50 flex items-center justify-center top-0 opacity-0 transition-all duration-300 hover:opacity-100">
     <IoAddSharp className="text-5xl"/>
@@ -48,10 +48,10 @@ return(
       {title}
       </p>
       <p>{description}</p>
-      <span className="w-full flex gap-1 items-center font-semibold">
+      <Link className="w-full flex gap-1 items-center font-semibold">
         <p>Read more</p>
         <GoChevronRight />
-      </span>
+      </Link>
     </div>
   </li>
 )
@@ -79,5 +79,31 @@ return(
       </Link>
     </div>
   </li>
+)
+};
+ export const TimelineCard=({title,year,description})=>{
+
+return(
+
+    <li className="grid md:grid-cols-12 gap-1 ">
+    <p className="font-bold col-span-1 text-2xl">{year}</p>
+    <div className="h-full w-0 col-span-1 hidden md:block vertical-line-with-dots"></div>
+    <div className="flex flex-col gap-4 col-span-10">
+      <p className="font-bold text-xl">{title}</p>
+      <p className="pb-10">
+        {description}
+      </p>
+    </div>
+  </li>
+)
+};
+ export const SidenavCard=({title,link})=>{
+    const path=useLocation();
+    console.log(path)
+return(
+
+     <Link to={link} className={` p-4 hover:border-l-4 border-orange-500 bg-zinc-200 ${(path)?"border-orange-500":""}`}>
+           {title}
+          </Link>
 )
 };

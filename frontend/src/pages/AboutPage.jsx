@@ -1,6 +1,9 @@
 import { FaRegFilePdf } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { achievements } from "../components/ArraysObj";
+import { SidenavCard, TimelineCard } from "../components/Card";
+import { aboutNavs } from "../components/NavbarList";
 
 const About = () => {
   return (
@@ -14,42 +17,15 @@ const About = () => {
 
         <div className="w-full">
           <ul className=" py-6">
-            <li className="grid md:grid-cols-12 gap-1 ">
-              <p className="font-bold col-span-1 text-2xl">2011</p>
-              <div className="h-full  w-0 col-span-1 hidden md:block vertical-line-with-dots"></div>
-              <div className="flex flex-col gap-4 col-span-10">
-                <p className="font-bold text-xl">Start with a small service</p>
-                <p className="pb-10">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Voluptates ipsa odio necessitatibus officiis, adipisci tenetur
-                  rem recusandae doloremque excepturi molestias?
-                </p>
-              </div>
-            </li>
-            <li className="grid md:grid-cols-12 gap-1 ">
-              <p className="font-bold col-span-1 text-2xl">2018</p>
-              <div className="h-full  w-0 col-span-1 hidden md:block vertical-line-with-dots"></div>
-              <div className="flex flex-col gap-4 col-span-10">
-                <p className="font-bold text-xl">Start with a small service</p>
-                <p className="pb-10">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Voluptates ipsa odio necessitatibus officiis, adipisci tenetur
-                  rem recusandae doloremque excepturi molestias?
-                </p>
-              </div>
-            </li>
-            <li className="grid md:grid-cols-12 gap-1 ">
-              <p className="font-bold col-span-1 text-2xl">2023</p>
-              <div className="h-full  w-0 col-span-1 hidden md:block vertical-line-with-dots"></div>
-              <div className="flex flex-col gap-4 col-span-10">
-                <p className="font-bold text-xl">Start with a small service</p>
-                <p className="pb-10">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Voluptates ipsa odio necessitatibus officiis, adipisci tenetur
-                  rem recusandae doloremque excepturi molestias?
-                </p>
-              </div>
-            </li>
+
+            {achievements.map(({id,title,year,description})=>{
+              return(
+                <TimelineCard key={id}
+                title={title}
+                year={year}
+                description={description}/>
+              )
+            })}
           </ul>
         </div>
         <div className="flex flex-col gap-6">
@@ -95,12 +71,16 @@ const About = () => {
 {/* SECOND GRID */}
       <div className="lg:col-span-3 hidden flex-col gap-10  md:flex">
         <ul className="grid grid-cols-1 gap-[1px]">
-          <Link to='/well' className=" p-4 hover:border-l-2 border-orange-500 bg-zinc-200">
-            Company overview
-          </Link>
-          <li className=" p-4 hover:border-l-2 border-orange-500 bg-zinc-200">
-            <a href="/contact">Company overview</a>
-          </li>
+
+        {aboutNavs.map(({id,title,link})=>{
+            return(
+
+            <SidenavCard key={id}
+            title={title}
+            link={link}
+            />
+            )
+          })}
         </ul>
 
         <div className=" rounded-md p-4 flex items-center gap-2 bg-orange-400 text-white hover:bg-blue-950">

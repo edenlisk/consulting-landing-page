@@ -33,3 +33,32 @@ export const menuLinks = [
       ],
     },
   ];
+
+  export const aboutNavs=[
+    {
+      id:1,
+      title:'Company Overview',
+      link:'company-overview',
+    },
+    {
+      id:2,
+      title:'Careers',
+      link:'careers',
+    },
+    {
+      id:3,
+      title:'Company History',
+      link:'company-history',
+    },
+    {
+      id:4,
+      title:'Our approach',
+      link:'our-approach',
+    },
+    {
+      id:5,
+      title:'Partners',
+      link:'partners',
+    },
+
+  ]
