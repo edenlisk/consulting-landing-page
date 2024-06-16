@@ -3,7 +3,8 @@ type Query {
     getGallery: [Photo],
     service(serviceId: ID!): Service,
     services: [Service],
-    getMessages: [Message]
+    getMessages: [Message],
+    getCompany: Company
 }
 
 
@@ -14,8 +15,32 @@ type Mutation {
     addPhotoToGallery(file: Upload, input: PhotoInput): Photo,
     removeFromGallery(photoId: ID!, fileId: ID!): Photo,
     sendMessage(input: MessageInput): Message,
-    addUser(input: UserInput, file: Upload): User
+    addUser(input: UserInput, file: Upload): User,
+    addCompanyInfo(input: CompanyInput, file: Upload): Company,
+    updateCompany(input: CompanyInput, file: Upload): Company,
     singleUpload(file: Upload!): File!
+}
+
+
+input MapCoordsInput {
+    lat: String,
+    lng: String
+}
+
+
+input AddressInput {
+    country: String,
+    province: String,
+    district: String,
+    sector: String,
+    street: String,
+    mapCoords: MapCoordsInput
+}
+
+input CompanyInput {
+    name: String,
+    address: AddressInput,
+    socials: [SocialsInput]
 }
 
 

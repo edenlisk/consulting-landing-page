@@ -8,6 +8,7 @@ import {addToGallery, getAllGallery, removePhoto} from "./controllers/galleryCon
 import {addPhoto, deletePhoto} from "./utils/helperFunctions.js";
 import {addMessage, getMessages} from "./controllers/messageControllers.js";
 import {signup} from "./controllers/authControllers.js";
+import {createCompany, getCompany, updateCompany} from "./controllers/companyControllers.js";
 
 export const resolvers = {
     Upload: GraphQLUpload,
@@ -27,6 +28,9 @@ export const resolvers = {
         getMessages: () => {
             return getMessages();
         },
+        getCompany: () => {
+            return getCompany()
+        }
     },
     Mutation: {
         addService: (_root, { input: { title, description } }) => {
@@ -51,10 +55,17 @@ export const resolvers = {
             }
         },
         sendMessage: (_root, { input: { senderEmail, senderName, senderPhoneNumber, textMessage } }) => {
+            console.log('weeee');
             return addMessage({senderEmail, senderName, senderPhoneNumber, textMessage});
         },
         addUser: async (_root, { input, file }) => {
             return signup({...input, file});
+        },
+        addCompanyInfo: (_root, { input: { name, address, socials }, file }) => {
+            return createCompany({ socials, name, address, file });
+        },
+        updateCompany: (_root, { input: { name, address }, file }) => {
+            return updateCompany({name, address, file});
         },
         singleUpload: async (_root, { file }) => {
             const { createReadStream, filename, mimetype, encoding } = await file;
