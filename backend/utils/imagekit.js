@@ -1,5 +1,6 @@
 import ImageKit from "imagekit";
-
+import {config} from "dotenv";
+config()
 
 export default new ImageKit(
     {
