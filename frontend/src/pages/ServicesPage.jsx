@@ -57,6 +57,9 @@ const Services = () => {
             <p>contacts</p>
           </button>
         </div>
+        <div className="border-4 border-zinc-500 p-4 testimonial">
+          <p>Consulting WP really helped us achieve our financial goals. The slick presentation along with fantastic readability ensures that our financial standing is stable.</p>
+        </div>
       </div>
     </section>
   );
