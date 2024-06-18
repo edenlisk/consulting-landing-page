@@ -10,6 +10,10 @@ const servicesSchema = new mongoose.Schema(
         display: {
             type: Boolean,
             default: true
+        },
+        image: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Gallery'
         }
     }, {
         timestamps: true
