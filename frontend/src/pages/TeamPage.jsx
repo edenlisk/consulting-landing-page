@@ -3,23 +3,33 @@ import { IoCall,IoAddSharp } from "react-icons/io5";
 import { GoChevronRight } from "react-icons/go";
 import { ProfileCard } from "../components/Card";
 import { profilesArray } from "../components/ArraysObj";
+import {useQuery} from "@apollo/client";
+import {GET_USERS} from "../api/graphql.js";
+import {useEffect, useState} from "react";
+import {message} from "antd";
 
 
 const Team = () => {
+  const { data, error } = useQuery(GET_USERS);
+  const [teamProfiles, setTeamProfiles] = useState([]);
+  useEffect(() => {
+    if (data) setTeamProfiles(data.team);
+    if (error) return message.error(error.message);
+  }, [data, error]);
+
   return (
     <section className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-2 p-6 lg:px-32">
       {/* FIRST GRID */}
       <ul className=" lg:col-span-9 grid grid-cols-1 gap-4 gap-y-10 md:grid-cols-12 ">
         <p className="col-span-full pb-1 text-5xl font-bold">Our team grid</p>
         {
-          profilesArray.map(({id,name,title,description,img})=>{
-
+          teamProfiles.map(({id,name,position,background,profile: { filePath } })=>{
             return(
               <ProfileCard key={id}
               name={name}
-              title={title}
-              description={description}
-              img={img}/>
+              title={position}
+              description={background}
+              img={filePath}/>
             )
           })
         }
