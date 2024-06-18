@@ -14,6 +14,38 @@ export function createApolloClient() {
     })
 }
 
+export const GET_USERS = gql`
+    query Users {
+        team:users {
+            background
+            position
+            name
+            id
+            socials {
+                name
+                iconLink
+                socialMediaLink
+            }
+            profile {
+                filePath
+            }
+        }
+    }
+`;
+
+export const GET_COMPANY_INFO = gql`
+    query Company {
+        getCompany {
+            name
+            email
+            aboutUs
+            logo {
+                filePath
+            }
+        }
+    }
+`;
+
 
 export const GET_SERVICES = gql`
     query fetchServices {
@@ -24,7 +56,7 @@ export const GET_SERVICES = gql`
     }
 `
 // get one service
-const GET_SERVICE = gql`query Query($serviceId: ID!) {
+export const GET_SERVICE = gql`query Query($serviceId: ID!) {
     service(serviceId: $serviceId) {
         description
         slug
@@ -41,7 +73,7 @@ const GET_SERVICE = gql`query Query($serviceId: ID!) {
 
 // get messages
 
-const GET_MESSAGES = gql`query GetMessages {
+export const GET_MESSAGES = gql`query GetMessages {
     getMessages {
         senderName
         senderEmail
@@ -50,8 +82,9 @@ const GET_MESSAGES = gql`query GetMessages {
 
 // send message
 
-const SEND_MESSAGE = gql`mutation Mutation($input: MessageInput!) {
+export const SEND_MESSAGE = gql`mutation Mutation($input: MessageInput!) {
     newMessage:sendMessage(input: $input) {
+        senderName
         senderName
     }
 }`
@@ -66,7 +99,7 @@ const SEND_MESSAGE = gql`mutation Mutation($input: MessageInput!) {
 // }
 // }
 
-const ADD_PHOTO_TO_GALLERY = gql`mutation AddPhotoToGallery($input: PhotoInput, $file: Upload) {
+export const ADD_PHOTO_TO_GALLERY = gql`mutation AddPhotoToGallery($input: PhotoInput, $file: Upload) {
     addPhotoToGallery(input: $input, file: $file) {
         fileId
         filePath
