@@ -21,6 +21,11 @@ const companySchema = new mongoose.Schema(
             }
         },
         socials: [socialsSchema],
+        aboutUs: String,
+        ourMission: String,
+        companyOverview: String,
+        phoneNumber: String,
+        email: String
     }
 )
 

@@ -9,7 +9,7 @@ type Query {
 
 
 type Mutation {
-    addService(input: ServiceInput!): Service,
+    addService(input: ServiceInput!, file: Upload): Service,
     updateService(input: ServiceInput, serviceId: ID!): Service,
     deleteService(serviceId: ID!): Service,
     addPhotoToGallery(file: Upload, input: PhotoInput): Photo,
@@ -85,12 +85,13 @@ input UserInput {
     background: String,
     position: String,
     password: String,
+    email: String,
     socials: [SocialsInput]
 }
 
 type User {
     id: ID!,
-    fullName: String!,
+    name: String!,
     phoneNumber: String,
     background: String,
     position: String,
@@ -126,7 +127,12 @@ type Company {
     name: String,
     logo: Photo,
     address: Address,
-    socials: [Socials]
+    socials: [Socials],
+    aboutUs: String,
+    companyOverview: String,
+    ourMission: String,
+    email: String,
+    phoneNumber: String
 }
 
 type Socials {
@@ -143,6 +149,7 @@ type Service {
     description: String
     slug: String
     display: Boolean
+    image: Photo
 }
 
 

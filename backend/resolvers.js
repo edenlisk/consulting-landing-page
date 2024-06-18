@@ -33,8 +33,8 @@ export const resolvers = {
         }
     },
     Mutation: {
-        addService: (_root, { input: { title, description } }) => {
-            return addService({title, description});
+        addService: (_root, { input: { title, description }, file }) => {
+            return addService({title, description, file});
         },
         updateService: (_root, { input: { title, description, display, serviceId } }) => {
             return updateService({description, title, display, serviceId});
@@ -55,7 +55,6 @@ export const resolvers = {
             }
         },
         sendMessage: (_root, { input: { senderEmail, senderName, senderPhoneNumber, textMessage } }) => {
-            console.log('weeee');
             return addMessage({senderEmail, senderName, senderPhoneNumber, textMessage});
         },
         addUser: async (_root, { input, file }) => {
@@ -75,5 +74,10 @@ export const resolvers = {
             await finished(out);
             return { filename, mimetype, encoding };
         },
+    },
+    User: {
+        name: (user) => {
+            return user.fullName;
+        }
     }
 }
