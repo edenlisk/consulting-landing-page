@@ -9,6 +9,7 @@ import {addPhoto, deletePhoto} from "./utils/helperFunctions.js";
 import {addMessage, getMessages} from "./controllers/messageControllers.js";
 import {signup} from "./controllers/authControllers.js";
 import {createCompany, getCompany, updateCompany} from "./controllers/companyControllers.js";
+import {addBlog, getBlog, getBlogs} from "./controllers/blogControllers.js";
 
 export const resolvers = {
     Upload: GraphQLUpload,
@@ -30,6 +31,12 @@ export const resolvers = {
         },
         getCompany: () => {
             return getCompany()
+        },
+        getBlogs: () => {
+            return getBlogs();
+        },
+        getBlog: (_root, { blogId }) => {
+            return getBlog(blogId);
         }
     },
     Mutation: {
@@ -60,11 +67,14 @@ export const resolvers = {
         addUser: async (_root, { input, file }) => {
             return signup({...input, file});
         },
-        addCompanyInfo: (_root, { input: { name, address, socials }, file }) => {
-            return createCompany({ socials, name, address, file });
+        addCompanyInfo: (_root, { input, file }) => {
+            return createCompany({ ...input, file });
         },
         updateCompany: (_root, { input: { name, address }, file }) => {
             return updateCompany({name, address, file});
+        },
+        addBlog(_root, { input: { title, content }, file }) {
+            return addBlog({title, content, file});
         },
         singleUpload: async (_root, { file }) => {
             const { createReadStream, filename, mimetype, encoding } = await file;

@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import DummyPage from './pages/DummyPage.jsx'
 import AdminLayout from './pages/admin-layout/AdminLayout.jsx'
 import DataTable from './pages/admin-layout/DataTable.jsx'
+import RichTextEditor from "./components/RichTextEditor.jsx";
 
 function App() {
     const [count, setCount] = useState(0)
@@ -26,6 +27,11 @@ function App() {
                     <>
       <Routes>
                         <Route element={<Layout/>}>
+                        <Layout/>
+                        <BreadCrumb/>
+                        <Routes>
+                            {/* <Route element={}> */}
+                            <Route path="/rich" element={<RichTextEditor/>}/>
                             <Route path='/' element={<HomePage/>}></Route>
                             <Route path='/about-us' element={<About/>}></Route>
                             <Route path='/services' element={<Services/>}></Route>
@@ -40,10 +46,19 @@ function App() {
                       <Route path='/admin/table' element={<DataTable/>}></Route>
                       </Route>
       </Routes>
-                
+
       </>
       </ApolloProvider>
       </BrowserRouter>
+                            <Route path='/well' element={<Dummy/>}></Route>
+                            {/* </Route> */}
+                        </Routes>
+
+                        <Footer/>
+
+                    </>
+                </ApolloProvider>
+            </BrowserRouter>
         </>
     )
 }

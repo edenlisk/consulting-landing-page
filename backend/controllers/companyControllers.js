@@ -2,7 +2,8 @@ import Company from "../models/company.js";
 import {addPhoto, graphQlError} from '../utils/helperFunctions.js';
 import Gallery from "../models/gallery.js";
 
-export async function createCompany({ socials, aboutUs, ourMission, companyOverview, phoneNumber, email, name, file, address: { country, province, district, sector, street, mapCoords } }) {
+export async function createCompany({ socials, aboutUs, ourMission, companyOverview, history, phoneNumber, email, name, file, address: { country, province, district, sector, street, mapCoords } }) {
+
     const self = new Company(
         {
             name,
@@ -12,6 +13,7 @@ export async function createCompany({ socials, aboutUs, ourMission, companyOverv
             companyOverview,
             phoneNumber,
             email,
+            history,
             address: {
                 country,
                 province,
@@ -44,7 +46,7 @@ export async function createCompany({ socials, aboutUs, ourMission, companyOverv
     // return newSelf;
 }
 
-export async function updateCompany({ file, aboutUs, ourMission, companyOverview, email, phoneNumber, name, address: { country, province, district, sector, street, mapCoords } }) {
+export async function updateCompany({ file, aboutUs, ourMission, companyOverview, email, history, phoneNumber, name, address: { country, province, district, sector, street, mapCoords } }) {
     const existingCompany = await Company.findOne().populate('logo');
     if (!existingCompany) throw graphQlError('Unable to find existing company info', 'INVALID_INPUT');
     if (aboutUs) existingCompany.aboutUs = aboutUs;
@@ -53,6 +55,7 @@ export async function updateCompany({ file, aboutUs, ourMission, companyOverview
     if (phoneNumber) existingCompany.phoneNumber = phoneNumber;
     if (email) existingCompany.email = email;
     if (name) existingCompany.name = name;
+    if (history) existingCompany.history = history;
     if (country) existingCompany.address.country = country;
     if (province) existingCompany.address.province = province;
     if (district) existingCompany.address.district = district;
