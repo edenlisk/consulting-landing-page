@@ -37,7 +37,7 @@ function App() {
                       </Route>
 
                       <Route element={<AdminLayout/>}>
-                      <Route path='/wee/table' element={<DataTable/>}></Route>
+                      <Route path='/admin/table' element={<DataTable/>}></Route>
                       </Route>
       </Routes>
                 
