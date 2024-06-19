@@ -10,7 +10,7 @@ const Services = () => {
   const path=useLocation()
 
   return (
-    <section className="w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-2 p-6 lg:px-32">
+    <section className="w-full grid grid-cols-1 lg:grid-cols-12 gap-2 p-6 lg:px-32">
       {/* FIRST GRID */}
       <ul className=" lg:col-span-9 grid grid-cols-1 gap-4 gap-y-10 md:grid-cols-12 ">
         <p className="col-span-full pb-1 text-5xl font-bold">Services</p>

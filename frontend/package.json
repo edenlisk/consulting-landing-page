@@ -13,7 +13,7 @@
     "@apollo/client": "^3.10.5",
     "@syncfusion/ej2-base": "^26.1.37",
     "@syncfusion/ej2-react-richtexteditor": "^26.1.35",
-    "antd": "^5.18.1",
+    "antd": "^5.18.2",
     "cors": "^2.8.5",
     "framer-motion": "^11.0.5",
     "graphql": "^16.8.2",

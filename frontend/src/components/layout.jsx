@@ -9,6 +9,8 @@ import { Spin as Hamburger } from "hamburger-react";
 import MobileMenu from "../components/MobileMenu";
 import office from '../images/office.webp'
 import { navigations } from "./ArraysObj";
+import Footer from "./Footer";
+import BreadCrumb from "./BreadCrumb";
 
 
 const Layout = () => {
@@ -99,9 +101,12 @@ const Layout = () => {
        
         
       </menu>
+      <BreadCrumb/>
       <>
-        <Outlet />
+        <Outlet/>
+        <Footer/>
       </>
+      
     </div>
   );
 };
