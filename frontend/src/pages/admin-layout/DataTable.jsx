@@ -14,7 +14,12 @@ for (let i = 0; i < 100; i++) {
     age: 32,
     description: `London Park no. ${i}`,
   });
-}
+};
+const rowSelection = {
+  onChange: (selectedRowKeys, selectedRows) => {
+    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+  },};
+
 const EditableCell = ({
   editing,
   dataIndex,
@@ -55,7 +60,7 @@ const DataTable=()=>{const [form] = Form.useForm();
     const [editingKey, setEditingKey] = useState('');
     const [open, setOpen] = useState(false);
     const [Input,SetInput]=useState(false);
-    const [sideInfo,SetSideInfo]=useState({title:'',key:'',description:'',})
+    const [sideInfo,SetSideInfo]=useState({title:'',key:'',description:''})
     const [placement, setPlacement] = useState('right');
 
     const dateChange = (date, dateString) => {
@@ -126,13 +131,20 @@ const DataTable=()=>{const [form] = Form.useForm();
     };
 
     const updateRow=(id)=>{
-        const indexToUpdate = originData.findIndex(item => item.key === id);
+        const indexToUpdate = originData.findIndex(item => id=== item.key );
         if (indexToUpdate !== -1) {
             // Create a shallow copy of the array using slice
             const newData = [...originData];
-            newData[indexToUpdate] = { ...newData[indexToUpdate],title:'wee'};
-            SetSideInfo(newData[indexToUpdate])
-            console.log(indexToUpdate)
+            newData[indexToUpdate] = { ...newData[indexToUpdate],title:sideInfo.title,description:sideInfo.description};
+            SetSideInfo(newData[indexToUpdate]);
+            newData.splice(indexToUpdate,1,sideInfo);
+            setData(newData);
+            console.log(newData[indexToUpdate]);
+            SetInput(false);
+            SetSideInfo({title:'',key:'',description:''});
+            setEditingKey('');
+            setOpen(false);
+
        };
     };
 
@@ -140,19 +152,19 @@ const DataTable=()=>{const [form] = Form.useForm();
       {
         title: 'title',
         dataIndex: 'title',
-        width: '25%',
+        // width: '25%',
         // editable: true,
       },
       {
         title: 'age',
         dataIndex: 'age',
-        width: '15%',
+        // width: '15%',
         // editable: true,
       },
       {
         title: 'description',
         dataIndex: 'description',
-        width: '40%',
+        // width: '40%',
         // editable: true,
       },
       {
@@ -210,8 +222,11 @@ const DataTable=()=>{const [form] = Form.useForm();
     });
     return (
         <>
+
+        <p className='text-xl font-bold pb-4 px-2'>Posts</p>
         <Form form={form} component={false}>
         <Table
+        rowSelection={rowSelection}
           components={{
             body: {
               cell: EditableCell,
@@ -269,7 +284,7 @@ const DataTable=()=>{const [form] = Form.useForm();
         <form action="" className='flex flex-col gap-2'>
             <p className='text-md font-bold px-2'>Description</p>
             <textarea name="description" id="" value={sideInfo.description ||""} onChange={handleInput}placeholder='where rich editor will get' className='w-full p-2 border rounded'></textarea>
-            <button type='button' onClick={()=>console.log(sideInfo)} className='p-2 rounded bg-blue-400 w-fit text-white'>save</button>
+            <button type='button' onClick={()=>updateRow(sideInfo.key)} className='p-2 rounded bg-blue-400 w-fit text-white'>save</button>
         </form>
         </div>
       </Drawer>
