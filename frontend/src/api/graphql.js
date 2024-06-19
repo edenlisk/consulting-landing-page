@@ -8,7 +8,7 @@ export function createApolloClient() {
         cache: new InMemoryCache(),
         defaultOptions: {
             query: {
-                fetchPolicy: 'cache-first'
+                fetchPolicy: 'network-only'
             }
         }
     })
@@ -34,15 +34,30 @@ export const GET_USERS = gql`
 `;
 
 export const GET_COMPANY_INFO = gql`
-    query Company {
-        getCompany {
-            name
-            email
+    query GetCompany {
+        company:getCompany {
             aboutUs
+            address {
+                country,
+                province
+                district
+            },
+            companyOverview
+            ourMission,
+            phoneNumber,
+            history {
+                description,
+                title,
+                year
+            }
             logo {
                 filePath
             }
-        }
+            socials {
+                name
+                socialMediaLink
+            }
+        },
     }
 `;
 
