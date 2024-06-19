@@ -25,7 +25,16 @@ const companySchema = new mongoose.Schema(
         ourMission: String,
         companyOverview: String,
         phoneNumber: String,
-        email: String
+        email: String,
+        history: {
+            type: [
+                {
+                    year: String,
+                    title: String,
+                    description: String
+                }
+            ]
+        }
     }
 )
 
