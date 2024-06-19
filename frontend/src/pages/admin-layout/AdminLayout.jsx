@@ -2,6 +2,8 @@ import React, { useEffect, useState, Fragment } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { PiCaretLeftLight, PiWindowsLogoDuotone, PiHandbagDuotone, PiUserDuotone, PiUsersDuotone,PiUserPlusDuotone, PiEnvelopeLight, PiCubeDuotone, PiShieldDuotone, PiGlobeSimpleLight, PiCaretRightLight, PiUser, PiSquaresFourDuotone, PiDeviceMobileCameraDuotone, PiPlusSquareDuotone, PiCubeTransparentDuotone, PiTagDuotone, PiSpeakerHifiDuotone, PiBarcodeDuotone, PiArrowsInSimpleDuotone, PiShoppingCartSimpleDuotone, PiFilesDuotone, PiFileTextDuotone, PiFloppyDiskDuotone, PiArrowsClockwiseDuotone, PiArrowBendUpLeftDuotone, PiDatabaseDuotone, PiSignInDuotone, PiChartPieDuotone, PiHouseDuotone, PiBrowserDuotone, PiFileMinusDuotone, PiGearDuotone, PiFileDuotone, PiShoppingBagDuotone, PiBellSimpleLight, PiGearLight,PiHandshakeDuotone,PiTruckDuotone,PiFolderSimpleDuotone  } from "react-icons/pi";
 import { GoHistory } from "react-icons/go";
+import { GrArticle } from "react-icons/gr";
+import { PiUsers   } from "react-icons/pi";
 import { LuBarChart2 } from "react-icons/lu"
 import { GiDiamondHard } from "react-icons/gi"
 import { PiCurrencyEthDuotone } from "react-icons/pi"
@@ -44,100 +46,9 @@ const AdminLayout = () => {
     const menu = [
         {
             heading: "Main", hId: 1, subHeaders: [
-                { title: "Dashboard", show: true, icon: <PiSquaresFourDuotone />, id: 10,navtext:'dashboard' },
-                {
-                    title: "Application", id: 11, icon: <PiDeviceMobileCameraDuotone />, submenu: true,
-                    submenuItems: [
-                        { title: "Chat", id: 12,navtext:'chat' },
-                    ], line: true
-                }
-            ]
-        },
-        {
-            heading: "Entry", show: true,  hId:2 , subHeaders: [
-                { title: "Coltan", show: true, icon: <PiCurrencyEthDuotone />, id: 15,navtext:'coltan' },
-                { title: "Cassiterite", show: true, icon: <PiCurrencyEthDuotone />, id: 16,navtext:'cassiterite' },
-                { title: "Wolframite", show: true, icon: <PiCurrencyEthDuotone />, id: 17,navtext:'wolframite' },
-                { title: "Lithium", show: true, icon: <PiCurrencyEthDuotone />, id: 18,navtext:'lithium' },
-                { title: "Beryllium", show: true, icon: <PiCurrencyEthDuotone />, id: 19,navtext:'beryllium' },
-                { title: "Mixed", show: true, icon: <PiCurrencyEthDuotone />,submenu: true, id: 20,submenuItems: [
-                    { title: "Cassiterite and Coltan ", show: true, id: 86,navtext:"mixed" },
-                ]},
-            ]
-        },
-        {
-            heading: "Shipments", show: true, hId: 3, subHeaders: [
-                { title: "Shipments list", show: true, icon: <PiShoppingCartSimpleDuotone />, id: 22,navtext:"shipments",},
-                { title: "Add", show: true, icon: <PiFileTextDuotone />, submenu: true, id: 23,submenuItems: [
-                    { title: "Coltan", id: 24,navtext:"shipment/add/coltan" },
-                    { title: "Cassiterite", id: 25,navtext:"shipment/add/cassiterite" },
-                    { title: "Wolframite", id: 26,navtext:"shipment/add/wolframite" },
-                    { title: "Lithium", id: 27,navtext:"shipment/add/lithium" },
-                    { title: "Beryllium", id: 28,navtext:"shipment/add/beryllium" }
-                ]},
-
-            ]
-        },
-                
-        {
-            heading: "Tags", show: true, hId: 79, subHeaders: [
-                { title: "List Tags", show: true, icon: <PiTagDuotone />, id: 80,navtext:"tags"},
-                { title: "Add", show: true, icon: <PiTagDuotone />, id: 80,navtext:"add/tag",line: true },
-            ]
-        },
-
-        {
-            heading: "Suppliers", show: true, hId: 4, subHeaders: [
-                { title: "Suppliers List", show: true, icon: <PiTruckDuotone />, id: 32,navtext:"suppliers" },
-                { title: "Add", show: true, icon: <PiUserPlusDuotone />, id: 33,navtext:"add/supplier", line: true, },
-            ]
-        },
-
-        {
-            heading: "Buyers", show: true, hId: 81, subHeaders: [
-                { title: "Buyers", show: true, icon: <PiHandshakeDuotone />, id: 82,navtext:"buyers"},
-                { title: "Add", show: true, icon: <PiUserPlusDuotone />, id: 83,navtext:"add/buyer",line: true },
-            ]
-    },
-        {
-            heading: "Users", hId: 6, show: true, subHeaders: [
-                { title: "Users", show: true, icon: <PiUserDuotone />, id: 38, navtext:'users' },
-                { title: "Add", show: true, icon: <PiUserPlusDuotone />, id: 39,navtext:"add/user", line: true, },
-            ]
-        },
-        {
-            heading: "Contracts", show: true, hId: 7, subHeaders: [
-                { title: "Contracts list", show: true, icon: <PiFileTextDuotone />, id: 40,navtext:"contracts", line: true, },
-            ]
-        },
-        {
-            heading: "Finance",show: true, hId: 8, subHeaders: [
-                {
-                    title: "Payments",show: true, icon: <PiUsersDuotone />, id: 46,navtext:"payments"
-                },
-                {
-                    title: "Advanced Payment",show: true, icon: <PiUsersDuotone />, id: 57,navtext:"advanced-payment", line: true,
-                },
-                // { title: "Invoice ", icon: <PiFileDuotone />, id: 43,navtext:'invoice', line: true, },
-            ]
-        },
-        {
-            heading: "File Directory", show: true, hId: 84, subHeaders: [
-                { title: "Directory", show: true, icon: <GoFileDirectory />, id: 85,navtext:"structure",line: true },
-            ]
-        },
-        {
-            heading: "History", show: true, hId: 87, subHeaders: [
-                { title: "Activity logs", show: true, icon: <GoHistory />, id: 88,navtext:"logs",line: true },
-            ]
-        },
-        {
-            heading: "Settings", show: true, hId: 9, subHeaders: [
-                {
-                    title: "Settings", show: true, icon: <PiGearDuotone />, submenu: true, id: 49, submenuItems: [
-                        { title: "General Settings", id: 50,navtext:"settings" },
-                    ],
-                },
+                { title: "Posts", show: true, icon: <GrArticle />, id: 10,navtext:'posts' },
+                { title: "Sevices", show: true, icon: <PiSquaresFourDuotone />, id: 11,navtext:'sevices' },
+                { title: "Users", show: true, icon: <PiUsers   />, id: 12,navtext:'users' },
             ]
         },
     ]
