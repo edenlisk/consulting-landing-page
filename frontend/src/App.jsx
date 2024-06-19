@@ -12,6 +12,8 @@ import Dummy from './pages/DumyPgae'
 import BreadCrumb from './components/BreadCrumb'
 import Footer from './components/Footer'
 import DummyPage from './pages/DummyPage.jsx'
+import AdminLayout from './pages/admin-layout/AdminLayout.jsx'
+import DataTable from './pages/admin-layout/DataTable.jsx'
 
 function App() {
     const [count, setCount] = useState(0)
@@ -22,10 +24,8 @@ function App() {
             <BrowserRouter>
                 <ApolloProvider client={client}>
                     <>
-      <Layout/>
-      <BreadCrumb/>
       <Routes>
-                        {/* <Route element={}> */}
+                        <Route element={<Layout/>}>
                             <Route path='/' element={<HomePage/>}></Route>
                             <Route path='/about-us' element={<About/>}></Route>
                             <Route path='/services' element={<Services/>}></Route>
@@ -34,12 +34,13 @@ function App() {
                             <Route path='/services/company-history' element={<DummyPage/>}></Route>
                             <Route path='/our-team' element={<Team/>}></Route>
                             <Route path='/contact-us' element={<Contacts/>}></Route>
-                        <Route path='/well' element={<Dummy/>}></Route>
-                      {/* </Route> */}
+                      </Route>
+
+                      <Route element={<AdminLayout/>}>
+                      <Route path='/wee/table' element={<DataTable/>}></Route>
+                      </Route>
       </Routes>
                 
-            <Footer/>
-            
       </>
       </ApolloProvider>
       </BrowserRouter>

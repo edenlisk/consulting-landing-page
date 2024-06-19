@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.10.5",
-    "antd": "^5.18.1",
+    "antd": "^5.18.2",
     "cors": "^2.8.5",
     "framer-motion": "^11.0.5",
     "graphql": "^16.8.2",
