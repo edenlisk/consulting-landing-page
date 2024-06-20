@@ -27,12 +27,8 @@ function App() {
                     <>
       <Routes>
                         <Route element={<Layout/>}>
-                        <Layout/>
-                        <BreadCrumb/>
-                        <Routes>
-                            {/* <Route element={}> */}
-                            <Route path="/rich" element={<RichTextEditor/>}/>
                             <Route path='/' element={<HomePage/>}></Route>
+                            <Route path="/rich" element={<RichTextEditor/>}/>
                             <Route path='/about-us' element={<About/>}></Route>
                             <Route path='/services' element={<Services/>}></Route>
                             <Route path='/services/careers' element={<DummyPage/>}></Route>
@@ -46,19 +42,9 @@ function App() {
                       <Route path='/admin/table' element={<DataTable/>}></Route>
                       </Route>
       </Routes>
-
-      </>
+      </>           
       </ApolloProvider>
       </BrowserRouter>
-                            <Route path='/well' element={<Dummy/>}></Route>
-                            {/* </Route> */}
-                        </Routes>
-
-                        <Footer/>
-
-                    </>
-                </ApolloProvider>
-            </BrowserRouter>
         </>
     )
 }

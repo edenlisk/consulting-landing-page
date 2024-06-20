@@ -18,17 +18,6 @@ const AdminLayout = () => {
     const [userSubmenuMobile, setUserSubmenuMobile] = useState(false);
     const navigate = useNavigate();
 
-
-    // const decideShowMenu = (permissionKey) => {
-    //     if (permissions && permissions[permissionKey]) {
-    //         Object.keys(permissions[permissionKey]).forEach(key => {
-    //             if (permissions[permissionKey][key]) {
-    //                 return true;
-    //             }
-    //         })
-    //     }
-    // }
-
     const opennav = () => {
         setOpen(!open)
     }
@@ -52,65 +41,6 @@ const AdminLayout = () => {
             ]
         },
     ]
-
-    const keyMap = {
-        "main": "main",
-        "dashboard": "dashboard",
-        "entry": "entry",
-        "shipments": "shipments",
-        "tags": "tags",
-        "suppliers": "suppliers",
-        "buyers": "buyers",
-        "users": "users",
-        "contracts": "contracts",
-        "payments": "payments",
-    }
-
-    // Define the roles and their associated menu item IDs and restricted item IDs
-    const roleMenus = {
-        admin: {
-            allowedSections: [1, 7, 15, 24, 29, 32, 37, 44, 48,79,81, 84, 84,87],
-            restrictedItems: {
-                7: [11, 12], // For section with hId 7, restrict items 11 and 12
-                15: [19, 58], // For section with hId 15, restrict items 19 and 58
-                // Add more restricted items for specific sections as needed
-            }
-        },
-        ceo: {
-            allowedSections: [1, 2,3,4,5,6,7,8,9,79,81,84, 85,87],
-            restrictedItems: {
-                15: [19, 58], // For section with hId 15, restrict items 19 and 58
-                // Add more restricted items for specific sections as needed
-            }
-        },
-        employee: {
-            allowedSections: [1, 7, 15, 24, 32,29, 37, 44, 48,79,81,87],
-            restrictedItems: {
-                // Define restricted items for employee role if needed
-            }
-        },
-        // Add more roles and associated menu item IDs and restrictions as needed
-    };
-
-    // Define the user's role and user ID (change these values as needed)
-    const userRole = 'ceo'; // Change this to 'ceo', 'employee', etc.
-    const userId = 123; // Change this to the actual user ID
-
-    // Filter the original menu based on the user's role and restrictions
-    const filteredMenu = menu.filter(section => roleMenus[userRole].allowedSections.includes(section.hId))
-        .map(section => {
-            if (section.subHeaders && section.subHeaders.length > 0) {
-                const restrictedItems = roleMenus[userRole].restrictedItems[section.hId];
-                if (restrictedItems) {
-                    section.subHeaders = section.subHeaders.filter(item => !restrictedItems.includes(item.id));
-                }
-            }
-            return section;
-        });
-
-    // Output the filtered menu
-
-
     return (
         <>
 
@@ -122,7 +52,7 @@ const AdminLayout = () => {
                     handleUserSubmenuMobile={handleUserSubmenuMobile} />
 
                 {/* side bar */}
-                <SidebarAdmin filteredMenu={filteredMenu}
+                <SidebarAdmin filteredMenu={menu}
                     opennav={opennav}
                     open={open} 
                     logOut={handleLogOut}/>
