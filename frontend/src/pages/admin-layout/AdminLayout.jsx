@@ -35,9 +35,9 @@ const AdminLayout = () => {
     const menu = [
         {
             heading: "Main", hId: 1, subHeaders: [
-                { title: "Posts", show: true, icon: <GrArticle />, id: 10,navtext:'posts' },
-                { title: "Sevices", show: true, icon: <PiSquaresFourDuotone />, id: 11,navtext:'sevices' },
-                { title: "Users", show: true, icon: <PiUsers   />, id: 12,navtext:'users' },
+                { title: "Posts", show: true, icon: <GrArticle />, id: 10,navtext:'admin/posts' },
+                { title: "Sevices", show: true, icon: <PiSquaresFourDuotone />, id: 11,navtext:'admin/sevices' },
+                { title: "Users", show: true, icon: <PiUsers   />, id: 12,navtext:'admin/users' },
             ]
         },
     ]

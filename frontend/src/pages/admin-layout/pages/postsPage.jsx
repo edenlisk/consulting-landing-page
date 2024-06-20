@@ -21,7 +21,7 @@ const rowSelection = {
     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);   
   },};
 
-const DataTable=()=>{const [form] = Form.useForm();
+const PostsPage=()=>{
     const [data, setData] = useState(originData);
     const [editingKey, setEditingKey] = useState('');
     const [open, setOpen] = useState(false);
@@ -44,9 +44,7 @@ const DataTable=()=>{const [form] = Form.useForm();
     const showDrawer = () => {
       setOpen(true);
     };
-    const onChange = (e) => {
-      setPlacement(e.target.value);
-    };
+
     const onClose = () => {
       setOpen(false);
     };
@@ -56,14 +54,12 @@ const DataTable=()=>{const [form] = Form.useForm();
     };
     const save = async (key) => {
       try {
-        const row = await form.validateFields();
         const newData = [...data];
         const index = newData.findIndex((item) => key === item.key);
         if (index > -1) {
           const item = newData[index];
           newData.splice(index, 1, {
             ...item,
-            ...row,
           });
           setData(newData);
           setEditingKey('');
@@ -133,7 +129,7 @@ const DataTable=()=>{const [form] = Form.useForm();
     return (
         <>
        
-        <p className='text-xl font-bold pb-2 px-2'>Posts</p>
+        <p className='text-xl font-bold pb-2 px-2'>Blogs</p>
         <div className="flex justify-end gap-2 items-center w-full pb-3">
           <span className='flex items-center w-fit'>
             <span onClick={()=>setIsearch(!isearch)} className='hover:bg-zinc-100 p-2 rounded-md'>
@@ -146,7 +142,7 @@ const DataTable=()=>{const [form] = Form.useForm();
             setInput(true)
             }} className='bg-blue-500 rounded text-white px-2 py-1 w-fit'>New</button>
         </div>
-        <Form form={form} component={false}>
+        <Form component={false}>
         <Table
         rowSelection={rowSelection}
           bordered
@@ -203,4 +199,4 @@ const DataTable=()=>{const [form] = Form.useForm();
     );
   };
 
-export default DataTable;
+export default PostsPage;

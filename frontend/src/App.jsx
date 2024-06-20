@@ -13,8 +13,10 @@ import BreadCrumb from './components/BreadCrumb'
 import Footer from './components/Footer'
 import DummyPage from './pages/DummyPage.jsx'
 import AdminLayout from './pages/admin-layout/AdminLayout.jsx'
-import DataTable from './pages/admin-layout/DataTable.jsx'
+import DataTable from './pages/admin-layout/pages/postsPage.jsx'
 import RichTextEditor from "./components/RichTextEditor.jsx";
+import PostsPage from './pages/admin-layout/pages/postsPage.jsx'
+import UsersPage from './pages/admin-layout/pages/usersPage.jsx'
 
 function App() {
     const [count, setCount] = useState(0)
@@ -39,7 +41,9 @@ function App() {
                       </Route>
 
                       <Route element={<AdminLayout/>}>
-                      <Route path='/admin/table' element={<DataTable/>}></Route>
+                      <Route path='/admin/posts' element={<PostsPage/>}></Route>
+                      <Route path='/admin/users' element={<UsersPage/>}></Route>
+                      {/* <Route path='/admin/posts' element={<DataTable/>}></Route> */}
                       </Route>
       </Routes>
       </>           

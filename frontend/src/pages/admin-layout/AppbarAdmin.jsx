@@ -168,7 +168,7 @@ const AppbarAdmin = ({ handleUserSubmenuMobile,userSubmenuMobile }) => {
             {/* App bar */}
             <div className="  w-full fixed flex z-10 bg-white p-2 items-center justify-between h-16 px-10 border-b">
                 <div className={`logo ml-12 dark:text-white  transform ease-in-out duration-300 flex-none h-full flex items-center justify-center`} >
-                    RANI MINING
+                    DEFAULT
                 </div>
 
 
