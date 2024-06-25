@@ -11,7 +11,7 @@ type Query {
 
 
 type Mutation {
-    addService(input: ServiceInput!, file: Upload): Service,
+    addService(input: ServiceInput, file: Upload): Service,
     updateService(input: ServiceInput, serviceId: ID!): Service,
     deleteService(serviceId: ID!): Service,
     addPhotoToGallery(file: Upload, input: PhotoInput): Photo,
@@ -20,7 +20,8 @@ type Mutation {
     addUser(input: UserInput, file: Upload): User,
     addCompanyInfo(input: CompanyInput, file: Upload): Company,
     updateCompany(input: CompanyInput, file: Upload): Company,
-    addBlog(input: BlogInput!, file: Upload!): Blog
+    addBlog(input: BlogInput, file: Upload!): Blog,
+    updateBlog(input: BlogInput, file: Upload, blogId: ID!): Blog,
     singleUpload(file: Upload!): File!
 }
 
