@@ -20,7 +20,7 @@ type Mutation {
     addUser(input: UserInput, file: Upload): User,
     addCompanyInfo(input: CompanyInput, file: Upload): Company,
     updateCompany(input: CompanyInput, file: Upload): Company,
-    addBlog(input: BlogInput, file: Upload!): Blog,
+    addBlog(file: Upload, input: BlogInput): Blog,
     updateBlog(input: BlogInput, file: Upload, blogId: ID!): Blog,
     singleUpload(file: Upload!): File!
 }
@@ -32,6 +32,7 @@ input BlogInput {
 }
 
 type Blog {
+    id: ID!
     content: String,
     title: String,
     slug: String,
@@ -114,11 +115,12 @@ input UserInput {
 
 type User {
     id: ID!,
-    name: String!,
+    fullName: String!,
     phoneNumber: String,
     background: String,
     position: String,
     socials: [Socials],
+    email: String,
     profile: Photo
 }
 

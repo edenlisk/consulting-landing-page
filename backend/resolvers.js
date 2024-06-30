@@ -9,7 +9,7 @@ import {addPhoto, deletePhoto} from "./utils/helperFunctions.js";
 import {addMessage, getMessages} from "./controllers/messageControllers.js";
 import {signup} from "./controllers/authControllers.js";
 import {createCompany, getCompany, updateCompany} from "./controllers/companyControllers.js";
-import {addBlog, getBlog, getBlogs} from "./controllers/blogControllers.js";
+import {addBlog, getBlog, getBlogs, updateBlog} from "./controllers/blogControllers.js";
 
 export const resolvers = {
     Upload: GraphQLUpload,
@@ -73,8 +73,11 @@ export const resolvers = {
         updateCompany: (_root, { input: { name, address }, file }) => {
             return updateCompany({name, address, file});
         },
-        addBlog(_root, { input: { title, content }, file }) {
+        addBlog: (_root, { input: {title, content }, file }) => {
             return addBlog({title, content, file});
+        },
+        updateBlog: (_root, { input: { title, content }, blogId, file }) => {
+            return updateBlog({ title, content, blogId, file });
         },
         singleUpload: async (_root, { file }) => {
             const { createReadStream, filename, mimetype, encoding } = await file;
@@ -84,10 +87,5 @@ export const resolvers = {
             await finished(out);
             return { filename, mimetype, encoding };
         },
-    },
-    User: {
-        name: (user) => {
-            return user.fullName;
-        }
     }
 }

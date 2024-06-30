@@ -9,6 +9,7 @@ import { resolvers } from './resolvers.js';
 import cors from 'cors';
 import { connectDb } from './utils/dbConnection.js';
 import { login } from "./controllers/authControllers.js";
+import {graphqlLogger} from "./utils/helperFunctions.js";
 config();
 const PORT = process.env.PORT;
 const app = express();
