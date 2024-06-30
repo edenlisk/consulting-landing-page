@@ -7,7 +7,7 @@ import Services from './pages/ServicesPage'
 import Team from './pages/TeamPage'
 import Contacts from './pages/ContactsPage'
 import {ApolloProvider} from "@apollo/client";
-import { createApolloClient } from "./api/graphql.js";
+import {createApolloClient} from "./api/graphql.js";
 import Dummy from './pages/DumyPgae'
 import BreadCrumb from './components/BreadCrumb'
 import Footer from './components/Footer'
@@ -27,28 +27,28 @@ function App() {
             <BrowserRouter>
                 <ApolloProvider client={client}>
                     <>
-      <Routes>
-                        <Route element={<Layout/>}>
-                            <Route path='/' element={<HomePage/>}></Route>
-                            <Route path="/rich" element={<RichTextEditor/>}/>
-                            <Route path='/about-us' element={<About/>}></Route>
-                            <Route path='/services' element={<Services/>}></Route>
-                            <Route path='/services/careers' element={<DummyPage/>}></Route>
-                            <Route path='/services/partners' element={<DummyPage/>}></Route>
-                            <Route path='/services/company-history' element={<DummyPage/>}></Route>
-                            <Route path='/our-team' element={<Team/>}></Route>
-                            <Route path='/contact-us' element={<Contacts/>}></Route>
-                      </Route>
+                        <Routes>
+                            <Route element={<Layout/>}>
+                                <Route path='/' element={<HomePage/>}></Route>
+                                <Route path="/rich" element={<RichTextEditor/>}/>
+                                <Route path='/about-us' element={<About/>}></Route>
+                                <Route path='/services' element={<Services/>}></Route>
+                                <Route path='/services/careers' element={<DummyPage/>}></Route>
+                                <Route path='/services/partners' element={<DummyPage/>}></Route>
+                                <Route path='/services/company-history' element={<DummyPage/>}></Route>
+                                <Route path='/our-team' element={<Team/>}></Route>
+                                <Route path='/contact-us' element={<Contacts/>}></Route>
+                            </Route>
 
-                      <Route element={<AdminLayout/>}>
-                      <Route path='/admin/posts' element={<PostsPage/>}></Route>
-                      <Route path='/admin/users' element={<UsersPage/>}></Route>
-                      {/* <Route path='/admin/posts' element={<DataTable/>}></Route> */}
-                      </Route>
-      </Routes>
-      </>           
-      </ApolloProvider>
-      </BrowserRouter>
+                            <Route element={<AdminLayout/>}>
+                                <Route path='/admin/posts' element={<PostsPage/>}></Route>
+                                <Route path='/admin/users' element={<UsersPage/>}></Route>
+                                {/* <Route path='/admin/posts' element={<DataTable/>}></Route> */}
+                            </Route>
+                        </Routes>
+                    </>
+                </ApolloProvider>
+            </BrowserRouter>
         </>
     )
 }

@@ -1,10 +1,18 @@
 import {ApolloClient, createHttpLink, from, gql, InMemoryCache} from "@apollo/client";
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
 const httpLink = createHttpLink({uri: 'http://localhost:5000/api/graphql'});
+const uploadLink = createUploadLink({
+    uri: "http://localhost:5000/api/graphql",
+});
+
 
 export function createApolloClient() {
     return new ApolloClient({
-        link: from([httpLink]),
+        // link: from([httpLink, uploadLink]),
+        link: from([createUploadLink({
+            uri: "http://localhost:5000/api/graphql"
+        }), httpLink]),
         cache: new InMemoryCache(),
         defaultOptions: {
             query: {
@@ -14,15 +22,6 @@ export function createApolloClient() {
     })
 }
 
-// export const GET_SERVICES = gql`
-//     query getServices {
-//         services {
-//             description
-//             title
-//             image
-//         }
-//     }
-// `;
 
 // QUERIES
 export const GET_SERVICES = gql`
@@ -37,20 +36,24 @@ export const GET_SERVICES = gql`
     }
 `;
 
-export const GET_SERVICE = gql`query Query($serviceId: ID!) {
+export const GET_SERVICE = gql`
+    query Query($serviceId: ID!) {
     service(serviceId: $serviceId) {
         description
         slug
         title
     }
-}`;
+}
+`;
 
 export const GET_USERS = gql`
     query Users {
         team:users {
             background
             position
-            name
+            fullName
+            phoneNumber
+            email
             id
             socials {
                 name
@@ -74,12 +77,14 @@ export const GALLERY = gql`
     }
 `;
 
-export const GET_MESSAGES = gql`query GetMessages {
+export const GET_MESSAGES = gql`
+    query GetMessages {
     getMessages {
         senderName
         senderEmail
     }
-}`
+}
+`;
 
 export const GET_COMPANY_INFO = gql`
     query GetCompany {
@@ -112,6 +117,7 @@ export const GET_COMPANY_INFO = gql`
 export const GET_BLOGS = gql`
     query getBlogs {
         blogs:getBlogs {
+            id,
             title,
             content,
             slug,
@@ -218,8 +224,8 @@ export const UPDATE_COMPANY_INFO = gql`
 `;
 
 export const ADD_BLOG = gql`
-    mutation addBlog($input: BlogInput, $file: Upload) {
-        blog: addBlog(input: $input, file: $file) {
+    mutation addBlog($file: Upload, $input: BlogInput) {
+        blog: addBlog(file: $file, input: $input) {
             title
             slug
             content

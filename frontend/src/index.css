@@ -51,6 +51,7 @@ body{
   transform: translateX(-50%);
 }
 
+
 .vertical-line-with-dots::before {
   top: -5px;
 }
