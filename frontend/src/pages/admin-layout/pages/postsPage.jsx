@@ -23,16 +23,6 @@ import {useMutation, useQuery} from "@apollo/client";
 import {ADD_BLOG, GET_BLOGS} from "../../../api/graphql.js";
 import ReactHtmlParser from 'html-react-parser';
 
-
-const originData = [];
-for (let i = 0; i < 100; i++) {
-    originData.push({
-        key: i.toString(),
-        title: `Bonds & Commodities ${i}`,
-        description: `Bonds and commodities are much more stable than stocks and trades. We allow our clients to invest in the right bonds & commodities. ${i}`,
-    });
-}
-
 const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -149,10 +139,10 @@ const PostsPage = () => {
     };
 
     const updateRow = (id) => {
-        const indexToUpdate = originData.findIndex(item => id === item.id);
+        const indexToUpdate = data?.findIndex(item => id === item.id);
         if (indexToUpdate !== -1) {
             // Create a shallow copy of the array using slice
-            const newData = [...originData];
+            const newData = [...data];
             newData[indexToUpdate] = {
                 ...newData[indexToUpdate],
                 title: sideInfo.title,

@@ -27,6 +27,7 @@ export function createApolloClient() {
 export const GET_SERVICES = gql`
     query fetchServices {
         services {
+            id
             title,
             description
             image {

@@ -20,7 +20,7 @@ import {GoSearch} from "react-icons/go";
 import {FiTrash} from "react-icons/fi";
 import RichTextEditor from "../../../components/RichTextEditor.jsx";
 import {useMutation, useQuery} from "@apollo/client";
-import {ADD_BLOG, GET_BLOGS} from "../../../api/graphql.js";
+import {ADD_BLOG, GET_BLOGS, GET_SERVICES} from "../../../api/graphql.js";
 import ReactHtmlParser from 'html-react-parser';
 
 
@@ -40,7 +40,7 @@ const rowSelection = {
 };
 
 const ServicesPage = () => {
-    const {data: blogsData, error,loading:dataload} = useQuery(GET_BLOGS);
+    const {data: servicesData, error,loading:dataload} = useQuery(GET_SERVICES);
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
     const [open, setOpen] = useState(false);
@@ -52,10 +52,11 @@ const ServicesPage = () => {
     const [htmlContent, setHtmlContent] = useState('<p>Hello</p>');
 
     useEffect(() => {
-        if (blogsData) {
-            setData(blogsData.blogs);
+        if (servicesData) {
+            setData(servicesData.services);
         } else if (error) return message.error(error.message);
-    }, [error, blogsData]);
+        // console.log(servicesData)
+    }, [error, servicesData]);
 
     const rteRef = useRef();
 
@@ -66,7 +67,7 @@ const ServicesPage = () => {
             // console.log('[htmlContent]: ', rteRef.current.getHtml());
             // setSideInfo(prevState => ({...prevState, content: rteRef.current.getHtml()}));
             if (!sideInfo.blogId) {
-                console.log('')
+                // console.log('')
                 // await addPost({
                 //     variables: {
                 //         input: {title: sideInfo.title, content: rteRef.current.value},
@@ -176,19 +177,41 @@ const ServicesPage = () => {
             dataIndex: 'title',
         },
         {
-            title: 'description',
-            dataIndex: 'content',
-            width: '70%',
-            render: (_, record) => {
-                if (record.content) return <div>{ReactHtmlParser(record.content)}</div>
-            }
+            title: 'Image',
+            dataIndex: 'image',
+            render: (_, record) =>
+                (
+                   <img src={record.image} alt={record.slug}
+                   className='p-0 w-8 h-8  object-cover'
+                   />
+                )
+        },
+        {
+            title: 'Display',
+            dataIndex: 'dislay',
+            render: (_, record) =>
+                (
+                   <img src={record.image} alt={record.slug}/>
+                )
+        },
+        {
+            title: 'Description',
+            dataIndex: 'description',
+            width: '50%',
+            render: (_, record) =>
+                (
+                    <div>{`${record.description.split(/(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/).slice(0,7).join(' ')} ...`}</div>
+                )
+
+             
+            
         },
         {
             title: 'Action',
             dataIndex: 'action',
             render: (_, record) => {
                 return (
-                    <div className='flex gap-2 items-center'>
+                    <div className='flex gap-2 items-center w-full justify-center'>
                         <FiEdit2 onClick={() => {
                             getData(record)
                             setOpen(true)
