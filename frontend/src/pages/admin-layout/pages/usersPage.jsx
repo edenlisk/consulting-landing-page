@@ -11,21 +11,6 @@ import {ADD_USER, GET_USERS} from "../../../api/graphql.js";
 import {useNavigate} from "react-router-dom";
 
 
-const originData = [];
-
-for (let i = 0; i < 100; i++) {
-    originData.push({
-        key: i.toString(),
-        fullName: `Oliver Barkley ${i}`,
-        phoneNumber: '250785478696',
-        position: `CEO`,
-        email: `barkley${i * 2}@gmail.com`,
-        password: `barkley ${i}`,
-        socials: '',
-        // description: `Bonds and commodities are much more stable than stocks and trades. We allow our clients to invest in the right bonds & commodities. ${i}`,
-    });
-}
-;
 const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -34,8 +19,13 @@ const rowSelection = {
 
 const UsersPage = () => {
 
-    const [register, { loading: registerLoading, error: registerError, data: userDataM }] = useMutation(ADD_USER);
-    const { data: userDataQ, error } = useQuery(GET_USERS);
+    const [register, { loading: registerLoading, error: registerError, data: userDataM }] = useMutation(ADD_USER,{
+        refetchQueries:[
+            GET_USERS,
+            'Users'
+        ]
+    });
+    const { data: userDataQ, error,loading } = useQuery(GET_USERS);
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
     const [open, setOpen] = useState(false);
@@ -43,7 +33,6 @@ const UsersPage = () => {
     const [Input, setInput] = useState(false);
     const [sideInfo, setSideInfo] = useState({
         fullName: '',
-        // key: '',
         email: '',
         phoneNumber: '',
         position: '',
@@ -129,10 +118,10 @@ const UsersPage = () => {
     };
 
     const updateRow = (id) => {
-        const indexToUpdate = originData.findIndex(item => id === item.id);
+        const indexToUpdate = data?.findIndex(item => id === item.id);
         if (indexToUpdate !== -1) {
             // Create a shallow copy of the array using slice
-            const newData = [...originData];
+            const newData = [...data];
             newData[indexToUpdate] = {
                 ...newData[indexToUpdate],
                 title: sideInfo.title,
@@ -143,7 +132,7 @@ const UsersPage = () => {
             setData(newData);
             console.log(newData[indexToUpdate]);
             setInput(false);
-            setSideInfo({title: '', key: '', description: ''});
+            setSideInfo({title: '',  description: ''});
             setEditingKey('');
             setOpen(false);
 
@@ -162,7 +151,7 @@ const UsersPage = () => {
             render: (_, record) => {
                 return (
                     <img
-                        src={record.profile.filePath}
+                        src={record.profile?.filePath}
                         // src='https://www.vhv.rs/dpng/d/509-5097789_oic-provincial-statistics-officer-psa-maguindanao-profile-avatar.png'
                         alt='profile' className='p-0 w-8 h-8 rounded-full'/>
                 );
@@ -221,11 +210,12 @@ const UsersPage = () => {
                     bordered
                     dataSource={data}
                     columns={columns}
+                    loading={loading}
                     rowClassName="editable-row"
                     pagination={{
                         onChange: cancel,
                     }}
-                    key={"id"}
+                    rowKey={"id"}
                 />
             </Form>
 
@@ -240,7 +230,7 @@ const UsersPage = () => {
                     <div className='flex gap-1 items-center'>
 
                         <HiOutlineChevronDoubleRight onClick={() => {
-                            setSideInfo({fullName: '', key: '', email: '', phoneNumber: '', position: '', password: '', background: ''})
+                            setSideInfo({fullName: '', email: '', phoneNumber: '', position: '', password: '', background: ''})
                             setOpen(false)
                             setInput(!Input)
                         }}/>

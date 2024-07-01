@@ -27,7 +27,7 @@ body{
   height:180px;
   margin:0px 0px 0px 20px;
   bottom:0px;
-  border: 1px #f6f6f6 solid;
+  /* border: 1px #f6f6f6 solid; */
   /* margin-left:20px */
 }
 .vertical-line-with-dots:last-child {
@@ -35,8 +35,18 @@ body{
   border: 0px;
 }
 
-/* .vertical-line-with-dots::before, */
-.vertical-line-with-dots::after
+.vertical-line-with-dots::after{
+
+  content:'';
+  position:absolute;
+  height:230px;
+  width:2px;
+  top:10px;
+  /* z-index:-5; */
+  background-color:#f6f6f6;
+
+}
+.vertical-line-with-dots::before
  {
   content: '';
   position: absolute;
@@ -45,7 +55,7 @@ body{
   top:10px;
   width: 8px;
   height: 8px;
-  z-index:3;
+  /* z-index:3; */
   background-color: #f05836;
   border-radius: 100%;
   transform: translateX(-50%);

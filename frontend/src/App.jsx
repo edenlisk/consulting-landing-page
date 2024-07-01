@@ -17,6 +17,7 @@ import DataTable from './pages/admin-layout/pages/postsPage.jsx'
 import RichTextEditor from "./components/RichTextEditor.jsx";
 import PostsPage from './pages/admin-layout/pages/postsPage.jsx'
 import UsersPage from './pages/admin-layout/pages/usersPage.jsx'
+import ServicesPage from './pages/admin-layout/pages/servicesPage.jsx'
 
 function App() {
     const [count, setCount] = useState(0)
@@ -43,6 +44,7 @@ function App() {
                             <Route element={<AdminLayout/>}>
                                 <Route path='/admin/posts' element={<PostsPage/>}></Route>
                                 <Route path='/admin/users' element={<UsersPage/>}></Route>
+                                <Route path='/admin/services' element={<ServicesPage/>}></Route>
                                 {/* <Route path='/admin/posts' element={<DataTable/>}></Route> */}
                             </Route>
                         </Routes>

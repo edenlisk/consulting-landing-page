@@ -36,8 +36,10 @@ const AdminLayout = () => {
         {
             heading: "Main", hId: 1, subHeaders: [
                 { title: "Posts", show: true, icon: <GrArticle />, id: 10,navtext:'admin/posts' },
-                { title: "Sevices", show: true, icon: <PiSquaresFourDuotone />, id: 11,navtext:'admin/sevices' },
+                { title: "Services", show: true, icon: <PiSquaresFourDuotone />, id: 11,navtext:'admin/services' },
                 { title: "Users", show: true, icon: <PiUsers   />, id: 12,navtext:'admin/users' },
+                { title: "Company", show: true, icon: <PiUsers   />, id: 13,navtext:'admin/companies' },
+                { title: "Users", show: true, icon: <PiUsers   />, id: 14,navtext:'admin/users' },
             ]
         },
     ]

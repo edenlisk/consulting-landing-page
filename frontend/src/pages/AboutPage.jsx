@@ -10,7 +10,7 @@ import {useEffect, useState} from "react";
 import {message} from "antd";
 
 const About = () => {
-    const { data, error } = useQuery(GET_COMPANY_INFO);
+    const { data, error,loading } = useQuery(GET_COMPANY_INFO);
     const [company, setCompany] = useState({
         history: [],
         companyOverview: [],
@@ -44,7 +44,8 @@ const About = () => {
                                 <TimelineCard key={index}
                                               title={title}
                                               year={year}
-                                              description={description}/>
+                                              description={description}
+                                              />
                             )
                         })}
                     </ul>
