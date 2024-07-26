@@ -1,0 +1,212 @@
+type Query {
+    users: [User],
+    getGallery: [Photo],
+    service(serviceId: ID!): Service,
+    services: [Service],
+    getMessages: [Message],
+    getCompany: Company,
+    getBlogs: [Blog],
+    getBlog(blogId: ID!): Blog
+}
+
+
+type Mutation {
+    addService(input: ServiceInput, file: Upload): Service,
+    updateService(input: ServiceInput, serviceId: ID!): Service,
+    deleteService(serviceId: ID!): Service,
+    addPhotoToGallery(file: Upload, input: PhotoInput): Photo,
+    removeFromGallery(photoId: ID!, fileId: ID!): Photo,
+    sendMessage(input: MessageInput): Message,
+    addUser(input: UserInput, file: Upload): User,
+    addCompanyInfo(input: CompanyInput, file: Upload): Company,
+    updateCompany(input: CompanyInput, file: Upload): Company,
+    addBlog(file: Upload, input: BlogInput): Blog,
+    updateBlog(input: BlogInput, file: Upload, blogId: ID!): Blog,
+    singleUpload(file: Upload!): File!
+}
+
+
+input BlogInput {
+    content: String,
+    title: String
+}
+
+type Blog {
+    id: ID!
+    content: String,
+    title: String,
+    slug: String,
+    createdAt: String,
+    updatedAt: String
+}
+
+input MapCoordsInput {
+    lat: String,
+    lng: String
+}
+
+
+input AddressInput {
+    country: String,
+    province: String,
+    district: String,
+    sector: String,
+    street: String,
+    mapCoords: MapCoordsInput
+}
+
+input CompanyInput {
+    name: String,
+    address: AddressInput,
+    socials: [SocialsInput],
+    aboutUs: String,
+    ourMission: String,
+    companyOverview: String,
+    phoneNumber: String,
+    email: String,
+    history: [EventInput]
+}
+
+
+input MessageInput {
+    senderEmail: String,
+    senderName: String!,
+    senderPhoneNumber: String!,
+    textMessage: String!
+}
+
+type Message {
+    senderEmail: String,
+    senderName: String,
+    senderPhoneNumber: String,
+    textMessage: String,
+    createdAt: String
+}
+
+
+input PhotoInput {
+    description: String,
+    year: String,
+    showInGallery: Boolean
+}
+
+
+input ServiceInput {
+    title: String!,
+    description: String!,
+    display: Boolean
+}
+
+input SocialsInput {
+    name: String,
+    iconLink: String,
+    socialMediaLink: String
+}
+
+input UserInput {
+    fullName: String!,
+    phoneNumber: String,
+    background: String,
+    position: String,
+    password: String,
+    email: String,
+    socials: [SocialsInput]
+}
+
+type User {
+    id: ID!,
+    fullName: String!,
+    phoneNumber: String,
+    background: String,
+    position: String,
+    socials: [Socials],
+    email: String,
+    profile: Photo
+}
+
+
+type Photo {
+    fileId: ID,
+    filePath: String,
+    description: String,
+    year: String,
+    createdAt: String,
+    showInGallery: Boolean
+}
+
+type Address {
+    country: String,
+    province: String,
+    district: String,
+    sector: String,
+    street: String,
+    mapCoords: MapCoords
+}
+
+type MapCoords {
+    lat: String,
+    lng: String
+}
+
+input EventInput {
+    year: String,
+    title: String,
+    description: String
+}
+
+type Event {
+    year: String,
+    title: String,
+    description: String
+}
+
+type Company {
+    name: String,
+    logo: Photo,
+    address: Address,
+    socials: [Socials],
+    aboutUs: String,
+    companyOverview: String,
+    ourMission: String,
+    email: String,
+    phoneNumber: String,
+    history: [Event]
+}
+
+type Socials {
+    name: String,
+    iconLink: String,
+    socialMediaLink: String
+}
+
+
+
+type Service {
+    id: ID!,
+    title: String,
+    description: String
+    slug: String
+    display: Boolean
+    image: Photo
+}
+
+
+scalar Upload
+
+type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+}
+
+#type Query {
+#    # This is only here to satisfy the requirement that at least one
+#    # field be present within the 'Query' type.  This example does not
+#    # demonstrate how to fetch uploads back.
+#    otherFields: Boolean!
+#}
+#
+#type Mutation {
+#    # Multiple uploads are supported. See graphql-upload docs for details.
+#    singleUpload(file: Upload!): File!
+#}
