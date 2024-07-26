@@ -37,40 +37,42 @@ export const navigations = [
   },
 ];
 
+import consultImg from '../images/consult.webp';
+import officeImg from '../images/consult.webp';
 export const cardsArray = [
   {
     id: 1,
     title: "Narrow Your Focus to Prevent Overanalysis",
     link: "",
-    img: "./src/images/consult.webp",
+    img: consultImg,
     date: "April 24, 2024",
   },
   {
     id: 2,
     title: "Three Social Media Hacks for the Busy Entrepreneur",
     link: "",
-    img: "./src/images/office.webp",
+    img: officeImg,
     date: "March 5, 2024",
   },
   {
     id: 3,
     title: "Stick with Your Concept but Do Your Homework",
     link: "",
-    img: "./src/images/consult.webp",
+    img: consultImg,
     date: "April 24, 2024",
   },
   {
     id: 4,
     title: "Narrow Your Focus to Prevent Overanalysis",
     link: "",
-    img: "./src/images/office.webp",
+    img: officeImg,
     date: "April 24, 2024",
   },
   {
     id: 5,
     title: "Narrow Your Focus to Prevent Overanalysis",
     link: "",
-    img: "./src/images/consult.webp",
+    img: consultImg,
     date: "April 24, 2024",
   },
 ];
@@ -78,7 +80,7 @@ export const cardsArray = [
 export const servicesArray = [
   {
     id: 1,
-    img: "./src/images/office.webp",
+    img: officeImg,
     title: "Business Unit Strategy",
     description:
       "The effort vastly improved the company’s planning and execution functions, they knew that in order to succeed in this era of technology their accounting systems needed.",
@@ -86,7 +88,7 @@ export const servicesArray = [
   },
   {
     id: 2,
-    img: "./src/images/office.webp",
+    img: officeImg,
     title: "Turnaround Consulting",
     description:
       "Companies dislike the term ‘turnaround consulting’ because it represents failure. The truth is that turnaround consulting represents success.",
@@ -94,7 +96,7 @@ export const servicesArray = [
   },
   {
     id: 3,
-    img: "./src/images/office.webp",
+    img: officeImg,
     title: "Bonds & Commodities",
     description:
       "Bonds and commodities are much more stable than stocks and trades. We allow our clients to invest in the right bonds & commodities.",
@@ -102,7 +104,7 @@ export const servicesArray = [
   },
   {
     id: 4,
-    img: "./src/images/office.webp",
+    img: officeImg,
     title: "Audit & Assurance",
     description:
       "Audit and assurance is all about meticulous data analysis. Everything needs to be checked, double checked, and triple checked.",
@@ -110,7 +112,7 @@ export const servicesArray = [
   },
   {
     id: 5,
-    img: "./src/images/office.webp",
+    img: officeImg,
     title: "Trades & Stocks",
     description:
       "This allows us to specialize in all dimensions of trades and stocks, because we have a specialist within the team for every scenario.",
@@ -118,7 +120,7 @@ export const servicesArray = [
   },
   {
     id: 6,
-    img: "./src/images/office.webp",
+    img: officeImg,
     title: "Strategic Planning",
     description:
       "We work with our clients and do a deep analysis of their business. We help prepare possible outcomes to different decisions.",
@@ -126,13 +128,16 @@ export const servicesArray = [
   },
   {
     id: 7,
-    img: "./src/images/office.webp",
+    img: officeImg,
     title: "Financial Projections",
     description:
       "This stops companies from taking drastic measures like downsizing or closing down sites; those things happen only with no or bad financial projections.",
     link: "",
   },
 ];
+
+import profile1 from "../images/profile1.webp"
+import profile2 from "../images/profile2.webp"
 
 export const profilesArray = [
   {
@@ -142,7 +147,7 @@ export const profilesArray = [
     description:
       "She is an accomplished business developer. Her skills at creating relationships with clients are...",
     link: "",
-    img: "./src/images/profile1.webp",
+    img: profile1,
   },
   {
     id: 2,
@@ -151,7 +156,7 @@ export const profilesArray = [
     description:
       "The founder of Consulting WP, he has been the captain of this ship from the beginning and has sailed...",
     link: "",
-    img: "./src/images/profile2.webp",
+    img: profile2,
   },
   {
     id: 3,
@@ -160,7 +165,7 @@ export const profilesArray = [
     description:
       "As we help other companies grow, she helps us grow. She handles all the internal work at WP consulting...",
     link: "",
-    img: "./src/images/profile1.webp",
+    img: profile1,
   },
   {
     id: 4,
@@ -169,7 +174,7 @@ export const profilesArray = [
     description:
       "Being the CFO in the Financial Industry is a tough task, thankfully he was here to man the helm...",
     link: "",
-    img: "./src/images/profile2.webp",
+    img: profile2,
   },
   {
     id: 5,
@@ -178,7 +183,7 @@ export const profilesArray = [
     description:
       "He has helped Business WordPress Theme reach new heights and enter new markets. His skills of understanding...",
     link: "",
-    img: "./src/images/profile1.webp",
+    img: profile1,
   },
 ];
 

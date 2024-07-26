@@ -11,9 +11,9 @@ import { NewsCard } from "../components/Card";
 const HomePage = () => {
   const { data, loading, error } = useQuery(GET_SERVICES);
 
-  useEffect(() => {
-    if (data) console.log('[data]', data);
-  }, []);
+  // useEffect(() => {
+  //   if (data) console.log('[data]', data);
+  // }, []);
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isMobileSubMenu, setIsMobileSubMenu] = useState(false);
   return (
