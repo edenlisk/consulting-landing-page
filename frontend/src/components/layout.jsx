@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TfiLocationPin } from "react-icons/tfi";
 import { FiArrowRight } from "react-icons/fi";
-import { BiSolidTimeFive } from "react-icons/bi";
+import {BiPhone, BiSolidTimeFive} from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
 import { Spin as Hamburger } from "hamburger-react";
@@ -11,6 +11,9 @@ import office from '../images/office.webp'
 import { navigations } from "./ArraysObj";
 import Footer from "./Footer";
 import BreadCrumb from "./BreadCrumb";
+import {Avatar} from "antd";
+import {CgLock} from "react-icons/cg";
+import {BsClock} from "react-icons/bs";
 
 
 const Layout = () => {
@@ -30,7 +33,10 @@ const Layout = () => {
       {/* HEADER */}
       <header className=" w-full bg-cover bg-[url(./images/office.webp)] h-fit px-6 py-4 lg:px-28 lg:grid flex lg:grid-cols-12 items-center justify-between relative">
         <div src={office} alt="" style={{filter:'blur(3px)'}} className="w-full h-full object-cover bg-black/5 backdrop-blur-sm absolute z-10"> </div> 
-        <h1 className=" text-4xl bg-lime-200 col-start-1 col-end-3 z-20">Helllo!</h1>
+        <h1 className=" text-4xl col-start-1 col-end-3 z-20">
+            <Avatar size={80} src={"https://ik.imagekit.io/wmhztw3vi/user-profiles/simple-logo_45hN5IEVA-.png"}/>
+            {/*<img src="https://ik.imagekit.io/wmhztw3vi/user-profiles/simple-logo_45hN5IEVA-.png" alt="company logo"/>*/}
+        </h1>
         <span className="md:hidden z-20">
           <Hamburger
           style={{color:'white'}}
@@ -42,28 +48,31 @@ const Layout = () => {
             }}
           />
         </span>
-        <ul className="hidden col-start-6 col-end-13 px-1 lg:flex items-center justify-between z-20">
-          <li className="flex justify-start items-center gap-1">
-            <TfiLocationPin className="text-2xl text-white font-semibold" />
-            <p className="text-lg text-white font-semibold">Kigali,Rwanda</p>
-          </li>
-          <li className="flex justify-start items-center gap-1">
-            <TfiLocationPin className="text-2xl text-white font-semibold" />
-            <p className="text-lg text-white font-semibold">Kigali,Rwanda</p>
-          </li>
-          <li className="flex justify-start items-center gap-1">
-            <TfiLocationPin className="text-2xl text-white font-semibold" />
-            <p className="text-lg text-white font-semibold">Kigali,Rwanda</p>
-          </li>
-        </ul>
+          <ul className="hidden col-start-6 col-end-13 px-1 lg:flex items-center justify-between z-20">
+              <li className="flex justify-start items-center gap-1">
+                  <TfiLocationPin className="text-2xl text-white font-semibold"/>
+                  <p className="text-lg text-white font-semibold">Gasabo, Kigali-Rwanda</p>
+              </li>
+              <li className="flex justify-start items-center gap-1">
+                  <BiPhone className="text-2xl text-white font-semibold"/>
+                  <p className="text-lg text-white font-semibold">+250 788 888 888</p>
+              </li>
+              <li className="flex justify-start items-center gap-1">
+                  <BsClock className="text-2xl text-white font-semibold"/>
+                  <p className="text-lg text-white font-semibold">
+                      Mon - Sat 8.00 - 18.00
+                  </p>
+              </li>
+          </ul>
       </header>
 
-      <MobileMenu
-        isMobileMenu={isMobileMenu}
-        setIsMobileMenu={setIsMobileMenu}
-      />
-      {/* DESKTOP ONLY HEADER */}
-      <menu className=" w-full h-fit bg-[#03274a] px-6 lg:px-28 hidden md:flex items-center justify-between group overflow-hidden">
+        <MobileMenu
+            isMobileMenu={isMobileMenu}
+            setIsMobileMenu={setIsMobileMenu}
+        />
+        {/* DESKTOP ONLY HEADER */}
+        <menu
+            className=" w-full h-fit bg-[#03274a] px-6 lg:px-28 hidden md:flex items-center justify-between group overflow-hidden">
 
         {navigations.map(({id,text,path,submenu})=>{
           return(
@@ -83,16 +92,16 @@ const Layout = () => {
               {text}
             </NavLink>
 
-            <ul
-        onMouseEnter={()=>setIsModel(true)}
-        onMouseLeave={()=>setIsModel(false)}
-        style={{left: `${modalPosition.left}px`}} className={`w-fit p-2 ${isModel? 'grid':'hidden'} grid-cols-2 h-72 gap-2 shadow-lg bg-white absolute top-28 z-50 `}>
-          <li className=" border-r-2 px-6">
-            <p>web dev</p>
-            <p>app dev</p>
-          </li>
-          <li className="px-6">yoola</li>
-        </ul>
+        {/*    <ul*/}
+        {/*onMouseEnter={()=>setIsModel(true)}*/}
+        {/*onMouseLeave={()=>setIsModel(false)}*/}
+        {/*style={{left: `${modalPosition.left}px`}} className={`w-fit p-2 ${isModel? 'grid':'hidden'} grid-cols-2 h-72 gap-2 shadow-lg bg-white absolute top-28 z-50 `}>*/}
+        {/*  <li className=" border-r-2 px-6">*/}
+        {/*    <p>web dev</p>*/}
+        {/*    <p>app dev</p>*/}
+        {/*  </li>*/}
+        {/*  <li className="px-6">yoola</li>*/}
+        {/*</ul>*/}
             </Fragment>
           
           )

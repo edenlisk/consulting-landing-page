@@ -141,19 +141,19 @@ const HomePage = () => {
         </div>
       </section>
       {/* 5TH PAGE CONTACTS */}
-      <section className="  w-full h-fit px-6 py-12 md:px-28 md:py-24 space-y-6 bg-slate-200">
-        <h2 className="m-0 text-4xl">Our team</h2>
-        <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>
-        <ul className="w-full h-fit grid grid-cols-1 gap-6 md:grid-cols-2">
-          <li className="w-full h-[250px] space-y-2 bg-white"></li>
-          <li className="w-full h-[250px] space-y-2 bg-white"></li>
-        </ul>
-      </section>
+      {/*<section className="  w-full h-fit px-6 py-12 md:px-28 md:py-24 space-y-6 bg-slate-200">*/}
+      {/*  <h2 className="m-0 text-4xl">Our team</h2>*/}
+      {/*  <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>*/}
+      {/*  <ul className="w-full h-fit grid grid-cols-1 gap-6 md:grid-cols-2">*/}
+      {/*    <li className="w-full h-[250px] space-y-2 bg-white"></li>*/}
+      {/*    <li className="w-full h-[250px] space-y-2 bg-white"></li>*/}
+      {/*  </ul>*/}
+      {/*</section>*/}
       {/* 6TH PAGE CONTACTS */}
-      <section className="  w-full h-fit px-6 py-12 md:px-28 md:py-24 md:grid md:grid-cols-2 gap-3 items-center justify-center bg-[url('./src/images/buildings.webp')] bg-cover bg-center">
-        <div className="w-full h-[400px] bg-orange-300 space-y-1 flex flex-col items-start"></div>
-        <div className="w-full h-[400px] bg-orange-500 "></div>
-      </section>
+      {/*<section className="  w-full h-fit px-6 py-12 md:px-28 md:py-24 md:grid md:grid-cols-2 gap-3 items-center justify-center bg-[url('./src/images/buildings.webp')] bg-cover bg-center">*/}
+      {/*  <div className="w-full h-[400px] bg-orange-300 space-y-1 flex flex-col items-start"></div>*/}
+      {/*  <div className="w-full h-[400px] bg-orange-500 "></div>*/}
+      {/*</section>*/}
 
       {/* 7TH PAGE CONTACTS */}
       <section className="hidden md:block w-full h-fit px-6 py-12 md:px-28 md:py-24 space-y-6">

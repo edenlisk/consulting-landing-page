@@ -34,6 +34,9 @@ const RichTextEditor = ({rteRef, htmlContent}) => {
     //     console.log('rteref');
     // }, [rteRef, htmlContent]);
 
+    const imageSettings = {
+        saveFormat: "Base64"
+    }
 
 
     return (
@@ -42,7 +45,7 @@ const RichTextEditor = ({rteRef, htmlContent}) => {
                 : (
                     <>
                         {/*<button className="p-2 rounded bg-blue-400 w-fit text-white" onClick={handleSaveFile}>Save</button>*/}
-                        <RichTextEditorComponent ref={rteRef} height={600} toolbarSettings={toolbarSettings}>
+                        <RichTextEditorComponent insertImageSettings={imageSettings} ref={rteRef} height={600} toolbarSettings={toolbarSettings}>
                             <div>{ReactHtmlParser(htmlContent)}</div>
                             <Inject services={[Toolbar, HtmlEditor, Image, Link, Table]}/>
                         </RichTextEditorComponent>

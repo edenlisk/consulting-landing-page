@@ -75,30 +75,12 @@ const Footer = () => {
                         <li>
                             <a href="/our-team">Team</a>
                         </li>
-                        <li>
-                            <a href="">About</a>
-                        </li>
-                        <li>
-                            <a href="">About</a>
-                        </li>
-                        <li>
-                            <a href="">About</a>
-                        </li>
-                        <li>
-                            <a href="">About</a>
-                        </li>
-                        <li>
-                            <a href="">About</a>
-                        </li>
-                        <li>
-                            <a href="">About</a>
-                        </li>
                     </ul>
                 </div>
                 <div className=" flex flex-col gap-8">
                     <p className="text-3xl font-bold">subscribe</p>
                     <p>
-                        Sign up for Alerts, Special Offers, Education
+                        Sign up for Alerts, Special Offers
                         <br/>
                         and Updates
                     </p>
