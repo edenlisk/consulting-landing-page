@@ -19,7 +19,7 @@ const HomePage = () => {
   return (
     <>
       {/* 1ST SECTION */}
-      <section className=" w-full h-[800px] bg-[url('./src/images/office.webp')] bg-cover bg-center flex items-center text-white font-semibold">
+      <section className=" w-full h-[800px] bg-[url('./public/images/office.webp')] bg-cover bg-center flex items-center text-white font-semibold">
         <div className="w-full h-fit py-24 px-4 lg:px-28 space-y-6">
           <div className="flex  items-center gap-3 py-1">
             <span className="w-[70px] p-[1.8px] rounded-full bg-red-500"></span>
@@ -47,7 +47,7 @@ const HomePage = () => {
       </section>
       {/* 2ND SECTION */}
       <section className=" w-full h-fit px-6 py-12 md:px-28 md:py-24 md:flex md:gap-16 md:items-center justify-center">
-        <div className="w-full h-[300px] mb-10 md:h-[400px] lg:h-[300px] bg-[url('./src/images/consult.webp')] bg-cover bg-center font-semibold relative">
+        <div className="w-full h-[300px] mb-10 md:h-[400px] lg:h-[300px] bg-[url('./public/images/consult.webp')] bg-cover bg-center font-semibold relative">
           {/* TO ADD IMAGE CONTAINER TO BE USED AS IF IT WAS A BACKGROUND */}
           <span className="flex flex-col md:flex-row items-center gap-2 bg-white p-4 shadow-lg drop-shadow absolute -top-6 right-8 z-30 rounded">
             <p>Innovation</p>
