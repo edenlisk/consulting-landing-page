@@ -23,7 +23,7 @@ const HomePage = () => {
         <div className="w-full h-fit py-24 px-4 lg:px-28 space-y-6">
           <div className="flex  items-center gap-3 py-1">
             <span className="w-[70px] p-[1.8px] rounded-full bg-red-500"></span>
-            <p className="text-lg">Meet Consulting</p>
+            <p className="text-lg">Meet Mineral Exporter</p>
           </div>
           <p className="py-1 text-5xl md:text-6xl w-full md:w-3/4">
             Elevate business operations with Consulting

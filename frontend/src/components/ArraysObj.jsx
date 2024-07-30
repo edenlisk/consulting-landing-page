@@ -35,6 +35,18 @@ export const navigations = [
     path: "/contact-us",
     submenu: true,
   },
+  {
+    id: 6,
+    text: "GALLERY",
+    path: "/gallery",
+    submenu: true,
+  },
+  {
+    id: 6,
+    text: "REPORTS",
+    path: "/reports",
+    submenu: true,
+  },
 ];
 
 import consultImg from '../images/consult.webp';

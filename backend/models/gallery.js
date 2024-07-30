@@ -1,8 +1,11 @@
-import mongoose from "mongoose";
+import mongoose, {Schema} from "mongoose";
 
 
 const photoSchema = new mongoose.Schema(
     {
+        referenceObj: {
+            type: Schema.Types.ObjectId
+        },
         fileId: String,
         filePath: String,
         year: String,

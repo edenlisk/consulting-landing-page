@@ -18,6 +18,8 @@ import RichTextEditor from "./components/RichTextEditor.jsx";
 import PostsPage from './pages/admin-layout/pages/postsPage.jsx'
 import UsersPage from './pages/admin-layout/pages/usersPage.jsx'
 import ServicesPage from './pages/admin-layout/pages/servicesPage.jsx'
+import Gallery from "./components/Gallery.jsx";
+import GalleryPage from "./components/GalleryPage.jsx";
 
 function App() {
     const [count, setCount] = useState(0)
@@ -39,6 +41,8 @@ function App() {
                                 <Route path='/services/company-history' element={<DummyPage/>}></Route>
                                 <Route path='/our-team' element={<Team/>}></Route>
                                 <Route path='/contact-us' element={<Contacts/>}></Route>
+                                <Route path='/gallery' element={<Gallery/>}></Route>
+                                <Route path='/gallery/:eventId' element={<GalleryPage/>}></Route>
                             </Route>
 
                             <Route element={<AdminLayout/>}>

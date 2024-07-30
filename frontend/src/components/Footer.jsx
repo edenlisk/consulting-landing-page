@@ -75,6 +75,12 @@ const Footer = () => {
                         <li>
                             <a href="/our-team">Team</a>
                         </li>
+                        <li>
+                            <a href="/gallery">Gallery</a>
+                        </li>
+                        <li>
+                            <a href="/reports">Reports</a>
+                        </li>
                     </ul>
                 </div>
                 <div className=" flex flex-col gap-8">
