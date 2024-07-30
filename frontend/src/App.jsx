@@ -20,6 +20,7 @@ import UsersPage from './pages/admin-layout/pages/usersPage.jsx'
 import ServicesPage from './pages/admin-layout/pages/servicesPage.jsx'
 import Gallery from "./components/Gallery.jsx";
 import GalleryPage from "./components/GalleryPage.jsx";
+import Reports from "./components/Reports.jsx";
 
 function App() {
     const [count, setCount] = useState(0)
@@ -43,6 +44,7 @@ function App() {
                                 <Route path='/contact-us' element={<Contacts/>}></Route>
                                 <Route path='/gallery' element={<Gallery/>}></Route>
                                 <Route path='/gallery/:eventId' element={<GalleryPage/>}></Route>
+                                <Route path='/reports' element={<Reports/>}></Route>
                             </Route>
 
                             <Route element={<AdminLayout/>}>

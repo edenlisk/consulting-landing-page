@@ -1,8 +1,6 @@
 import { FaRegFilePdf } from "react-icons/fa6";
 import { IoCall,IoAddSharp } from "react-icons/io5";
-import { GoChevronRight } from "react-icons/go";
 import { ProfileCard } from "../components/Card";
-import { profilesArray } from "../components/ArraysObj";
 import {useQuery} from "@apollo/client";
 import {GET_USERS} from "../api/graphql.js";
 import {useEffect, useState} from "react";
