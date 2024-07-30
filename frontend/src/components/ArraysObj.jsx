@@ -42,7 +42,7 @@ export const navigations = [
     submenu: true,
   },
   {
-    id: 6,
+    id: 7,
     text: "REPORTS",
     path: "/reports",
     submenu: true,
