@@ -26,7 +26,7 @@ const HomePage = () => {
             <p className="text-lg">Meet Mineral Exporter</p>
           </div>
           <p className="py-1 text-5xl md:text-6xl w-full md:w-3/4">
-            Elevate business operations with Consulting
+            Elevate business operations with Mining Process
           </p>
           <p className="text-lg py-1">
             We know how to achieve the highest standards most productively
@@ -98,7 +98,7 @@ const HomePage = () => {
           <li className="w-full h-[250px] flex flex-col gap-3">
             {/* frontend\src\assets\icons\strategy.svg */}
             <object type="image/svg+xml" data="/icons/strategy.svg" className="h-16 w-12"></object>
-            <a href="" className="text-lg font-semibold">Turnaround Consulting</a>
+            <a href="" className="text-lg font-semibold">Turnaround Mining Industry</a>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat in dolore nihil.</p>
             <span className="flex items-center gap-2 font-semibold">
               <p>Learn more</p>

@@ -101,7 +101,7 @@ export const servicesArray = [
   {
     id: 2,
     img: officeImg,
-    title: "Turnaround Consulting",
+    title: "Turnaround & Restructuring",
     description:
       "Companies dislike the term ‘turnaround consulting’ because it represents failure. The truth is that turnaround consulting represents success.",
     link: "",

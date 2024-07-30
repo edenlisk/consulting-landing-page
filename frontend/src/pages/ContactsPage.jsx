@@ -64,7 +64,7 @@ const Contacts = () => {
                         <FaEnvelope className="text-orange-500 "/>
                         </span>
                             <a href="mailto:brandon@consulting.com"
-                               className="font-semibold text-wrap">brandon@consulting.com</a>
+                               className="font-semibold text-wrap">brandon@example.com</a>
                         </li>
 
                     </ul>

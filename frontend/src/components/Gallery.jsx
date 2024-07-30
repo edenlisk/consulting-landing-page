@@ -1,8 +1,10 @@
 import { Card } from 'antd';
+import {useNavigate} from "react-router-dom";
 
 
 const Gallery = () => {
 
+    const navigate = useNavigate();
     const { Meta } = Card;
 
     const events = [
@@ -64,12 +66,12 @@ const Gallery = () => {
         }
     ];
 
-
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {events.map(event => (
                     <Card
+                        onClick={() => navigate(`/gallery/${event.id}`)}
                         key={event.id}
                         hoverable
                         style={{ width: '100%' }}

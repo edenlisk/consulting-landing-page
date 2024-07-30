@@ -72,7 +72,7 @@ const Services = () => {
                     </button>
                 </div>
                 <div className="border-4 border-zinc-500 p-4 testimonial">
-                    <p>Consulting WP really helped us achieve our financial goals. The slick presentation along with
+                    <p>XYZ Company really helped us achieve our financial goals. The slick presentation along with
                         fantastic readability ensures that our financial standing is stable.</p>
                 </div>
             </div>
