@@ -11,22 +11,22 @@ import { NewsCard } from "../components/Card";
 const HomePage = () => {
   const { data, loading, error } = useQuery(GET_SERVICES);
 
-  useEffect(() => {
-    if (data) console.log('[data]', data);
-  }, []);
+  // useEffect(() => {
+  //   if (data) console.log('[data]', data);
+  // }, []);
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isMobileSubMenu, setIsMobileSubMenu] = useState(false);
   return (
     <>
       {/* 1ST SECTION */}
-      <section className=" w-full h-[800px] bg-[url('./src/images/office.webp')] bg-cover bg-center flex items-center text-white font-semibold">
+      <section className=" w-full h-[800px] bg-[url('https://moderndiplomacy.eu/wp-content/uploads/2023/12/business-office-1068x712.jpg')] bg-cover bg-center flex items-center text-white font-semibold">
         <div className="w-full h-fit py-24 px-4 lg:px-28 space-y-6">
           <div className="flex  items-center gap-3 py-1">
             <span className="w-[70px] p-[1.8px] rounded-full bg-red-500"></span>
-            <p className="text-lg">Meet Consulting</p>
+            <p className="text-lg">Meet Mineral Exporter</p>
           </div>
           <p className="py-1 text-5xl md:text-6xl w-full md:w-3/4">
-            Elevate business operations with Consulting
+            Elevate business operations with Mining Process
           </p>
           <p className="text-lg py-1">
             We know how to achieve the highest standards most productively
@@ -47,7 +47,7 @@ const HomePage = () => {
       </section>
       {/* 2ND SECTION */}
       <section className=" w-full h-fit px-6 py-12 md:px-28 md:py-24 md:flex md:gap-16 md:items-center justify-center">
-        <div className="w-full h-[300px] mb-10 md:h-[400px] lg:h-[300px] bg-[url('./src/images/consult.webp')] bg-cover bg-center font-semibold relative">
+        <div className="w-full h-[300px] mb-10 md:h-[400px] lg:h-[300px] bg-[url('https://dbspazio.io/wp-content/uploads/2023/03/img-about.jpg')] bg-cover bg-center font-semibold relative">
           {/* TO ADD IMAGE CONTAINER TO BE USED AS IF IT WAS A BACKGROUND */}
           <span className="flex flex-col md:flex-row items-center gap-2 bg-white p-4 shadow-lg drop-shadow absolute -top-6 right-8 z-30 rounded">
             <p>Innovation</p>
@@ -98,7 +98,7 @@ const HomePage = () => {
           <li className="w-full h-[250px] flex flex-col gap-3">
             {/* frontend\src\assets\icons\strategy.svg */}
             <object type="image/svg+xml" data="/icons/strategy.svg" className="h-16 w-12"></object>
-            <a href="" className="text-lg font-semibold">Turnaround Consulting</a>
+            <a href="" className="text-lg font-semibold">Turnaround Mining Industry</a>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat in dolore nihil.</p>
             <span className="flex items-center gap-2 font-semibold">
               <p>Learn more</p>
@@ -141,19 +141,19 @@ const HomePage = () => {
         </div>
       </section>
       {/* 5TH PAGE CONTACTS */}
-      <section className="  w-full h-fit px-6 py-12 md:px-28 md:py-24 space-y-6 bg-slate-200">
-        <h2 className="m-0 text-4xl">Our team</h2>
-        <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>
-        <ul className="w-full h-fit grid grid-cols-1 gap-6 md:grid-cols-2">
-          <li className="w-full h-[250px] space-y-2 bg-white"></li>
-          <li className="w-full h-[250px] space-y-2 bg-white"></li>
-        </ul>
-      </section>
+      {/*<section className="  w-full h-fit px-6 py-12 md:px-28 md:py-24 space-y-6 bg-slate-200">*/}
+      {/*  <h2 className="m-0 text-4xl">Our team</h2>*/}
+      {/*  <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>*/}
+      {/*  <ul className="w-full h-fit grid grid-cols-1 gap-6 md:grid-cols-2">*/}
+      {/*    <li className="w-full h-[250px] space-y-2 bg-white"></li>*/}
+      {/*    <li className="w-full h-[250px] space-y-2 bg-white"></li>*/}
+      {/*  </ul>*/}
+      {/*</section>*/}
       {/* 6TH PAGE CONTACTS */}
-      <section className="  w-full h-fit px-6 py-12 md:px-28 md:py-24 md:grid md:grid-cols-2 gap-3 items-center justify-center bg-[url('./src/images/buildings.webp')] bg-cover bg-center">
-        <div className="w-full h-[400px] bg-orange-300 space-y-1 flex flex-col items-start"></div>
-        <div className="w-full h-[400px] bg-orange-500 "></div>
-      </section>
+      {/*<section className="  w-full h-fit px-6 py-12 md:px-28 md:py-24 md:grid md:grid-cols-2 gap-3 items-center justify-center bg-[url('./src/images/buildings.webp')] bg-cover bg-center">*/}
+      {/*  <div className="w-full h-[400px] bg-orange-300 space-y-1 flex flex-col items-start"></div>*/}
+      {/*  <div className="w-full h-[400px] bg-orange-500 "></div>*/}
+      {/*</section>*/}
 
       {/* 7TH PAGE CONTACTS */}
       <section className="hidden md:block w-full h-fit px-6 py-12 md:px-28 md:py-24 space-y-6">

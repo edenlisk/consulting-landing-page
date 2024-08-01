@@ -10,6 +10,7 @@ import {addMessage, getMessages} from "./controllers/messageControllers.js";
 import {signup} from "./controllers/authControllers.js";
 import {createCompany, getCompany, updateCompany} from "./controllers/companyControllers.js";
 import {addBlog, getBlog, getBlogs, updateBlog} from "./controllers/blogControllers.js";
+import {getEvents, getOneEvent} from "./controllers/eventsControllers.js";
 
 export const resolvers = {
     Upload: GraphQLUpload,
@@ -37,6 +38,12 @@ export const resolvers = {
         },
         getBlog: (_root, { blogId }) => {
             return getBlog(blogId);
+        },
+        events: () => {
+            return getEvents();
+        },
+        event: (_root, { eventId }) => {
+            return getOneEvent({eventId});
         }
     },
     Mutation: {
@@ -87,5 +94,10 @@ export const resolvers = {
             await finished(out);
             return { filename, mimetype, encoding };
         },
+    },
+    Event: {
+        date: (event) => {
+            return event.date.toISOString().slice(0, 10);
+        }
     }
 }

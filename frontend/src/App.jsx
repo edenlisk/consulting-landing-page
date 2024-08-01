@@ -42,6 +42,9 @@ function App() {
                                 <Route path='/services/company-history' element={<DummyPage/>}></Route>
                                 <Route path='/our-team' element={<Team/>}></Route>
                                 <Route path='/contact-us' element={<Contacts/>}></Route>
+                                <Route path='/gallery' element={<Gallery/>}></Route>
+                                <Route path='/gallery/:eventId' element={<GalleryPage/>}></Route>
+                                <Route path='/reports' element={<Reports/>}></Route>
                             </Route>
 
                             <Route element={<AdminLayout/>}>

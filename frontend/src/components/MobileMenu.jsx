@@ -8,45 +8,31 @@ const MobileMenu = ({ isMobileMenu, setIsMobileMenu }) => {
   const [heading, setIHeading] = useState("");
 
   return (
-    <menu
-      className={`w-full h-screen md:hidden flex flex-col absolute bg-red-400 duration-500 items-start gap-10 py-8 overflow-x-none z-50 ${
-        isMobileMenu ? `left-0 top-18 ` : ` -left-full`
-      }`}
-    >
-      {/* MOBILE MENU */}
-      {menuLinks.map(({ name,sublinks }) => (
-        <li key={name} className=" w-full flex flex-col gap-4 text-md font-bold text-white">
-          <div className="flex justify-between items-center w-full px-8 uppercase">
-            <NavLink
-              to={`/${name}`}
-              onClick={() => setIsMobileMenu(!isMobileMenu)}
-              className={({ isActive }) =>
-                isActive ? "text-orange-300 " : " "
-              }
+      <menu
+          className={`w-full h-full md:hidden flex flex-col absolute bg-gray-900 duration-500 items-start gap-10 py-8 overflow-x-auto z-50 ${
+              isMobileMenu ? 'left-0 top-18' : '-left-full'
+          }`}
+      >
+        {/* MOBILE MENU */}
+        {menuLinks.map(({text, path, id}) => (
+            <li
+                key={id}
+                className="w-full flex flex-col gap-4 text-md font-bold text-white"
             >
-              {name}
-            </NavLink>
-            <FaPlus
-              className={` text-xl ${
-                isMobileSubMenu && heading === name ? "rotate-45 duration-300 text-orange-300" : ""
-              }`}
-              onClick={() => {
-                setIsMobileSubMenu(!isMobileSubMenu);
-                setIHeading(name);
-              }}
-            />
-          </div>
-
-          {isMobileSubMenu && heading === name && (
-            <div className="w-full col-span-full flex flex-col duration-500 transition-all gap-8 bg-white text-black py-6 px-10">
-             {sublinks.map(({name,link})=>(
-                <p key={name} className=" hover:text-orange-600">{name}</p>
-             ))}
-            </div>
-          )}
-        </li>
-      ))}
-    </menu>
+              <div className="flex justify-between items-center w-full px-8 uppercase">
+                <NavLink
+                    to={`${path}`}
+                    onClick={() => setIsMobileMenu(!isMobileMenu)}
+                    className={({isActive}) =>
+                        isActive ? 'text-orange-300 ' : ' '
+                    }
+                >
+                  {text}
+                </NavLink>
+              </div>
+            </li>
+        ))}
+      </menu>
   );
 };
 export default MobileMenu;

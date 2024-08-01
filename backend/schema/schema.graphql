@@ -6,7 +6,9 @@ type Query {
     getMessages: [Message],
     getCompany: Company,
     getBlogs: [Blog],
-    getBlog(blogId: ID!): Blog
+    getBlog(blogId: ID!): Blog,
+    events: [Event],
+    event(eventId: ID!): Event
 }
 
 
@@ -23,6 +25,15 @@ type Mutation {
     addBlog(file: Upload, input: BlogInput): Blog,
     updateBlog(input: BlogInput, file: Upload, blogId: ID!): Blog,
     singleUpload(file: Upload!): File!
+}
+
+
+type Event {
+    name: String,
+    date: String,
+    location: String,
+    description: String,
+    images: [Photo]
 }
 
 
@@ -64,7 +75,7 @@ input CompanyInput {
     companyOverview: String,
     phoneNumber: String,
     email: String,
-    history: [EventInput]
+    history: [HistoryEventInput]
 }
 
 
@@ -148,13 +159,13 @@ type MapCoords {
     lng: String
 }
 
-input EventInput {
+input HistoryEventInput {
     year: String,
     title: String,
     description: String
 }
 
-type Event {
+type HistoryEvent {
     year: String,
     title: String,
     description: String
@@ -170,7 +181,7 @@ type Company {
     ourMission: String,
     email: String,
     phoneNumber: String,
-    history: [Event]
+    history: [HistoryEvent]
 }
 
 type Socials {
