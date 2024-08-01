@@ -20,9 +20,8 @@ import {GoSearch} from "react-icons/go";
 import {FiTrash} from "react-icons/fi";
 import RichTextEditor from "../../../components/RichTextEditor.jsx";
 import {useMutation, useQuery} from "@apollo/client";
-import {ADD_BLOG, GET_BLOGS} from "../../../api/graphql.js";
+import {ADD_BLOG, GET_BLOGS, GET_COMPANY_INFO} from "../../../api/graphql.js";
 import ReactHtmlParser from 'html-react-parser';
-import'./syncfusion-overrides.css';
 
 const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -30,8 +29,8 @@ const rowSelection = {
     },
 };
 
-const PostsPage = () => {
-    const {data: blogsData, error} = useQuery(GET_BLOGS);
+const CompanysPage = () => {
+    const {data: companyInfo, error} = useQuery(GET_COMPANY_INFO);
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
     const [open, setOpen] = useState(false);
@@ -43,19 +42,18 @@ const PostsPage = () => {
     const [htmlContent, setHtmlContent] = useState('<p>Hello</p>');
 
     useEffect(() => {
-        if (blogsData) {
-            setData(blogsData.blogs);
+        if (companyInfo) {
+            setData(companyInfo.blogs);
         } else if (error) return message.error(error.message);
-    }, [error, blogsData]);
+    }, [error, companyInfo]);
 
-    const rteRef = useRef(null);
+    const rteRef = useRef();
 
     const [addPost, {loading, error: addPostError}] = useMutation(ADD_BLOG);
     const handleSaveFile = async () => {
         // handleGetHtmlContent();
         if (rteRef.current) {
-            // console.log('[htmlContent]: ', rteRef.current.getHtml());
-            setSideInfo(prevState => ({...prevState, content: rteRef.current.value}));
+            console.log('[htmlContent]: ', rteRef.current.getHtml());
             // setSideInfo(prevState => ({...prevState, content: rteRef.current.getHtml()}));
             if (!sideInfo.blogId) {
                 console.log('')
@@ -70,8 +68,8 @@ const PostsPage = () => {
             }
         }
         setOpen(false);
-        // rteRef.current.value = '<p>Hello</p>';
-        console.log(rteRef.current.value)
+        rteRef.current.value = '<p>Hello</p>';
+        // console.log('after')
     }
 
     useEffect(() => {
@@ -94,13 +92,6 @@ const PostsPage = () => {
             ...prev, [e.target.name]: e.target.value
         }));
         console.log(sideInfo)
-    };
-
-    
-    const desriptionChange=()=>{
-        // rteRef.current.getHtml()
-
-        console.log(htmlContent)
     };
 
     const showDrawer = () => {
@@ -138,10 +129,10 @@ const PostsPage = () => {
 
     const getData = (record) => {
         if (record) {
-            console.log( record);
+            console.log('[getData]: ', record);
             setSideInfo(record)
-            // rteRef.current.value = record.content;
-            setHtmlContent(record.content);
+            rteRef.current.value = record.content;
+            // setHtmlContent(record.content);
             // console.log(sideInfo)
         }
 
@@ -171,16 +162,27 @@ const PostsPage = () => {
 
     const columns = [
         {
-            title: 'title',
-            dataIndex: 'title',
+            title: 'Name',
+            dataIndex: 'name',
         },
         {
-            title: 'description',
-            dataIndex: 'content',
+            title: 'Logo',
+            dataIndex: 'logo',
             width: '70%',
-            render: (_, record) => {
-                if (record.content) return <div>{ReactHtmlParser(record.content)}</div>
-            }
+            render: (_, record) =>
+                (
+                   <img src={record.image} alt={record.slug}
+                   className='p-0 w-8 h-8  object-cover'
+                   />
+                )
+        },
+        {
+            title: 'Address',
+            dataIndex: 'address',
+        },
+        {
+            title: 'Socials',
+            dataIndex: 'socials',
         },
         {
             title: 'Action',
@@ -202,7 +204,7 @@ const PostsPage = () => {
     return (
         <>
 
-            <p className='text-xl font-bold pb-2 px-2'>Blogs</p>
+            <p className='text-xl font-bold pb-2 px-2'>Services</p>
             <div className="flex justify-end gap-2 items-center w-full pb-3">
           <span className='flex items-center w-fit'>
             <span onClick={() => setIsearch(!isearch)} className='hover:bg-zinc-100 p-2 rounded-md'>
@@ -230,7 +232,7 @@ const PostsPage = () => {
                     pagination={{
                         onChange: cancel,
                     }}
-                    key="id"
+                    rowKey="id"
                 />
             </Form>
 
@@ -280,17 +282,14 @@ const PostsPage = () => {
                         <button type='button' disabled={loading} onClick={handleSaveFile}
                                 className='p-2 rounded bg-blue-400 w-fit text-white'>save
                         </button>
-                        <RichTextEditor rteRef={rteRef} change={desriptionChange} htmlContent={htmlContent}/>
+                        <RichTextEditor rteRef={rteRef} htmlContent={htmlContent}/>
                     </div>
                 </div>
             </Drawer>
-
-
-            <div className=' w-full h-fit'>{ReactHtmlParser(sideInfo.content)}</div>
 
         </>
 
     );
 };
 
-export default PostsPage;
+export default CompanysPage;

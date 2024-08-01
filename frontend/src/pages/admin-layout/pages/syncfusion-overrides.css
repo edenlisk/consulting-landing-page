@@ -1,0 +1,14 @@
+/* Custom styles to ensure headers are displayed correctly */
+.e-rte-content h1 {
+    @apply text-4xl font-bold mt-2 mb-2; /* Tailwind classes applied to h1 */
+}
+
+.e-rte-content h2 {
+    @apply text-3xl font-semibold mt-2 mb-2; /* Tailwind classes applied to h2 */
+}
+
+.e-rte-content h3 {
+    @apply text-2xl font-medium mt-2 mb-2; /* Tailwind classes applied to h3 */
+}
+
+/* Add additional styles as needed */

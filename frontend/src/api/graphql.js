@@ -47,6 +47,7 @@ export const GET_SERVICE = gql`
 }
 `;
 
+
 export const GET_USERS = gql`
     query Users {
         team:users {
@@ -148,16 +149,27 @@ export const ADD_SERVICE = gql`
             description
             image {
                 filePath
+                description
             }
         }
     }
 `;
 
+export const UPDATE_SERVICE=gql`
+mutation updateService($input: ServiceInput, $serviceId: ID!){
+    service:updateService(input:$input,serviceId:$serviceId){
+        title
+        description
+    }
+
+}
+`
+
 export const DELETE_SERVICE = gql`
     mutation deleteService($serviceId: ID!) {
         service:deleteService(serviceId: $serviceId) {
             title
-            description,
+            description
             image {
                 filePath
             }
@@ -204,6 +216,7 @@ export const ADD_USER = gql`
 export const ADD_COMPANY_INFO = gql`
     mutation addCompanyInfo($input: CompanyInput, $file: Upload) {
         company:addCompanyInfo(input: $input, file: $file) {
+            id
             name
             logo {
                 filePath

@@ -20,18 +20,8 @@ import {GoSearch} from "react-icons/go";
 import {FiTrash} from "react-icons/fi";
 import RichTextEditor from "../../../components/RichTextEditor.jsx";
 import {useMutation, useQuery} from "@apollo/client";
-import {ADD_BLOG, GET_BLOGS, GET_SERVICES} from "../../../api/graphql.js";
+import { ADD_SERVICE, DELETE_SERVICE, GET_SERVICES} from "../../../api/graphql.js";
 import ReactHtmlParser from 'html-react-parser';
-
-
-const originData = [];
-for (let i = 0; i < 100; i++) {
-    originData.push({
-        key: i.toString(),
-        title: `Bonds & Commodities ${i}`,
-        description: `Bonds and commodities are much more stable than stocks and trades. We allow our clients to invest in the right bonds & commodities. ${i}`,
-    });
-}
 
 const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -45,6 +35,7 @@ const ServicesPage = () => {
     const [editingKey, setEditingKey] = useState('');
     const [open, setOpen] = useState(false);
     const [isearch, setIsearch] = useState(false);
+    const [isNew, setIsNew] = useState(false);
     const [Input, setInput] = useState(false);
     const [files, setFile] = useState(null);
     const [sideInfo, setSideInfo] = useState({title: '', blogId: '', content: '<p>Hello</p>'})
@@ -54,13 +45,24 @@ const ServicesPage = () => {
     useEffect(() => {
         if (servicesData) {
             setData(servicesData.services);
+            console.log(servicesData.services)
         } else if (error) return message.error(error.message);
         // console.log(servicesData)
     }, [error, servicesData]);
 
-    const rteRef = useRef();
+    const rteRef = useRef(null);
 
-    const [addPost, {loading, error: addPostError}] = useMutation(ADD_BLOG);
+    const [addService, {loading, error: addServiceError}] = useMutation(ADD_SERVICE,{
+        refetchQueries:[GET_SERVICES,
+        'fetchServices',]
+    });
+    // const [Updateservice]=useMutation()
+    const [deleteservice,{loading:laod}]=useMutation(DELETE_SERVICE,{
+        refetchQueries:[
+            GET_SERVICES,
+            'fetchServices'
+        ]
+    })
     const handleSaveFile = async () => {
         // handleGetHtmlContent();
         if (rteRef.current) {
@@ -68,26 +70,36 @@ const ServicesPage = () => {
             // setSideInfo(prevState => ({...prevState, content: rteRef.current.getHtml()}));
             if (!sideInfo.blogId) {
                 // console.log('')
-                // await addPost({
+                // await addService({
                 //     variables: {
                 //         input: {title: sideInfo.title, content: rteRef.current.value},
                 //         file: files[0]
                 //     },
                 // });
             } else {
-                console.log('update');
+                // console.log('update');
             }
+            console.log(sideInfo);
         }
         setOpen(false);
         rteRef.current.value = '<p>Hello</p>';
         // console.log('after')
     }
+    // const updateService = () => {
+
+    // }
+    const deleteRow = (id) => {
+        console.log(id)
+
+        deleteservice({variables:{serviceId:id}});
+
+    }
 
     useEffect(() => {
-        if (addPostError) {
-            return message.error(addPostError.message);
+        if (addServiceError) {
+            return message.error(addServiceError.message);
         }
-    }, [addPostError]);
+    }, [addServiceError]);
 
     const handleSelectFile = (e) => {
         setFile(e.target.files);
@@ -105,46 +117,54 @@ const ServicesPage = () => {
         console.log(sideInfo)
     };
 
+    const desriptionChange=()=>{
+        rteRef.current.getHtml()
+
+        console.log(rteRef.current.getHtml())
+    };
+
     const showDrawer = () => {
         setOpen(true);
     };
 
     const onClose = () => {
         setOpen(false);
+        setIsNew(false)
         setHtmlContent('<p>Hello</p>');
     };
 
     const cancel = () => {
         setEditingKey('');
     };
-    const save = async (key) => {
-        try {
-            const newData = [...data];
-            const index = newData.findIndex((item) => key === item.id);
-            if (index > -1) {
-                const item = newData[index];
-                newData.splice(index, 1, {
-                    ...item,
-                });
-                setData(newData);
-                setEditingKey('');
-            } else {
-                newData.push(row);
-                setData(newData);
-                setEditingKey('');
-            }
-        } catch (errInfo) {
-            console.log('Validate Failed:', errInfo);
-        }
-    };
+    // const save = async (key) => {
+    //     try {
+    //         const newData = [...data];
+    //         const index = newData.findIndex((item) => key === item.id);
+    //         if (index > -1) {
+    //             const item = newData[index];
+    //             newData.splice(index, 1, {
+    //                 ...item,
+    //             });
+    //             setData(newData);
+    //             setEditingKey('');
+    //         } else {
+    //             newData.push(row);
+    //             setData(newData);
+    //             setEditingKey('');
+    //         }
+    //     } catch (errInfo) {
+    //         console.log('Validate Failed:', errInfo);
+    //     }
+    // };
 
     const getData = (record) => {
         if (record) {
             console.log('[getData]: ', record);
-            setSideInfo(record)
-            rteRef.current.value = record.content;
-            // setHtmlContent(record.content);
-            // console.log(sideInfo)
+            setSideInfo(record);
+            setHtmlContent(record.description)
+            rteRef.current.value = record.description;
+            setHtmlContent(record.content);
+            console.log(htmlContent.content)
         }
 
     };
@@ -189,6 +209,7 @@ const ServicesPage = () => {
         {
             title: 'Display',
             dataIndex: 'dislay',
+            width:'30px',
             render: (_, record) =>
                 (
                    <img src={record.image} alt={record.slug}/>
@@ -200,7 +221,7 @@ const ServicesPage = () => {
             width: '50%',
             render: (_, record) =>
                 (
-                    <div>{`${record.description.split(/(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/).slice(0,7).join(' ')} ...`}</div>
+                    <div>{`${record.description?.split(/(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/).slice(0,7).join(' ')} ...`}</div>
                 )
 
              
@@ -211,12 +232,15 @@ const ServicesPage = () => {
             dataIndex: 'action',
             render: (_, record) => {
                 return (
-                    <div className='flex gap-2 items-center w-full justify-center'>
+                    <div className='flex gap-2 text-[18px] items-center w-full justify-center'>
                         <FiEdit2 onClick={() => {
-                            getData(record)
                             setOpen(true)
+                            getData(record)
+                            
                         }}/>
-                        <FiTrash/>
+                        <FiTrash onClick={()=>{
+                            deleteRow(record.id)
+                        }}/>
                     </div>
                 );
             },
@@ -241,6 +265,7 @@ const ServicesPage = () => {
                     }
                     setOpen(true)
                     setInput(true)
+                    setIsNew(true)
                 }} className='bg-blue-500 rounded text-white px-2 py-1 w-fit'>New
                 </button>
             </div>
@@ -298,14 +323,16 @@ const ServicesPage = () => {
                     <input type="file" name="file" onInput={handleSelectFile}/>
                     <div className='flex flex-col gap-2'>
                         <p className='text-md font-bold px-2'>Description</p>
-                        {/*<textarea name="description" id="" value={sideInfo.description || ""} onChange={handleInput}*/}
-                        {/*          placeholder='where rich editor will get'*/}
-                        {/*          className='w-full p-2 border rounded'></textarea>*/}
-                        {/*updateRow(sideInfo.key)*/}
-                        <button type='button' disabled={loading} onClick={handleSaveFile}
+                        <RichTextEditor rteRef={rteRef} change={desriptionChange} htmlContent={htmlContent}/>
+                        <>
+                        {isNew? <button type='button' disabled={loading} onClick={handleSaveFile}
                                 className='p-2 rounded bg-blue-400 w-fit text-white'>save
-                        </button>
-                        <RichTextEditor rteRef={rteRef} htmlContent={htmlContent}/>
+                        </button>:<button type='button' disabled={loading} onClick={handleSaveFile}
+                                className='p-2 rounded bg-blue-400 w-fit text-white'>Update
+                        </button>}
+                        </>
+                       
+                       
                     </div>
                 </div>
             </Drawer>

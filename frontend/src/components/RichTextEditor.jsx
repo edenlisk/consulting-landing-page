@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {forwardRef, useEffect, useRef} from 'react';
 import {
     HtmlEditor,
     Image,
@@ -12,8 +12,17 @@ import ReactHtmlParser from 'html-react-parser';
 import { useNavigate } from "react-router-dom";
 
 
-const RichTextEditor = ({rteRef, htmlContent}) => {
+const RichTextEditor = ({htmlContent,change,rteRef}) => {
     // const rteRef = useRef();
+
+    useEffect(() => {
+        if (rteRef && rteRef.current) {
+            rteRef.current.value = htmlContent;
+        }
+    }, [rteRef,htmlContent]);
+
+    console.log('rteref',rteRef.current);
+
 
 
     const toolbarSettings = {
@@ -42,8 +51,8 @@ const RichTextEditor = ({rteRef, htmlContent}) => {
                 : (
                     <>
                         {/*<button className="p-2 rounded bg-blue-400 w-fit text-white" onClick={handleSaveFile}>Save</button>*/}
-                        <RichTextEditorComponent ref={rteRef} height={600} toolbarSettings={toolbarSettings}>
-                            <div>{ReactHtmlParser(htmlContent)}</div>
+                        <RichTextEditorComponent ref={rteRef} value={htmlContent} change={change} height={600} toolbarSettings={toolbarSettings}>
+                            {/* <div>{ReactHtmlParser(htmlContent)}</div> */}
                             <Inject services={[Toolbar, HtmlEditor, Image, Link, Table]}/>
                         </RichTextEditorComponent>
                     </>
@@ -52,5 +61,6 @@ const RichTextEditor = ({rteRef, htmlContent}) => {
         </div>
     )
 }
+
 
 export default RichTextEditor;

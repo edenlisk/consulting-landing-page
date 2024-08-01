@@ -18,6 +18,9 @@ import RichTextEditor from "./components/RichTextEditor.jsx";
 import PostsPage from './pages/admin-layout/pages/postsPage.jsx'
 import UsersPage from './pages/admin-layout/pages/usersPage.jsx'
 import ServicesPage from './pages/admin-layout/pages/servicesPage.jsx'
+import CompanysPage from './pages/admin-layout/pages/companysPage.jsx'
+import HtmlText from './pages/admin-layout/pages/htmlText.jsx'
+// import HtmlText from './pages/admin-layout/pages/htmlText.jsx'
 
 function App() {
     const [count, setCount] = useState(0)
@@ -45,6 +48,8 @@ function App() {
                                 <Route path='/admin/posts' element={<PostsPage/>}></Route>
                                 <Route path='/admin/users' element={<UsersPage/>}></Route>
                                 <Route path='/admin/services' element={<ServicesPage/>}></Route>
+                                <Route path='/admin/Companies' element={<CompanysPage/>}></Route>
+                                <Route path='/admin/text' element={<HtmlText/>}></Route>
                                 {/* <Route path='/admin/posts' element={<DataTable/>}></Route> */}
                             </Route>
                         </Routes>

@@ -40,6 +40,7 @@ const AdminLayout = () => {
                 { title: "Users", show: true, icon: <PiUsers   />, id: 12,navtext:'admin/users' },
                 { title: "Company", show: true, icon: <PiUsers   />, id: 13,navtext:'admin/companies' },
                 { title: "Users", show: true, icon: <PiUsers   />, id: 14,navtext:'admin/users' },
+                { title: "text", show: true, icon: <PiUsers   />, id: 14,navtext:'admin/text' },
             ]
         },
     ]
