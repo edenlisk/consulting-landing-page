@@ -57,7 +57,7 @@ function App() {
                                 <Route path='/admin/users' element={<UsersPage/>}></Route>
                                 <Route path='/admin/services' element={<ServicesPage/>}></Route>
                                 <Route path='/admin/Companies' element={<CompanysPage/>}></Route>
-                                <Route path='/admin/text' element={<HtmlText/>}></Route>
+                                {/*<Route path='/admin/text' element={<HtmlText/>}></Route>*/}
                                 {/* <Route path='/admin/posts' element={<DataTable/>}></Route> */}
                             </Route>
                         </Routes>
