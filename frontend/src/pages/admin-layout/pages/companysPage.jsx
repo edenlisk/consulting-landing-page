@@ -138,28 +138,6 @@ const CompanysPage = () => {
 
     };
 
-    const updateRow = (id) => {
-        const indexToUpdate = data?.findIndex(item => id === item.id);
-        if (indexToUpdate !== -1) {
-            // Create a shallow copy of the array using slice
-            const newData = [...data];
-            newData[indexToUpdate] = {
-                ...newData[indexToUpdate],
-                title: sideInfo.title,
-                content: sideInfo.content
-            };
-            setSideInfo(newData[indexToUpdate]);
-            newData.splice(indexToUpdate, 1, sideInfo);
-            setData(newData);
-            console.log(newData[indexToUpdate]);
-            setInput(false);
-            setSideInfo({title: '', blogId: '', content: ''});
-            setEditingKey('');
-            setOpen(false);
-
-        }
-    };
-
     const columns = [
         {
             title: 'Name',

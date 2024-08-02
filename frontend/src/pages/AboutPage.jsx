@@ -121,14 +121,12 @@ const About = () => {
                 <div className="p-4 bg-blue-950 text-white flex flex-col gap-3">
                     <p className="font-bold">How can we help you?</p>
                     <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure eum
-                        qui et.
+                        Please feel free to contact us for any inquiries or questions you may have.
                     </p>
-                    <button
-                        className="p-2 bg-white flex items-center gap-2 w-fit rounded-sm text-black hover:text-white hover:bg-orange-500">
+                    <Link to="/contact-us" className="p-2 bg-white flex items-center gap-2 w-fit rounded-sm text-black hover:text-white hover:bg-orange-500">
                         <IoCall/>
                         <p>contacts</p>
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>

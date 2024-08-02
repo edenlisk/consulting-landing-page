@@ -46,7 +46,7 @@ export async function createCompany({ socials, aboutUs, ourMission, companyOverv
     // return newSelf;
 }
 
-export async function updateCompany({ file, aboutUs, ourMission, companyOverview, email, history, phoneNumber, name, address: { country, province, district, sector, street, mapCoords } }) {
+export async function updateCompany({ file, aboutUs, ourMission, companyOverview, email, history, phoneNumber, name, address: { country, province, district, sector, street } }) {
     const existingCompany = await Company.findOne().populate('logo');
     if (!existingCompany) throw graphQlError('Unable to find existing company info', 'INVALID_INPUT');
     if (aboutUs) existingCompany.aboutUs = aboutUs;
@@ -61,7 +61,6 @@ export async function updateCompany({ file, aboutUs, ourMission, companyOverview
     if (district) existingCompany.address.district = district;
     if (sector) existingCompany.address.sector = sector;
     if (street) existingCompany.address.street = street;
-    if (mapCoords) existingCompany.address.mapCoords = mapCoords;
     if (file) {
         const { fileId, url } = await addPhoto({file, category: '/user-profiles'});
         if (fileId || url) {

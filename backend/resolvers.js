@@ -83,8 +83,8 @@ export const resolvers = {
         addCompanyInfo: (_root, { input, file }) => {
             return createCompany({ ...input, file });
         },
-        updateCompany: (_root, { input: { name, address }, file }) => {
-            return updateCompany({name, address, file});
+        updateCompany: (_root, { input }) => {
+            return updateCompany(input);
         },
         addBlog: (_root, { input: {title, content }, file }) => {
             return addBlog({title, content, file});

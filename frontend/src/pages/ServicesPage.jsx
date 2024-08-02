@@ -160,7 +160,9 @@ const Services = () => {
 
                 <div className="p-4 bg-blue-950 text-white flex flex-col gap-3">
                     <p className="font-bold">How can we help you?</p>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure eum qui et.</p>
+                    <p>
+                        Please feel free to contact us for any inquiries or questions you may have.
+                    </p>
                     <button
                         className="p-2 bg-white flex items-center gap-2 w-fit rounded-sm text-black hover:text-white hover:bg-orange-500">
                         <IoCall/>
@@ -168,7 +170,7 @@ const Services = () => {
                     </button>
                 </div>
                 <div className="border-4 border-zinc-500 p-4 testimonial">
-                    <p>XYZ Company really helped us achieve our financial goals. The slick presentation along with
+                    <p>Rani Mining Company really helped us achieve our financial goals. The slick presentation along with
                         fantastic readability ensures that our financial standing is stable.</p>
                 </div>
             </div>

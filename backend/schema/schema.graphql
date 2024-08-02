@@ -72,7 +72,6 @@ input AddressInput {
     district: String,
     sector: String,
     street: String,
-    mapCoords: MapCoordsInput
 }
 
 input CompanyInput {
@@ -119,7 +118,7 @@ input ServiceInput {
 
 input SocialsInput {
     name: String,
-    iconLink: String,
+#    iconLink: String,
     socialMediaLink: String
 }
 

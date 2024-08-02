@@ -19,6 +19,7 @@ import GalleryPage from "./components/GalleryPage.jsx";
 import Reports from "./components/Reports.jsx";
 import Gallery from "./components/Gallery.jsx";
 import SinglePostPage from "./pages/SinglePostPage.jsx";
+import Self from "./pages/admin-layout/pages/Self.jsx";
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
                                 <Route path='/admin/users' element={<UsersPage/>}></Route>
                                 <Route path='/admin/services' element={<ServicesPage/>}></Route>
                                 <Route path='/admin/Companies' element={<CompanysPage/>}></Route>
+                                <Route path='/admin/self' element={<Self/>}></Route>
                                 {/* <Route path='/admin/posts' element={<DataTable/>}></Route> */}
                             </Route>
                         </Routes>
