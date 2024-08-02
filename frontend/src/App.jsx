@@ -8,26 +8,19 @@ import Team from './pages/TeamPage'
 import Contacts from './pages/ContactsPage'
 import {ApolloProvider} from "@apollo/client";
 import {createApolloClient} from "./api/graphql.js";
-import Dummy from './pages/DumyPgae'
-import BreadCrumb from './components/BreadCrumb'
-import Footer from './components/Footer'
 import DummyPage from './pages/DummyPage.jsx'
 import AdminLayout from './pages/admin-layout/AdminLayout.jsx'
-import DataTable from './pages/admin-layout/pages/postsPage.jsx'
 import RichTextEditor from "./components/RichTextEditor.jsx";
 import PostsPage from './pages/admin-layout/pages/postsPage.jsx'
 import UsersPage from './pages/admin-layout/pages/usersPage.jsx'
 import ServicesPage from './pages/admin-layout/pages/servicesPage.jsx'
 import CompanysPage from './pages/admin-layout/pages/companysPage.jsx'
-import HtmlText from './pages/admin-layout/pages/htmlText.jsx'
 import GalleryPage from "./components/GalleryPage.jsx";
 import Reports from "./components/Reports.jsx";
 import Gallery from "./components/Gallery.jsx";
 import SinglePostPage from "./pages/SinglePostPage.jsx";
-// import HtmlText from './pages/admin-layout/pages/htmlText.jsx'
 
 function App() {
-    const [count, setCount] = useState(0)
 
     const client = createApolloClient();
     return (
@@ -57,7 +50,6 @@ function App() {
                                 <Route path='/admin/users' element={<UsersPage/>}></Route>
                                 <Route path='/admin/services' element={<ServicesPage/>}></Route>
                                 <Route path='/admin/Companies' element={<CompanysPage/>}></Route>
-                                {/*<Route path='/admin/text' element={<HtmlText/>}></Route>*/}
                                 {/* <Route path='/admin/posts' element={<DataTable/>}></Route> */}
                             </Route>
                         </Routes>
