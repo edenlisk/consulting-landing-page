@@ -20,6 +20,10 @@ import UsersPage from './pages/admin-layout/pages/usersPage.jsx'
 import ServicesPage from './pages/admin-layout/pages/servicesPage.jsx'
 import CompanysPage from './pages/admin-layout/pages/companysPage.jsx'
 import HtmlText from './pages/admin-layout/pages/htmlText.jsx'
+import GalleryPage from "./components/GalleryPage.jsx";
+import Reports from "./components/Reports.jsx";
+import Gallery from "./components/Gallery.jsx";
+import SinglePostPage from "./pages/SinglePostPage.jsx";
 // import HtmlText from './pages/admin-layout/pages/htmlText.jsx'
 
 function App() {
@@ -45,6 +49,7 @@ function App() {
                                 <Route path='/gallery' element={<Gallery/>}></Route>
                                 <Route path='/gallery/:eventId' element={<GalleryPage/>}></Route>
                                 <Route path='/reports' element={<Reports/>}></Route>
+                                <Route path='/news/:postId' element={<SinglePostPage/>}></Route>
                             </Route>
 
                             <Route element={<AdminLayout/>}>

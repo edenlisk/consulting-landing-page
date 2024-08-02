@@ -30,7 +30,7 @@ export const NewsCard = ({img, title, link, date}) => {
         </li>
     )
 };
-export const ServiceCard = ({img, title, link, description}) => {
+export const ServiceCard = ({img, title, link, description, handleModal}) => {
 
     return (
 
@@ -50,7 +50,7 @@ export const ServiceCard = ({img, title, link, description}) => {
                     {title}
                 </p>
                 <p>{description}</p>
-                <Link className="w-full flex gap-1 items-center font-semibold">
+                <Link onClick={handleModal} className="w-full flex gap-1 items-center font-semibold">
                     <p>Read more</p>
                     <GoChevronRight/>
                 </Link>
@@ -58,7 +58,7 @@ export const ServiceCard = ({img, title, link, description}) => {
         </li>
     )
 };
-export const ProfileCard = ({img, title, name, link, description}) => {
+export const ProfileCard = ({img, title, name, link, description, handleModal}) => {
 
     return (
 
@@ -75,7 +75,8 @@ export const ProfileCard = ({img, title, name, link, description}) => {
                 </p>
                 <p className="pb-2 text-md text-[#9c9c9c]">{title}</p>
                 <p className="text-md">{description}</p>
-                <Link to={""} className="w-full flex gap-1 items-center font-semibold pt-2 hover:text-orange-600">
+                <Link to={""} onClick={handleModal}
+                      className="w-full flex gap-1 items-center font-semibold pt-2 hover:text-orange-600">
                     <p>View Profile</p>
                     <GoChevronRight/>
                 </Link>

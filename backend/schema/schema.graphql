@@ -20,11 +20,19 @@ type Mutation {
     removeFromGallery(photoId: ID!, fileId: ID!): Photo,
     sendMessage(input: MessageInput): Message,
     addUser(input: UserInput, file: Upload): User,
+    updateUser(input: UserInputUpdate, userId: ID!): User,
+    deleteUser(userId: ID!): User,
     addCompanyInfo(input: CompanyInput, file: Upload): Company,
     updateCompany(input: CompanyInput, file: Upload): Company,
     addBlog(file: Upload, input: BlogInput): Blog,
     updateBlog(input: BlogInput, file: Upload, blogId: ID!): Blog,
     singleUpload(file: Upload!): File!
+}
+
+input UserInputUpdate {
+    fullName: String,
+    background: String,
+    position: String
 }
 
 
@@ -49,6 +57,7 @@ type Blog {
     slug: String,
     createdAt: String,
     updatedAt: String
+    image: Photo
 }
 
 input MapCoordsInput {

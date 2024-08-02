@@ -20,7 +20,7 @@ import {GoSearch} from "react-icons/go";
 import {FiTrash} from "react-icons/fi";
 import RichTextEditor from "../../../components/RichTextEditor.jsx";
 import {useMutation, useQuery} from "@apollo/client";
-import { ADD_SERVICE, DELETE_SERVICE, GET_SERVICES} from "../../../api/graphql.js";
+import {ADD_SERVICE, DELETE_SERVICE, GET_SERVICES, UPDATE_SERVICE} from "../../../api/graphql.js";
 import ReactHtmlParser from 'html-react-parser';
 
 const rowSelection = {
@@ -30,7 +30,7 @@ const rowSelection = {
 };
 
 const ServicesPage = () => {
-    const {data: servicesData, error,loading:dataload} = useQuery(GET_SERVICES);
+    const {data: servicesData, error, loading: dataload} = useQuery(GET_SERVICES);
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
     const [open, setOpen] = useState(false);
@@ -38,61 +38,58 @@ const ServicesPage = () => {
     const [isNew, setIsNew] = useState(false);
     const [Input, setInput] = useState(false);
     const [files, setFile] = useState(null);
-    const [sideInfo, setSideInfo] = useState({title: '', blogId: '', content: '<p>Hello</p>'})
+    const [sideInfo, setSideInfo] = useState({title: '', serviceId: '', description: '', filePath: ''})
     const [placement, setPlacement] = useState('right');
-    const [htmlContent, setHtmlContent] = useState('<p>Hello</p>');
 
     useEffect(() => {
         if (servicesData) {
             setData(servicesData.services);
-            console.log(servicesData.services)
         } else if (error) return message.error(error.message);
-        // console.log(servicesData)
     }, [error, servicesData]);
 
-    const rteRef = useRef(null);
 
-    const [addService, {loading, error: addServiceError}] = useMutation(ADD_SERVICE,{
-        refetchQueries:[GET_SERVICES,
-        'fetchServices',]
+    const [addService, {loading, error: addServiceError}] = useMutation(ADD_SERVICE, {
+        refetchQueries: [GET_SERVICES,
+            'fetchServices']
     });
     // const [Updateservice]=useMutation()
-    const [deleteservice,{loading:laod}]=useMutation(DELETE_SERVICE,{
-        refetchQueries:[
+    const [deleteService, {loading: laod}] = useMutation(DELETE_SERVICE, {
+        refetchQueries: [
             GET_SERVICES,
             'fetchServices'
         ]
     })
+
+    const [updateService, { loading: updateLoading, error: updateError }] = useMutation(UPDATE_SERVICE);
+
+    useEffect(() => {
+        if (updateError) return message.error(updateError.message);
+    }, [updateError]);
+
     const handleSaveFile = async () => {
-        // handleGetHtmlContent();
-        if (rteRef.current) {
-            // console.log('[htmlContent]: ', rteRef.current.getHtml());
-            // setSideInfo(prevState => ({...prevState, content: rteRef.current.getHtml()}));
-            if (!sideInfo.blogId) {
-                // console.log('')
-                // await addService({
-                //     variables: {
-                //         input: {title: sideInfo.title, content: rteRef.current.value},
-                //         file: files[0]
-                //     },
-                // });
-            } else {
-                // console.log('update');
-            }
-            console.log(sideInfo);
+        if (isNew) {
+            await addService({
+                variables: {
+                    input: {title: sideInfo.title, description: sideInfo.description},
+                    file: files[0]
+                },
+            });
+        } else {
+            await updateService(
+                {
+                    variables: {
+                        input: {title: sideInfo.title, description: sideInfo.description},
+                        serviceId: sideInfo.serviceId
+                    }
+                }
+            )
         }
+        setSideInfo({title: '', serviceId: '', description: '', filePath: ''});
+        setFile(null);
         setOpen(false);
-        rteRef.current.value = '<p>Hello</p>';
-        // console.log('after')
     }
-    // const updateService = () => {
-
-    // }
-    const deleteRow = (id) => {
-        console.log(id)
-
-        deleteservice({variables:{serviceId:id}});
-
+    const deleteRow = async (id) => {
+        await deleteService({variables: {serviceId: id}});
     }
 
     useEffect(() => {
@@ -114,14 +111,8 @@ const ServicesPage = () => {
         setSideInfo((prev) => ({
             ...prev, [e.target.name]: e.target.value
         }));
-        console.log(sideInfo)
     };
 
-    const desriptionChange=()=>{
-        rteRef.current.getHtml()
-
-        console.log(rteRef.current.getHtml())
-    };
 
     const showDrawer = () => {
         setOpen(true);
@@ -130,66 +121,21 @@ const ServicesPage = () => {
     const onClose = () => {
         setOpen(false);
         setIsNew(false)
-        setHtmlContent('<p>Hello</p>');
     };
 
     const cancel = () => {
         setEditingKey('');
     };
-    // const save = async (key) => {
-    //     try {
-    //         const newData = [...data];
-    //         const index = newData.findIndex((item) => key === item.id);
-    //         if (index > -1) {
-    //             const item = newData[index];
-    //             newData.splice(index, 1, {
-    //                 ...item,
-    //             });
-    //             setData(newData);
-    //             setEditingKey('');
-    //         } else {
-    //             newData.push(row);
-    //             setData(newData);
-    //             setEditingKey('');
-    //         }
-    //     } catch (errInfo) {
-    //         console.log('Validate Failed:', errInfo);
-    //     }
-    // };
 
     const getData = (record) => {
         if (record) {
-            console.log('[getData]: ', record);
-            setSideInfo(record);
-            setHtmlContent(record.description)
-            rteRef.current.value = record.description;
-            setHtmlContent(record.content);
-            console.log(htmlContent.content)
-        }
-
-    };
-
-    const updateRow = (id) => {
-        const indexToUpdate = data?.findIndex(item => id === item.id);
-        if (indexToUpdate !== -1) {
-            // Create a shallow copy of the array using slice
-            const newData = [...data];
-            newData[indexToUpdate] = {
-                ...newData[indexToUpdate],
-                title: sideInfo.title,
-                content: sideInfo.content
-            };
-            setSideInfo(newData[indexToUpdate]);
-            newData.splice(indexToUpdate, 1, sideInfo);
-            setData(newData);
-            console.log(newData[indexToUpdate]);
-            setInput(false);
-            setSideInfo({title: '', blogId: '', content: ''});
-            setEditingKey('');
-            setOpen(false);
-
+            setIsNew(false);
+            setFile(null);
+            // setSideInfo(record);
+            setSideInfo({title: record.title, serviceId: record.id, description: record.description, filePath: record.image?.filePath})
         }
     };
+
 
     const columns = [
         {
@@ -201,18 +147,9 @@ const ServicesPage = () => {
             dataIndex: 'image',
             render: (_, record) =>
                 (
-                   <img src={record.image} alt={record.slug}
-                   className='p-0 w-8 h-8  object-cover'
-                   />
-                )
-        },
-        {
-            title: 'Display',
-            dataIndex: 'dislay',
-            width:'30px',
-            render: (_, record) =>
-                (
-                   <img src={record.image} alt={record.slug}/>
+                    <img src={record.image?.filePath} alt={record.slug}
+                         className='p-0 w-8 h-8  object-cover'
+                    />
                 )
         },
         {
@@ -221,11 +158,9 @@ const ServicesPage = () => {
             width: '50%',
             render: (_, record) =>
                 (
-                    <div>{`${record.description?.split(/(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/).slice(0,7).join(' ')} ...`}</div>
+                    <div>{`${record.description?.split(/(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/).slice(0, 7).join(' ')} ...`}</div>
                 )
 
-             
-            
         },
         {
             title: 'Action',
@@ -236,9 +171,9 @@ const ServicesPage = () => {
                         <FiEdit2 onClick={() => {
                             setOpen(true)
                             getData(record)
-                            
+
                         }}/>
-                        <FiTrash onClick={()=>{
+                        <FiTrash onClick={() => {
                             deleteRow(record.id)
                         }}/>
                     </div>
@@ -260,9 +195,8 @@ const ServicesPage = () => {
                    className={`${isearch ? 'w-42' : 'w-0 hidden'} px-2 py-1 transition-all duration-1000`}></input>
           </span>
                 <button type='button' onClick={() => {
-                    if (rteRef.current) {
-                        rteRef.current.value = "<p>Hello</p>"
-                    }
+                    setSideInfo({title: '', serviceId: '', description: '', filePath: ''});
+                    setFile(null);
                     setOpen(true)
                     setInput(true)
                     setIsNew(true)
@@ -271,7 +205,6 @@ const ServicesPage = () => {
             </div>
             <Form component={false}>
                 <Table
-                    rowSelection={rowSelection}
                     bordered
                     dataSource={data}
                     columns={columns}
@@ -295,7 +228,8 @@ const ServicesPage = () => {
                     <div className='flex gap-1 items-center'>
 
                         <HiOutlineChevronDoubleRight onClick={() => {
-                            setSideInfo({title: '', blogId: '', content: ''})
+                            setSideInfo({title: '', serviceId: '', description: '', filePath: ''});
+                            setFile(null);
                             setOpen(false)
                         }}/>
                         <IoResizeOutline/>
@@ -305,34 +239,25 @@ const ServicesPage = () => {
                         <input type="text" id="fname" name="title" value={sideInfo.title || ""} onChange={handleInput}
                                placeholder='Add title' className='w-full p-2 rounded border'></input> :
                         <p className='text-2xl font-bold px-2' onClick={() => setInput(true)}>{sideInfo?.title}</p>}
-                    <div className='flex gap-4 items-center text-md '>
-            <span className='flex items-center gap-2 text-[#a6a5a3] p-1 px-2 rounded w-40 hover:bg-zinc-100'>
-            <IoTimeOutline/>
-            Date created
-            </span>
-                        {Input ? <DatePicker onChange={dateChange}/> :
-                            <span className='p-1 px-2 rounded w-full hover:bg-zinc-100'>Jan 18,2024 18:20</span>}
-                    </div>
-                    <div className='flex gap-4 items-center '>
-            <span className='flex items-center gap-2 text-[#a6a5a3] p-1 px-2 rounded w-40 hover:bg-zinc-100'>
-            <PiUsersFill/>
-            Published
-            </span>
-                        <span className='p-1 px-2 rounded w-full hover:bg-zinc-100'>Jan 18,2024 18:20</span>
-                    </div>
-                    <input type="file" name="file" onInput={handleSelectFile}/>
+                    <p className='text-md font-bold px-2'>Image</p>
+                    {Input ? <input type="file" name="file" onInput={handleSelectFile}/> :
+                        <img src={sideInfo.filePath} className='w-20 h-20 object-cover'/>}
+                    <p className='text-md font-bold px-2'>Description</p>
+                    {Input ?
+                        <textarea id="description" name="description" value={sideInfo.description || ""}
+                                  onChange={handleInput} placeholder='Enter description'
+                                  className='w-full p-2 h-52 rounded border focus:outline-none'></textarea> :
+                        <p className='hover:bg-zinc-100 py-1 px-2 rounded'
+                           onClick={() => setInput(true)}>{sideInfo?.description}</p>}
                     <div className='flex flex-col gap-2'>
-                        <p className='text-md font-bold px-2'>Description</p>
-                        <RichTextEditor rteRef={rteRef} change={desriptionChange} htmlContent={htmlContent}/>
                         <>
-                        {isNew? <button type='button' disabled={loading} onClick={handleSaveFile}
-                                className='p-2 rounded bg-blue-400 w-fit text-white'>save
-                        </button>:<button type='button' disabled={loading} onClick={handleSaveFile}
-                                className='p-2 rounded bg-blue-400 w-fit text-white'>Update
-                        </button>}
+                            {isNew ? <button type='button' disabled={loading} onClick={handleSaveFile}
+                                             className='p-2 rounded bg-blue-400 w-fit text-white'>save
+                            </button> : <button type='button' disabled={updateLoading} onClick={handleSaveFile}
+                                                className='p-2 rounded bg-blue-400 w-fit text-white'>Update
+                            </button>}
                         </>
-                       
-                       
+
                     </div>
                 </div>
             </Drawer>

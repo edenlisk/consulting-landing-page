@@ -30,13 +30,12 @@ const signToken = id => {
 }
 
 
-export async function signup({email, fullName, password, socials, phoneNumber, position, background, file}) {
+export async function signup({email, fullName, socials, phoneNumber, position, background, file}) {
     const existingUser = await User.findOne({email});
     if (existingUser) throw graphQlError("User with email:  " + email + " already exists")
     const user = new User(
         {
             fullName,
-            password,
             phoneNumber,
             position,
             background,

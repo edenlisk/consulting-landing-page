@@ -3,7 +3,7 @@ import { finished } from 'stream/promises';
 // import { GraphQLUpload } from 'graphql-upload';
 import GraphQLUpload from "graphql-upload/GraphQLUpload.mjs";
 import * as fs from 'fs';
-import {getUsers} from "./controllers/userControllers.js";
+import {getUsers, removeUser, updateUser} from "./controllers/userControllers.js";
 import {addToGallery, getAllGallery, removePhoto} from "./controllers/galleryControllers.js";
 import {addPhoto, deletePhoto} from "./utils/helperFunctions.js";
 import {addMessage, getMessages} from "./controllers/messageControllers.js";
@@ -73,6 +73,12 @@ export const resolvers = {
         },
         addUser: async (_root, { input, file }) => {
             return signup({...input, file});
+        },
+        deleteUser: (_root, { userId }) => {
+            return removeUser({userId});
+        },
+        updateUser: (_root, { input }) => {
+            return updateUser(input)
         },
         addCompanyInfo: (_root, { input, file }) => {
             return createCompany({ ...input, file });

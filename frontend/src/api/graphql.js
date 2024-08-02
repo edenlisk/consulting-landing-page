@@ -2,7 +2,7 @@ import {ApolloClient, createHttpLink, from, gql, InMemoryCache} from "@apollo/cl
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
 // https://consulting-landing-page-api.onrender.com
-const httpLink = createHttpLink({uri: 'https://consulting-landing-page-api.onrender.com/api/graphql'});
+const httpLink = createHttpLink({uri: 'http://localhost:5000/api/graphql'});
 const uploadLink = createUploadLink({
     uri: "https://consulting-landing-page-api.onrender.com/api/graphql",
 });
@@ -12,7 +12,7 @@ export function createApolloClient() {
     return new ApolloClient({
         // link: from([httpLink, uploadLink]),
         link: from([createUploadLink({
-            uri: "https://consulting-landing-page-api.onrender.com/api/graphql"
+            uri: "http://localhost:5000/api/graphql"
         }), httpLink]),
         cache: new InMemoryCache(),
         defaultOptions: {
@@ -46,6 +46,16 @@ export const GET_SERVICE = gql`
         title
     }
 }
+`;
+
+
+export const REMOVE_USER = gql`
+    mutation removeUser($userId: ID!) {
+        user:deleteUser(userId: $userId) {
+            background
+            position
+        }
+    }
 `;
 
 
@@ -126,18 +136,24 @@ export const GET_BLOGS = gql`
             slug,
             createdAt,
             updatedAt
+            image {
+                filePath
+            }
         }
     }
 `;
 
-export const BLOG = gql`
+export const GET_BLOG = gql`
     query blog($blogId: ID!) {
         blog:getBlog(blogId: $blogId) {
             content,
             title,
             slug,
             createdAt,
-            updatedAt
+            updatedAt,
+            image {
+                filePath
+            }
         }
     }
 `;
@@ -157,13 +173,13 @@ export const ADD_SERVICE = gql`
 `;
 
 export const UPDATE_SERVICE=gql`
-mutation updateService($input: ServiceInput, $serviceId: ID!){
-    service:updateService(input:$input,serviceId:$serviceId){
-        title
-        description
+    mutation updateService($input: ServiceInput, $serviceId: ID!){
+        service:updateService(input:$input,serviceId:$serviceId){
+            title
+            description
+        }
+    
     }
-
-}
 `
 
 export const DELETE_SERVICE = gql`
@@ -208,6 +224,16 @@ export const SEND_MESSAGE = gql`
 export const ADD_USER = gql`
     mutation addUser($input: UserInput, $file: Upload) {
         user:addUser(input: $input, file: $file) {
+            background
+            position
+        }
+    }
+`;
+
+export const UPDATE_USER = gql`
+    mutation UpdateUser($input: UserInputUpdate!, $userId: ID!) {
+        updateUser(input: $input, userId: $userId) {
+            fullName
             background
             position
         }
