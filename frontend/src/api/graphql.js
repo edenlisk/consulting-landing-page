@@ -2,7 +2,7 @@ import {ApolloClient, createHttpLink, from, gql, InMemoryCache} from "@apollo/cl
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
 // https://consulting-landing-page-api.onrender.com
-const httpLink = createHttpLink({uri: 'http://localhost:5000/api/graphql'});
+const httpLink = createHttpLink({uri: 'https://consulting-landing-page-api.onrender.com/api/graphql'});
 const uploadLink = createUploadLink({
     uri: "https://consulting-landing-page-api.onrender.com/api/graphql",
 });
@@ -12,7 +12,7 @@ export function createApolloClient() {
     return new ApolloClient({
         // link: from([httpLink, uploadLink]),
         link: from([createUploadLink({
-            uri: "http://localhost:5000/api/graphql"
+            uri: "https://consulting-landing-page-api.onrender.com/api/graphql"
         }), httpLink]),
         cache: new InMemoryCache(),
         defaultOptions: {
