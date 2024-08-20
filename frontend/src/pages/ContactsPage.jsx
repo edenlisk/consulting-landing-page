@@ -37,29 +37,31 @@ const Contacts = () => {
 
     return (
 
-        <section className="w-full h-full flex flex-col gap-6 p-6 lg:px-32 lg:gap-20 bg-zinc-50">
+        <section className="flex flex-col w-full h-full gap-6 p-6 lg:px-32 lg:gap-20 bg-zinc-50">
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
                 <div
                     className="w-full min-h-96 bg-cover bg-[url('https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2021/08/building.jpeg')]"></div>
                 <div className="w-full min-h-96 bg-blue-950"></div>
-                <div className="w-full min-h-96 bg-blue-950 p-12 flex flex-col gap-6 text-white">
+                <div className="relative flex flex-col w-full gap-6 p-12 text-white min-h-96 bg-blue-950">
+  <div className="absolute inset-0 bg-center bg-no-repeat bg-cover opacity-10 bg-[url('https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2021/08/building.jpeg')]"></div>
+
                     <p className="text-xl font-bold">Contact details</p>
                     <ul className="flex flex-col gap-4">
-                        <li className="flex gap-4 items-center">
+                        <li className="flex items-center gap-4">
                         <span className="text-2xl">
                         <IoLocationSharp className="text-orange-500 "/>
                         </span>
 
-                            <p className="text-wrap font-semibold">1010 Avenue of the Moon
+                            <p className="font-semibold text-wrap">1010 Avenue of the Moon
                                 New York, NY 10018 US.</p>
                         </li>
-                        <li className="flex gap-4 items-center">
+                        <li className="flex items-center gap-4">
                     <span className="text-2xl">
                         <FaPhoneAlt className="text-orange-500 "/>
                         </span>
-                            <a href="tel:+1 628 123 4000" className="text-wrap font-semibold">+1 628 123 4000</a>
+                            <a href="tel:+1 628 123 4000" className="font-semibold text-wrap">+1 628 123 4000</a>
                         </li>
-                        <li className="flex gap-4 items-center">
+                        <li className="flex items-center gap-4">
                     <span className="text-2xl">
                         <FaEnvelope className="text-orange-500 "/>
                         </span>
@@ -70,19 +72,19 @@ const Contacts = () => {
                     </ul>
 
                     <ul className="flex flex-wrap items-center gap-4 text-black">
-                        <li className="bg-white p-2 rounded-full text-start">
+                        <li className="p-2 bg-white rounded-full text-start">
                             <GrFacebookOption/>
                         </li>
-                        <li className="bg-white p-2 rounded-full text-start">
+                        <li className="p-2 bg-white rounded-full text-start">
                             <GrTwitter/>
                         </li>
-                        <li className="bg-white p-2 rounded-full text-start">
+                        <li className="p-2 bg-white rounded-full text-start">
                             <GrLinkedinOption/>
                         </li>
-                        <li className="bg-white p-2 rounded-full text-start">
+                        <li className="p-2 bg-white rounded-full text-start">
                             <IoLogoGoogleplus/>
                         </li>
-                        <li className="bg-white p-2 rounded-full text-start">
+                        <li className="p-2 bg-white rounded-full text-start">
                             <GrSkype/>
                         </li>
                     </ul>
@@ -91,21 +93,21 @@ const Contacts = () => {
 
             <div className="grid grid-cols-1 gap-2 md:grid-cols-12">
                 <div className="grid gap-2 md:col-span-8">
-                    <p className="font-bold text-xl">Feedback form</p>
-                    <form className="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-6">
-                    <span className="w-full grid gap-y-6 col-span-1">
+                    <p className="text-xl font-bold">Feedback form</p>
+                    <form className="grid grid-cols-1 gap-4 md:grid-cols-2 gap-y-6">
+                    <span className="grid w-full col-span-1 gap-y-6">
                     <input type="text" placeholder="First name*" name="senderName" onChange={handleChange}
-                           className="w-ful p-3 shadow-sm "/>
+                           className="p-3 shadow-sm w-ful "/>
                     <input type="email" placeholder="Email*" name="senderEmail" onChange={handleChange}
-                           className="w-ful p-3 shadow-sm "/>
+                           className="p-3 shadow-sm w-ful "/>
                     <input type="tel" placeholder="Phone*" name="senderPhoneNumber" onChange={handleChange}
-                           className="w-ful p-3 shadow-sm "/>
+                           className="p-3 shadow-sm w-ful "/>
                     </span>
-                        <span className="w-full grid gap-y-6 col-span-1">
+                        <span className="grid w-full col-span-1 gap-y-6">
                         <textarea name="textMessage" onChange={handleChange} id=""
                                   className="w-full h-32 shadow-sm"></textarea>
                         <button disabled={loading} onClick={handleSubmit}
-                                className="p-4 bg-orange-500 rounded-md w-fit h-fit text-white flex items-center gap-2">
+                                className="flex items-center gap-2 p-4 text-white bg-orange-500 rounded-md w-fit h-fit">
                             SUBMIT
                         <GoChevronRight/>
                         </button>
@@ -114,7 +116,7 @@ const Contacts = () => {
                     </form>
                 </div>
                 <div className="grid gap-2 md:col-span-4">
-                    <p className="font-bold text-xl">Your contact</p>
+                    <p className="text-xl font-bold">Your contact</p>
                     <ul className="flex flex-col gap-6">
                         <li className="flex gap-3">
                             <img

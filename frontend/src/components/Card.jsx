@@ -17,12 +17,12 @@ export const NewsCard = ({img, title, link, date}) => {
                 className="absolute m-0 w-full h-[220px] overflow-hidden text-white bg-black/50 flex items-center justify-center top-0 opacity-0 transition-all duration-300 hover:opacity-100">
                 <IoAddSharp className="text-5xl"/>
             </div>
-            <div className=" p-2 flex flex-col gap-2">
+            <div className="flex flex-col gap-2 p-2 ">
                 <div className="w-[50px] p-[1.8px] rounded-full bg-red-500"></div>
-                <Link to={link} className=" font-semibold text-xl py-2 hover:text-orange-400">
+                <Link to={link} className="py-2 text-xl font-semibold hover:text-orange-400">
                     {title}
                 </Link>
-                <span className="w-full flex gap-2 items-center">
+                <span className="flex items-center w-full gap-2">
         <BiSolidTimeFive className="text-orange-400"/>
         <p>{date}</p>
       </span>
@@ -46,11 +46,11 @@ export const ServiceCard = ({img, title, link, description, handleModal}) => {
             </div>
             <div className="flex flex-col gap-2">
                 <div className="w-[50px] p-[1.8px]  bg-red-500"></div>
-                <p className=" font-semibold text-xl py-2">
+                <p className="py-2 text-xl font-semibold ">
                     {title}
                 </p>
                 <p>{description}</p>
-                <Link onClick={handleModal} className="w-full flex gap-1 items-center font-semibold">
+                <Link onClick={handleModal} className="flex items-center w-full gap-1 font-semibold">
                     <p>Read more</p>
                     <GoChevronRight/>
                 </Link>
@@ -66,17 +66,17 @@ export const ProfileCard = ({img, title, name, link, description, handleModal}) 
             <img
                 src={img}
                 alt="people in office"
-                className="w-full h-[190px] object-cover bg-center"
+                className="w-full h-[190px] object-cover rounded-tr-3xl rounded-bl-3xl bg-center"
 
             />
-            <div className=" flex flex-col gap-1">
+            <div className="flex flex-col gap-1 ">
                 <p className="text-xl">
                     {name}
                 </p>
                 <p className="pb-2 text-md text-[#9c9c9c]">{title}</p>
                 <p className="text-md">{description}</p>
                 <Link to={""} onClick={handleModal}
-                      className="w-full flex gap-1 items-center font-semibold pt-2 hover:text-orange-600">
+                      className="flex items-center w-full gap-1 pt-2 font-semibold hover:text-orange-600">
                     <p>View Profile</p>
                     <GoChevronRight/>
                 </Link>
@@ -88,11 +88,11 @@ export const TimelineCard = ({title, year, description}) => {
 
     return (
 
-        <li className="grid md:grid-cols-12 gap-1 ">
-            <p className="font-bold col-span-1 text-2xl">{year}</p>
-            <div className="h-full w-0 col-span-1 hidden md:block vertical-line-with-dots"></div>
-            <div className="flex flex-col gap-4 col-span-10">
-                <p className="font-bold text-xl">{title}</p>
+        <li className="grid gap-1 md:grid-cols-12 ">
+            <p className="col-span-1 text-2xl font-bold">{year}</p>
+            <div className="hidden w-0 h-full col-span-1 md:block vertical-line-with-dots"></div>
+            <div className="flex flex-col col-span-10 gap-4">
+                <p className="text-xl font-bold">{title}</p>
                 <p className="pb-10">
                     {description}
                 </p>
