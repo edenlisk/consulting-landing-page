@@ -73,13 +73,3 @@ body{
   position:relative;
 }
 
-.testimonial::after{
-  content:"\275D";
-  position:absolute;
-  background:blue;
-  /* width:90px;
-  height:90px; */
-  bottom:0;
-  right:4px;
-  font-size:80px
-}

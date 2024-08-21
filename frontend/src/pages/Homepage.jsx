@@ -206,20 +206,24 @@ const HomePage = () => {
               <div className="relative z-10 flex flex-col w-full space-y-5 items-Center">
               <h2 className="m-0 text-5xl font-semi-bold">More than 25 years of experience</h2>
               <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>
-              <p>3000+ our clients are insured around the World</p>
+              <p className="text-lg">3000+ our clients are insured around the World</p>
               </div>
               <div className="relative z-10 grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-                <div className="pl-5 space-y-2 border-l-2 hover:border-l-orange-400 ">
-                    <p className="text-4xl font-bold">250</p>
-                    <p>projects completed</p>
+                <div className="pl-5 space-y-2 border-l-[3px] hover:border-l-orange-400 ">
+                    <p className="text-4xl font-bold">253</p>
+                    <p className="text-lg">projects completed</p>
                 </div>
-                <div className="pl-5 space-y-2 border-l-2 hover:border-l-orange-400">
-                    <p className="text-4xl font-bold">250</p>
-                    <p>projects completed</p>
+                <div className="pl-5 space-y-2 border-l-[3px] hover:border-l-orange-400">
+                    <p className="text-4xl font-bold">16</p>
+                    <p className="text-lg">consultants</p>
                 </div>
-                <div className="pl-5 space-y-2 border-l-2 hover:border-l-orange-400">
-                    <p className="text-4xl font-bold">250</p>
-                    <p>projects completed</p>
+                <div className="pl-5 space-y-2 border-l-[3px] hover:border-l-orange-400">
+                    <p className="text-4xl font-bold">11</p>
+                    <p className="text-lg">awards winning</p>
+                </div>
+                <div className="pl-5 space-y-2 border-l-[3px] hover:border-l-orange-400">
+                    <p className="text-4xl font-bold">372</p>
+                    <p className="text-lg">satisfied customers</p>
                 </div>
               </div>
               </div>
@@ -263,13 +267,13 @@ const HomePage = () => {
               <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>
 
               <form className="grid w-full gap-4 sm:grid-cols-1 md:grid-cols-2">
+              <input type="text" placeholder="Enter first name" name="firstName"
+                           className="w-full p-3 shadow-sm outline-none"/>
+              <input type="phone" placeholder="Phone" name="phone"
+                           className="w-full p-3 shadow-sm outline-none"/>
               <input type="text" placeholder="First name*" name="senderName"
-                           className="w-full p-3 shadow-sm"/>
-              <input type="text" placeholder="First name*" name="senderName"
-                           className="w-full p-3 shadow-sm"/>
-              <input type="text" placeholder="First name*" name="senderName"
-                           className="w-full p-3 shadow-sm"/>
-                           <button type="submit" className="p-3 text-white rounded-md w-fit bg-blue-950">Submit</button>
+                           className="w-full p-3 shadow-sm outline-none"/>
+                           <button type="submit" className="p-3 text-white bg-orange-600 rounded-md w-fit">Submit</button>
               </form>
               
               </div>

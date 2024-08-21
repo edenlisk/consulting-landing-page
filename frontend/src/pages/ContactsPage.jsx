@@ -97,15 +97,15 @@ const Contacts = () => {
                     <form className="grid grid-cols-1 gap-4 md:grid-cols-2 gap-y-6">
                     <span className="grid w-full col-span-1 gap-y-6">
                     <input type="text" placeholder="First name*" name="senderName" onChange={handleChange}
-                           className="p-3 shadow-sm w-ful "/>
+                           className="w-full p-3 shadow-sm outline-orange-400 "/>
                     <input type="email" placeholder="Email*" name="senderEmail" onChange={handleChange}
-                           className="p-3 shadow-sm w-ful "/>
+                           className="w-full p-3 shadow-sm outline-orange-400 "/>
                     <input type="tel" placeholder="Phone*" name="senderPhoneNumber" onChange={handleChange}
-                           className="p-3 shadow-sm w-ful "/>
+                           className="w-full p-3 shadow-sm outline-orange-400 "/>
                     </span>
                         <span className="grid w-full col-span-1 gap-y-6">
                         <textarea name="textMessage" onChange={handleChange} id=""
-                                  className="w-full h-32 shadow-sm"></textarea>
+                                  className="w-full h-32 shadow-sm outline-orange-400"></textarea>
                         <button disabled={loading} onClick={handleSubmit}
                                 className="flex items-center gap-2 p-4 text-white bg-orange-500 rounded-md w-fit h-fit">
                             SUBMIT
