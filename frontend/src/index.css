@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  overflow-x:hidden;
+body {
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -24,9 +24,9 @@ body{
 
 .vertical-line-with-dots {
   position: relative;
-  height:180px;
-  margin:0px 0px 0px 20px;
-  bottom:0px;
+  height: 180px;
+  margin: 0px 0px 0px 20px;
+  bottom: 0px;
   /* border: 1px #f6f6f6 solid; */
   /* margin-left:20px */
 }
@@ -35,24 +35,21 @@ body{
   border: 0px;
 }
 
-.vertical-line-with-dots::after{
-
-  content:'';
-  position:absolute;
-  height:230px;
-  width:2px;
-  top:10px;
-  /* z-index:-5; */
-  background-color:#f6f6f6;
-
-}
-.vertical-line-with-dots::before
- {
-  content: '';
+.vertical-line-with-dots::after {
+  content: "";
   position: absolute;
-  padding:6px;
+  height: 230px;
+  width: 2px;
+  top: 10px;
+  /* z-index:-5; */
+  background-color: #f6f6f6;
+}
+.vertical-line-with-dots::before {
+  content: "";
+  position: absolute;
+  padding: 6px;
   left: 50%;
-  top:10px;
+  top: 10px;
   width: 8px;
   height: 8px;
   /* z-index:3; */
@@ -61,7 +58,6 @@ body{
   transform: translateX(-50%);
 }
 
-
 .vertical-line-with-dots::before {
   top: -5px;
 }
@@ -69,7 +65,19 @@ body{
 .vertical-line-with-dots::after {
   bottom: -5px;
 }
-.testimonial{
-  position:relative;
+.testimonial {
+  position: relative;
 }
 
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  height: 680px;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  background-color: #f1f1f1;
+}

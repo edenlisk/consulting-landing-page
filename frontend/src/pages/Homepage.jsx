@@ -11,6 +11,7 @@ import { FiMail } from "react-icons/fi";
 import { LuPhone } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
 import ContactCard from "../components/contactCard.jsx";
+import Carousel from "../components/carousel.jsx";
 
 
 const HomePage = () => {
@@ -40,7 +41,7 @@ const HomePage = () => {
     return (
         <>
             {/* 1ST SECTION */}
-            <section
+            {/* <section
                 className=" w-full h-[800px] bg-[url('https://moderndiplomacy.eu/wp-content/uploads/2023/12/business-office-1068x712.jpg')] bg-cover bg-center flex items-center text-white font-semibold">
                 <div className="w-full px-4 py-24 space-y-6 h-fit lg:px-28">
                     <div className="flex items-center gap-3 py-1">
@@ -66,7 +67,8 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
+            <Carousel/>
             {/* 2ND SECTION */}
             <section
                 className="justify-center w-full px-6 py-12 h-fit md:px-28 md:py-24 md:flex md:gap-16 md:items-center">
