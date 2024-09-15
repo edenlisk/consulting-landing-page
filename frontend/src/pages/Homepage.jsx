@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {FiArrowRight} from "react-icons/fi";
 import {useQuery} from "@apollo/client";
-import {GET_SERVICES, GET_BLOGS} from "../api/graphql.js";
+import {GET_SERVICES, GET_BLOGS, getServicesQuery} from "../api/graphql.js";
 import {cardsArray} from "../components/ArraysObj";
 import {NewsCard} from "../components/Card";
 import {message} from "antd";
@@ -12,13 +12,27 @@ import { LuPhone } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
 import ContactCard from "../components/contactCard.jsx";
 import Carousel from "../components/carousel.jsx";
+// import { BlocksRenderer } from '@strapi/blocks-react-renderer';
+
 
 
 const HomePage = () => {
     const {data: servicesData, error} = useQuery(GET_SERVICES);
     const {data: postsData, error: postsError} = useQuery(GET_BLOGS);
+
+    const {data} = useQuery(getServicesQuery);
+
+    const [newServices, setNewServices] = useState([]);
+
     const [posts, setPosts] = useState([]);
     const [services, setServices] = useState([]);
+
+    useEffect(() => {
+        if (data) {
+            console.log('data: ', data);
+        }
+    }, [data]);
+
     useEffect(() => {
         if (servicesData) {
             setServices(servicesData.services);
@@ -26,6 +40,8 @@ const HomePage = () => {
             return message.error(error.message);
         }
     }, [servicesData, error]);
+
+
 
     useEffect(() => {
         if (postsData) {
@@ -40,34 +56,6 @@ const HomePage = () => {
     const [isMobileSubMenu, setIsMobileSubMenu] = useState(false);
     return (
         <>
-            {/* 1ST SECTION */}
-            {/* <section
-                className=" w-full h-[800px] bg-[url('https://moderndiplomacy.eu/wp-content/uploads/2023/12/business-office-1068x712.jpg')] bg-cover bg-center flex items-center text-white font-semibold">
-                <div className="w-full px-4 py-24 space-y-6 h-fit lg:px-28">
-                    <div className="flex items-center gap-3 py-1">
-                        <span className="w-[70px] p-[1.8px] rounded-full bg-red-500"></span>
-                        <p className="text-lg">Meet Rani Mining Company</p>
-                    </div>
-                    <p className="w-full py-1 text-5xl md:text-6xl md:w-3/4">
-                        Elevate business operations with Mining Process
-                    </p>
-                    <p className="py-1 text-lg">
-                        We know how to achieve the highest standards most productively
-                    </p>
-                    <div className="flex items-center gap-6 space-y-4">
-                        <button
-                            type="button"
-                            className="px-6 py-3 text-lg bg-orange-400 rounded-md "
-                        >
-                            Learn more
-                        </button>
-                        <div className="flex items-center gap-2">
-                            <p className="md:text-lg">All services</p>
-                            <FiArrowRight className="text-xl text-orange-500 hover:text-white"/>
-                        </div>
-                    </div>
-                </div>
-            </section> */}
             <Carousel/>
             {/* 2ND SECTION */}
             <section
@@ -128,36 +116,6 @@ const HomePage = () => {
                             </li>
                         )
                     })}
-                    {/*<li className="w-full h-[250px] flex flex-col gap-3">*/}
-                    {/*  /!* frontend\src\assets\icons\strategy.svg *!/*/}
-                    {/*  <object type="image/svg+xml" data="/icons/talk.svg" className="w-12 h-16"></object>*/}
-                    {/*  <a href="" className="text-lg font-semibold">Business Unit Strategy</a>*/}
-                    {/*  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat in dolore nihil.</p>*/}
-                    {/*  <span className="flex items-center gap-2 font-semibold">*/}
-                    {/*    <p>Learn more</p>*/}
-                    {/*    <FiArrowRight/>*/}
-                    {/*  </span>*/}
-                    {/*</li>*/}
-                    {/*<li className="w-full h-[250px] flex flex-col gap-3">*/}
-                    {/*  /!* frontend\src\assets\icons\strategy.svg *!/*/}
-                    {/*  <object type="image/svg+xml" data="/icons/strategy.svg" className="w-12 h-16"></object>*/}
-                    {/*  <a href="" className="text-lg font-semibold">Turnaround Mining Industry</a>*/}
-                    {/*  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat in dolore nihil.</p>*/}
-                    {/*  <span className="flex items-center gap-2 font-semibold">*/}
-                    {/*    <p>Learn more</p>*/}
-                    {/*    <FiArrowRight/>*/}
-                    {/*  </span>*/}
-                    {/*</li>*/}
-                    {/*<li className="w-full h-[250px] flex flex-col gap-3">*/}
-                    {/*  /!* frontend\src\assets\icons\strategy.svg *!/*/}
-                    {/*  <object type="image/svg+xml" data="/icons/bonds.svg" className="w-12 h-16"></object>*/}
-                    {/*  <a href="" className="text-lg font-semibold">Bonds & Commodities</a>*/}
-                    {/*  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat in dolore nihil.</p>*/}
-                    {/*  <span className="flex items-center gap-2 font-semibold">*/}
-                    {/*    <p>Learn more</p>*/}
-                    {/*    <FiArrowRight/>*/}
-                    {/*  </span>*/}
-                    {/*</li>*/}
                 </ul>
             </section>
             {/* 4TH SECTION */}

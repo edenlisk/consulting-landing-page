@@ -9,28 +9,42 @@ import {useQuery} from "@apollo/client";
 import {GET_COMPANY_INFO} from "../api/graphql.js";
 import {useEffect, useState} from "react";
 import {message} from "antd";
+import {useCompanyHistory, useCompanyInfo} from "../api/hooks.js";
+import { BlocksRenderer } from '@strapi/blocks-react-renderer';
+
 
 const About = () => {
-    const { data, error,loading } = useQuery(GET_COMPANY_INFO);
-    const [company, setCompany] = useState({
-        history: [],
-        companyOverview: [],
-        ourMission: [],
-    })
+    const { history, historyError, historyLoading } = useCompanyHistory();
+    const {rani, raniError, raniLoading} = useCompanyInfo();
     useEffect(() => {
-        if (data) {
-            setCompany(prevState => (
-                {...prevState, history: data.company.history,
-                    companyOverview: data.company.companyOverview.split('---'),
-                    ourMission: data.company.ourMission.split('---')
-                }));
-        }
-        if (error) message.error(error.message);
-    }, [data, error]);
+        if (historyError) return message.error(historyError.message);
+        if (raniError) return message.error(raniError.message);
+    }, [raniError, historyError]);
+    // const { data, error,loading } = useQuery(GET_COMPANY_INFO);
+    // const [company, setCompany] = useState({
+    //     history: [],
+    //     companyOverview: [],
+    //     ourMission: [],
+    // })
+
+    // useEffect(() => {
+    //     if (history) console.log(history)
+    // }, [history]);
+
+    // useEffect(() => {
+    //     if (data) {
+    //         setCompany(prevState => (
+    //             {...prevState, history: data.company.history,
+    //                 companyOverview: data.company.companyOverview.split('---'),
+    //                 ourMission: data.company.ourMission.split('---')
+    //             }));
+    //     }
+    //     if (error) message.error(error.message);
+    // }, [data, error]);
 
     return (
         <section className="grid w-full h-full grid-cols-1 gap-2 p-6 lg:grid-cols-12 lg:px-32">
-         {loading?<div className='flex flex-col items-center justify-center h-screen space-y-4 col-span-full'>
+         {raniLoading || historyLoading ?<div className='flex flex-col items-center justify-center h-screen space-y-4 col-span-full'>
                 <CgSpinner className='w-32 h-32 animate-spin text-blue-950' />
                 <p className="text-lg">Loading...</p>
                             </div>:<>
@@ -44,12 +58,12 @@ const About = () => {
                 <div className="w-full">
                     <ul className="py-6 ">
 
-                        {company.history?.map(({ title, year, description}, index) => {
+                        {history.length && history?.map(({attributes}, index) => {
                             return (
                                 <TimelineCard key={index}
-                                              title={title}
-                                              year={year}
-                                              description={description}
+                                              title={attributes.title}
+                                              year={attributes.year}
+                                              // description={attributes.description}
                                               />
                             )
                         })}
@@ -59,9 +73,10 @@ const About = () => {
                     <p className="text-4xl font-bold">
                         Company Overview
                     </p>
-                    {company.companyOverview && company.companyOverview.map((item, index) => {
-                        return <p key={index}>{item}</p>
-                    })}
+                    <BlocksRenderer content={rani.companyOverview}/>
+                    {/*{company.companyOverview && company.companyOverview.map((item, index) => {*/}
+                    {/*    return <p key={index}>{item}</p>*/}
+                    {/*})}*/}
                     {/*<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio aperiam autem sunt dolorem*/}
                     {/*    porro sit iure, libero mollitia officiis maxime.</p>*/}
                     {/*<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio aperiam autem sunt dolorem*/}
@@ -76,10 +91,11 @@ const About = () => {
                             Our mission
                         </p>
                         <p>Our renowned coaching programs will allow you to:</p>
+                        <BlocksRenderer content={rani.ourMission}/>
                         <ul className="pl-6 list-disc ">
-                            {company.ourMission && company.ourMission.map((item, index) => {
-                                return <li key={index}>{item}</li>
-                            })}
+                            {/*{rani.ourMission && rani.ourMission.map((item, index) => {*/}
+                            {/*    return <li key={index}>{item}</li>*/}
+                            {/*})}*/}
                             {/*<li>*/}
                             {/*    Work fewer hours — and make more money*/}
                             {/*</li>*/}

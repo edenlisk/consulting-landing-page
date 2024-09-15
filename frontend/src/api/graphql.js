@@ -2,9 +2,11 @@ import {ApolloClient, createHttpLink, from, gql, InMemoryCache} from "@apollo/cl
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
 // https://consulting-landing-page-api.onrender.com
-const httpLink = createHttpLink({uri: 'https://consulting-landing-page-api.onrender.com/api/graphql'});
+// 'http://localhost:1337/graphql'
+const BASE_URL = 'https://rani-strapi.onrender.com/graphql';
+const httpLink = createHttpLink({uri: BASE_URL});
 const uploadLink = createUploadLink({
-    uri: "https://consulting-landing-page-api.onrender.com/api/graphql",
+    uri: BASE_URL,
 });
 
 
@@ -12,7 +14,7 @@ export function createApolloClient() {
     return new ApolloClient({
         // link: from([httpLink, uploadLink]),
         link: from([createUploadLink({
-            uri: "https://consulting-landing-page-api.onrender.com/api/graphql"
+            uri: BASE_URL
         }), httpLink]),
         cache: new InMemoryCache(),
         defaultOptions: {
@@ -38,6 +40,43 @@ export const GET_SERVICES = gql`
     }
 `;
 
+export const getServicesQuery = gql`
+    query Services {
+    services {
+        data {
+            id
+            attributes {
+                title
+                description
+                display
+                image {
+                    data {
+                        id
+                        attributes {
+                            name
+                            alternativeText
+                            caption
+                            width
+                            height
+                            formats
+                            hash
+                            ext
+                            mime
+                            size
+                            url
+                            previewUrl
+                            provider
+                            provider_metadata
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+`;
+
 export const GET_SERVICE = gql`
     query Query($serviceId: ID!) {
     service(serviceId: $serviceId) {
@@ -46,6 +85,43 @@ export const GET_SERVICE = gql`
         title
     }
 }
+`;
+
+export const getServiceQuery = gql`
+    query Service($id: ID) {
+        service(id: $id) {
+            data {
+                id
+                attributes {
+                    title
+                    description
+                    display
+                    image {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                                provider_metadata
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 `;
 
 
@@ -80,6 +156,94 @@ export const GET_USERS = gql`
     }
 `;
 
+export const getUsersQuery = gql`
+    query Staffs {
+        staffs {
+            data {
+                id
+                attributes {
+                    fullName
+                    position
+                    phoneNumber
+                    background
+                    email
+                    profile {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const getSocialMediasQuery = gql`
+    query SocialMedias {
+        socialMedias {
+            data {
+                id
+                attributes {
+                    name
+                    socialMediaLink
+                    icon {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                                provider_metadata
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+`;
+
+export const getCompanyHistory = gql`
+    query Histories {
+        histories {
+            data {
+                id
+                attributes {
+                    year
+                    title
+                    description
+                }
+            }
+        }
+    }
+`;
+
 export const GALLERY = gql`
     query gallery {
         getGallery {
@@ -90,6 +254,81 @@ export const GALLERY = gql`
     }
 `;
 
+export const getGalleryQuery = gql`
+    query Events {
+        events {
+            data {
+                id
+                attributes {
+                    name
+                    date
+                    location
+                    description
+                    images {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                                provider_metadata
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+`;
+
+export const getReportsQuery = gql`
+    query Reports {
+        reports {
+            data {
+                id
+                attributes {
+                    name
+                    updatedAt
+                    publishedAt
+                    document {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                                provider_metadata
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+`;
+
 export const GET_MESSAGES = gql`
     query GetMessages {
         getMessages {
@@ -98,7 +337,6 @@ export const GET_MESSAGES = gql`
         }
     }
 `;
-
 
 
 export const GET_COMPANY_INFO = gql`
@@ -131,6 +369,51 @@ export const GET_COMPANY_INFO = gql`
     }
 `;
 
+export const getCompanyInfoQuery = gql`
+    query Rani {
+        rani {
+            data {
+                id
+                attributes {
+                    name
+                    companyOverview
+                    phoneNumber
+                    email
+                    ourMission
+                    aboutUs
+                    createdAt
+                    updatedAt
+                    publishedAt
+                    logo {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                                provider_metadata
+                                createdAt
+                                updatedAt
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+`;
+
 export const GET_BLOGS = gql`
     query getBlogs {
         blogs:getBlogs {
@@ -142,6 +425,47 @@ export const GET_BLOGS = gql`
             updatedAt
             image {
                 filePath
+            }
+        }
+    }
+`;
+
+export const getBlogsQuery = gql`
+    query Blogs {
+        blogs {
+            data {
+                id
+                attributes {
+                    title
+                    content
+                    slug
+                    createdAt
+                    updatedAt
+                    publishedAt
+                    representationalImage {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                                provider_metadata
+                                createdAt
+                                updatedAt
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -161,6 +485,48 @@ export const GET_BLOG = gql`
         }
     }
 `;
+
+export const getBlogQuery = gql`
+    query Blog ($id: ID) {
+        blog(id: $id) {
+            data {
+                id
+                attributes {
+                    title
+                    content
+                    slug
+                    createdAt
+                    updatedAt
+                    publishedAt
+                    representationalImage {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                                provider_metadata
+                                createdAt
+                                updatedAt
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
+
 
 // MUTATIONS
 export const ADD_SERVICE = gql`
