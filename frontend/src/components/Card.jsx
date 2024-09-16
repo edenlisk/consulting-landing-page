@@ -2,6 +2,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {BiSolidTimeFive} from "react-icons/bi";
 import {IoAddSharp} from "react-icons/io5";
 import {GoChevronRight} from "react-icons/go";
+import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
 export const NewsCard = ({img, title, link, date}) => {
 
@@ -49,7 +50,8 @@ export const ServiceCard = ({img, title, link, description, handleModal}) => {
                 <p className="py-2 text-xl font-semibold ">
                     {title}
                 </p>
-                <p>{description}</p>
+                {/*<p>{description}</p>*/}
+                <BlocksRenderer content={description}/>
                 <Link onClick={handleModal} className="flex items-center w-full gap-1 font-semibold">
                     <p>Read more</p>
                     <GoChevronRight/>
@@ -73,9 +75,10 @@ export const ProfileCard = ({img, title, name, link, description, handleModal}) 
                 <p className="text-xl">
                     {name}
                 </p>
-                <p className="pb-2 text-md text-[#9c9c9c]">{title}</p>
-                <p className="text-md">{description}</p>
-                <Link to={""} onClick={handleModal}
+                <p className="pb-2 text-md text-[#9c9c9c]">{name}</p>
+                <BlocksRenderer content={description}/>
+                {/*<p className="text-md">{description}</p>*/}
+                <Link onClick={handleModal}
                       className="flex items-center w-full gap-1 pt-2 font-semibold hover:text-orange-600">
                     <p>View Profile</p>
                     <GoChevronRight/>
@@ -93,9 +96,10 @@ export const TimelineCard = ({title, year, description}) => {
             <div className="hidden w-0 h-full col-span-1 md:block vertical-line-with-dots"></div>
             <div className="flex flex-col col-span-10 gap-4">
                 <p className="text-xl font-bold">{title}</p>
-                <p className="pb-10">
-                    {description}
-                </p>
+                <BlocksRenderer content={description}/>
+                {/*<p className="pb-10">*/}
+                {/*    {description}*/}
+                {/*</p>*/}
             </div>
         </li>
     )

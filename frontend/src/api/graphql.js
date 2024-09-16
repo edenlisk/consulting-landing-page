@@ -289,6 +289,43 @@ export const getGalleryQuery = gql`
             }
         }
     }
+`;
+
+export const getOneGalleryQuery = gql`
+    query Event($id: ID!) {
+        event(id: $id) {
+            data {
+                id
+                attributes {
+                    name
+                    date
+                    location
+                    description
+                    images {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                                provider_metadata
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 `;
 
@@ -299,8 +336,6 @@ export const getReportsQuery = gql`
                 id
                 attributes {
                     name
-                    updatedAt
-                    publishedAt
                     document {
                         data {
                             id
@@ -328,6 +363,7 @@ export const getReportsQuery = gql`
     }
 
 `;
+
 
 export const GET_MESSAGES = gql`
     query GetMessages {
@@ -381,6 +417,9 @@ export const getCompanyInfoQuery = gql`
                     email
                     ourMission
                     aboutUs
+                    country
+                    province
+                    district
                     createdAt
                     updatedAt
                     publishedAt

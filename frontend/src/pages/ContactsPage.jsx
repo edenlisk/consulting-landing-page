@@ -7,8 +7,13 @@ import {useEffect, useState} from "react";
 import {useMutation} from "@apollo/client";
 import {SEND_MESSAGE} from "../api/graphql.js";
 import {message} from "antd";
+import {useCompanyInfo, useSocialMedias} from "../api/hooks.js";
+import {Link, useNavigate} from "react-router-dom";
 
 const Contacts = () => {
+    const {rani} = useCompanyInfo();
+    const {socialMedia} = useSocialMedias();
+    const navigate = useNavigate();
     const [sendMessage, {loading, error}] = useMutation(SEND_MESSAGE)
 
     const [messageDetails, setMessageDetails] = useState(
@@ -31,7 +36,7 @@ const Contacts = () => {
     }
 
     const handleSubmit = async () => {
-        await sendMessage({variables: { input: messageDetails }});
+        await sendMessage({variables: {input: messageDetails}});
         setMessageDetails({senderEmail: '', senderName: '', textMessage: '', senderPhoneNumber: ''});
     }
 
@@ -43,7 +48,8 @@ const Contacts = () => {
                     className="w-full min-h-96 bg-cover bg-[url('https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2021/08/building.jpeg')]"></div>
                 <div className="w-full min-h-96 bg-blue-950"></div>
                 <div className="relative flex flex-col w-full gap-6 p-12 text-white min-h-96 bg-blue-950">
-  <div className="absolute inset-0 bg-center bg-no-repeat bg-cover opacity-10 bg-[url('https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2021/08/building.jpeg')]"></div>
+                    <div
+                        className="absolute inset-0 bg-center bg-no-repeat bg-cover opacity-10 bg-[url('https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2021/08/building.jpeg')]"></div>
 
                     <p className="text-xl font-bold">Contact details</p>
                     <ul className="flex flex-col gap-4">
@@ -52,41 +58,60 @@ const Contacts = () => {
                         <IoLocationSharp className="text-orange-500 "/>
                         </span>
 
-                            <p className="font-semibold text-wrap">1010 Avenue of the Moon
-                                New York, NY 10018 US.</p>
+                            <p className="font-semibold text-wrap">
+                                {`${rani.country}, ${rani.province}, ${rani.district}`}
+                            </p>
                         </li>
                         <li className="flex items-center gap-4">
                     <span className="text-2xl">
                         <FaPhoneAlt className="text-orange-500 "/>
                         </span>
-                            <a href="tel:+1 628 123 4000" className="font-semibold text-wrap">+1 628 123 4000</a>
+                            <a href={`tel:+${rani.phoneNumber}`}
+                               className="font-semibold text-wrap">{rani.phoneNumber}</a>
                         </li>
                         <li className="flex items-center gap-4">
                     <span className="text-2xl">
                         <FaEnvelope className="text-orange-500 "/>
                         </span>
-                            <a href="mailto:brandon@consulting.com"
-                               className="font-semibold text-wrap">brandon@example.com</a>
+                            <a href={`mailto:${rani.email}`}
+                               className="font-semibold text-wrap">{rani.email}</a>
                         </li>
 
                     </ul>
 
                     <ul className="flex flex-wrap items-center gap-4 text-black">
-                        <li className="p-2 bg-white rounded-full text-start">
-                            <GrFacebookOption/>
-                        </li>
-                        <li className="p-2 bg-white rounded-full text-start">
-                            <GrTwitter/>
-                        </li>
-                        <li className="p-2 bg-white rounded-full text-start">
-                            <GrLinkedinOption/>
-                        </li>
-                        <li className="p-2 bg-white rounded-full text-start">
-                            <IoLogoGoogleplus/>
-                        </li>
-                        <li className="p-2 bg-white rounded-full text-start">
-                            <GrSkype/>
-                        </li>
+                        {socialMedia.length && socialMedia.map(({attributes}, index) => {
+                            let icon = null;
+                            if (attributes.name?.includes('facebook')) {
+                                icon = <GrFacebookOption/>;
+                            } else if (attributes.name?.includes('twitter')) {
+                                icon = <GrTwitter/>
+                            } else if (attributes.name?.includes('linkedin')) {
+                                icon = <GrLinkedinOption/>
+                            } else {
+                                icon = <img className="size-4" src={attributes.icon?.data?.attributes?.url} alt={attributes.socialMediaLink}/>
+                            }
+                            return (
+                                <Link to={attributes.socialMediaLink}  key={index} className="p-2 bg-white rounded-full text-start">
+                                    {icon}
+                                </Link>
+                            )
+                        })}
+                        {/*<li className="p-2 bg-white rounded-full text-start">*/}
+                        {/*<GrFacebookOption/>*/}
+                        {/*</li>*/}
+                        {/*<li className="p-2 bg-white rounded-full text-start">*/}
+                        {/*    <GrTwitter/>*/}
+                        {/*</li>*/}
+                        {/*<li className="p-2 bg-white rounded-full text-start">*/}
+                        {/*    <GrLinkedinOption/>*/}
+                        {/*</li>*/}
+                        {/*<li className="p-2 bg-white rounded-full text-start">*/}
+                        {/*    <IoLogoGoogleplus/>*/}
+                        {/*</li>*/}
+                        {/*<li className="p-2 bg-white rounded-full text-start">*/}
+                        {/*    <GrSkype/>*/}
+                        {/*</li>*/}
                     </ul>
                 </div>
             </div>
@@ -114,34 +139,6 @@ const Contacts = () => {
                     </span>
 
                     </form>
-                </div>
-                <div className="grid gap-2 md:col-span-4">
-                    <p className="text-xl font-bold">Your contact</p>
-                    <ul className="flex flex-col gap-6">
-                        <li className="flex gap-3">
-                            <img
-                                src="https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2021/08/avatar-berg.jpeg"
-                                alt="" className="h-20"/>
-                            <span className="flex flex-col gap-1">
-                        <p className="font-semibold">Berg Devien</p>
-                        <p className="font-semibold">Berg Devien</p>
-                        <p>Email: <a href="">berg@consulting.wp</a></p>
-                        <p>Email: <a href="">berg@consulting.wp</a></p>
-                    </span>
-                        </li>
-                        <li className="flex gap-3">
-                            <img
-                                src="https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2021/08/avatar-berg.jpeg"
-                                alt="" className="h-20"/>
-                            <span className="flex flex-col gap-1">
-                        <p className="font-semibold">Berg Devien</p>
-                        <p className="font-semibold">Berg Devien</p>
-                        <p>Email: <a href="">berg@consulting.wp</a></p>
-                        <p>Email: <a href="">berg@consulting.wp</a></p>
-                    </span>
-                        </li>
-
-                    </ul>
                 </div>
             </div>
         </section>

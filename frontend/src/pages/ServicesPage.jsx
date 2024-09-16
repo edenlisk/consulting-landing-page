@@ -1,87 +1,3 @@
-// import {FaRegFilePdf} from "react-icons/fa6";
-// import {IoCall, IoAddSharp} from "react-icons/io5";
-// import {servicesArray} from "../components/ArraysObj";
-// import {ServiceCard, SidenavCard} from "../components/Card";
-// import {Link, useLocation} from "react-router-dom";
-// import {aboutNavs} from "../components/NavbarList";
-// import {useQuery} from "@apollo/client";
-// import {GET_SERVICES} from "../api/graphql.js";
-// import {useEffect, useState} from "react";
-// import {message} from "antd";
-//
-//
-// const Services = () => {
-//     const {data, loading, error} = useQuery(GET_SERVICES);
-//     const [services, setServices] = useState([]);
-//     useEffect(() => {
-//         if (data) {
-//             console.log('services:', data);
-//             setServices(data.services);
-//         } else if (error) {
-//             return message.error(error.message);
-//         }
-//     }, [data, error]);
-//     const path = useLocation()
-//
-//     return (
-//         <section className="grid w-full grid-cols-1 gap-2 p-6 lg:grid-cols-12 lg:px-32">
-//             {/* FIRST GRID */}
-//             <ul className="grid grid-cols-1 gap-4 lg:col-span-9 gap-y-10 md:grid-cols-12">
-//                 <p className="pb-1 text-5xl font-bold col-span-full">Services</p>
-//                 {
-//                     services && services.map(({image, title, description}, index) => {
-//                         return (
-//                             <ServiceCard key={index}
-//                                          title={title}
-//                                          img={image ? image.filePath : servicesArray[0].img}
-//                                          description={description}
-//                             />
-//                         )
-//                     })
-//                 }
-//             </ul>
-//
-//             {/* SECOND GRID */}
-//             <div className="flex-col hidden gap-10 lg:col-span-3 md:flex">
-//                 <ul className="grid grid-cols-1 gap-[1px]">
-//                     {aboutNavs.map(({id, title, link}) => {
-//                         return (
-//
-//                             <SidenavCard key={id}
-//                                          title={title}
-//                                          link={link}
-//                             />
-//                         )
-//                     })}
-//                 </ul>
-//
-//                 <div className="flex items-center gap-2 p-4 text-white bg-orange-400 rounded-md hover:bg-blue-950">
-//                     <FaRegFilePdf/>
-//                     <p>Company presentation</p>
-//                 </div>
-//
-//                 <div className="flex flex-col gap-3 p-4 text-white bg-blue-950">
-//                     <p className="font-bold">How can we help you?</p>
-//                     <p>
-//                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure eum
-//                         qui et.
-//                     </p>
-//                     <button
-//                         className="flex items-center gap-2 p-2 text-black bg-white rounded-sm w-fit hover:text-white hover:bg-orange-500">
-//                         <IoCall/>
-//                         <Link to={'/contact-us'}>Contacts</Link>
-//                     </button>
-//                 </div>
-//                 <div className="p-4 border-4 border-zinc-500 testimonial">
-//                     <p>XYZ Company really helped us achieve our financial goals. The slick presentation along with
-//                         fantastic readability ensures that our financial standing is stable.</p>
-//                 </div>
-//             </div>
-//         </section>
-//     );
-// };
-// export default Services;
-
 
 import React, {useEffect, useState} from 'react';
 import {message, Modal, Button} from 'antd';
@@ -95,23 +11,29 @@ import {useQuery} from "@apollo/client";
 import {GET_SERVICES} from "../api/graphql.js";
 import { CgSpinner } from "react-icons/cg";
 import { BiSolidQuoteLeft } from "react-icons/bi";
-
+import {useServices} from "../api/hooks.js";
+import {BlocksRenderer} from "@strapi/blocks-react-renderer";
 
 
 const Services = () => {
-    const {data, loading, error} = useQuery(GET_SERVICES);
-    const [services, setServices] = useState([]);
+    const {services, servicesLoading, servicesError} = useServices();
+    // const {data, loading, error} = useQuery(GET_SERVICES);
+    // const [services, setServices] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [modalContent, setModalContent] = useState({title: '', description: '', image: ''});
+    //
+    // useEffect(() => {
+    //     if (data) {
+    //         console.log('services:', data);
+    //         setServices(data.services);
+    //     } else if (error) {
+    //         return message.error(error.message);
+    //     }
+    // }, [data, error]);
 
     useEffect(() => {
-        if (data) {
-            console.log('services:', data);
-            setServices(data.services);
-        } else if (error) {
-            return message.error(error.message);
-        }
-    }, [data, error]);
+        if (servicesError) return message.error(servicesError.message);
+    }, [servicesError]);
 
     const path = useLocation();
 
@@ -133,19 +55,22 @@ const Services = () => {
             {/* FIRST GRID */}
             <p className="pb-1 text-5xl font-bold col-span-full">Services</p>
             <ul className="grid grid-cols-1 gap-4 lg:col-span-9 gap-y-10 md:grid-cols-12">
-              { loading? (<div className='flex items-center justify-center space-y-4 col-span-full'>
+              { servicesLoading? (<div className='flex items-center justify-center space-y-4 col-span-full'>
                 <CgSpinner className='w-32 h-32 animate-spin text-blue-950' />
                             </div>):<>
                 
                 {
-                    services && services.map(({image, title, description}, index) => {
+                    services.length && services.map(({attributes}, index) => {
                         return (
-                            
                             <ServiceCard key={index}
-                                         title={title}
-                                         img={image ? image.filePath : servicesArray[0].img}
-                                         description={`${description.slice(0, 100)}...`}
-                                         handleModal={() => showModal({title, description, image})}
+                                         title={attributes.title}
+                                         img={attributes.image?.data?.attributes?.url}
+                                         description={attributes.description}
+                                         handleModal={() => showModal({
+                                             title:attributes.title,
+                                             description: attributes.description,
+                                             image: attributes.image?.data?.attributes?.url
+                                         })}
                             />
                             
                         )
@@ -155,11 +80,11 @@ const Services = () => {
             </ul>
             {/* SECOND GRID */}
             <div className="flex-col hidden gap-10 lg:col-span-3 md:flex">
-                <ul className="grid grid-cols-1 gap-[1px]">
-                    {aboutNavs.map(({id, title, link}) => (
-                        <SidenavCard key={id} title={title} link={link}/>
-                    ))}
-                </ul>
+                {/*<ul className="grid grid-cols-1 gap-[1px]">*/}
+                {/*    {aboutNavs.map(({id, title, link}) => (*/}
+                {/*        <SidenavCard key={id} title={title} link={link}/>*/}
+                {/*    ))}*/}
+                {/*</ul>*/}
 
                 <div className="flex items-center gap-2 p-4 text-white bg-orange-400 rounded-md hover:bg-blue-950">
                     <FaRegFilePdf/>
@@ -190,9 +115,10 @@ const Services = () => {
                 onOk={handleOk}
                 onCancel={handleCancel}
             >
-                <img src={modalContent.image ? modalContent.image.filePath : servicesArray[0].img} alt="Service"
+                <img src={modalContent.image ? modalContent.image : servicesArray[0].img} alt="Service"
                      className="object-cover w-full h-64 mb-4"/>
-                <p>{modalContent.description}</p>
+                {/*<p>{modalContent.description}</p>*/}
+                <BlocksRenderer content={modalContent.description}/>
             </Modal>
         </section>
     );

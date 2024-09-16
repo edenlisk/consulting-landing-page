@@ -1,5 +1,11 @@
 import {useQuery} from "@apollo/client";
-import {GET_COMPANY_INFO, getCompanyHistory, getCompanyInfoQuery} from "./graphql.js";
+import {
+    getCompanyHistory,
+    getCompanyInfoQuery, getGalleryQuery, getOneGalleryQuery, getReportsQuery,
+    getServicesQuery,
+    getSocialMediasQuery,
+    getUsersQuery
+} from "./graphql.js";
 
 
 export function useCompanyHistory() {
@@ -14,8 +20,41 @@ export function useCompanyHistory() {
 export function useCompanyInfo() {
     const { data, error, loading } = useQuery(getCompanyInfoQuery);
     return {
-        rani: data?.rani?.data?.attributes ?? [],
+        rani: data?.rani?.data?.attributes ?? {},
         raniLoading: loading,
         raniError: error
     }
+}
+
+export function useServices() {
+    const { data, error, loading } = useQuery(getServicesQuery);
+    return {services: data?.services?.data ?? [], servicesLoading: loading, servicesError: error};
+}
+
+export function useTeamMembers() {
+    const { data, loading, error } = useQuery(getUsersQuery);
+    return { users: data?.staffs?.data ?? [], usersLoading: loading, usersError: error };
+}
+
+export function useSocialMedias() {
+    const { data } = useQuery(getSocialMediasQuery);
+    return { socialMedia: data?.socialMedias?.data ?? [] }
+}
+
+export function useGetGalleries() {
+    const { data } = useQuery(getGalleryQuery);
+    return { events: data?.events?.data ?? [] }
+}
+
+export function useGetOneGallery(id) {
+    const { data } = useQuery(getOneGalleryQuery,
+        {
+            variables: { id }
+        });
+    return { event: data?.event?.data ?? {} }
+}
+
+export function useGetReports() {
+    const { data } = useQuery(getReportsQuery);
+    return { reports: data?.reports?.data ?? []}
 }
