@@ -52,7 +52,7 @@ const HomePage = () => {
                         Above all, we believe that real change is possible and that tomorrow
                         doesn’t have to be like today
                     </p>
-                    <BlocksRenderer content={rani?.companyOverview}/>
+                    {rani?.companyOverview && <BlocksRenderer content={rani?.companyOverview}/>}
                     {/*<p className="text-md ">*/}
                     {/*    Solving social problems requires leaders from foundations,*/}
                     {/*    businesses, nonprofits, and governments to reimagine the systems and*/}
