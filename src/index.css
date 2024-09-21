@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 3.7px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.vertical-line-with-dots {
+  position: relative;
+  height: 180px;
+  margin: 0px 0px 0px 20px;
+  bottom: 0px;
+  /* border: 1px #f6f6f6 solid; */
+  /* margin-left:20px */
+}
+.vertical-line-with-dots:last-child {
+  position: relative;
+  border: 0px;
+}
+
+.vertical-line-with-dots::after {
+  content: "";
+  position: absolute;
+  height: 230px;
+  width: 2px;
+  top: 10px;
+  /* z-index:-5; */
+  background-color: #f6f6f6;
+}
+.vertical-line-with-dots::before {
+  content: "";
+  position: absolute;
+  padding: 6px;
+  left: 50%;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  /* z-index:3; */
+  background-color: #f05836;
+  border-radius: 100%;
+  transform: translateX(-50%);
+}
+
+.vertical-line-with-dots::before {
+  top: -5px;
+}
+
+.vertical-line-with-dots::after {
+  bottom: -5px;
+}
+.testimonial {
+  position: relative;
+}
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  height: 680px;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  background-color: #f1f1f1;
+}
