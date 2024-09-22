@@ -1,12 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {FiArrowRight} from "react-icons/fi";
-import {useQuery} from "@apollo/client";
-import {GET_SERVICES, GET_BLOGS, getServicesQuery} from "../api/graphql.js";
-import {cardsArray} from "../components/ArraysObj";
-import {NewsCard} from "../components/Card";
-import {message} from "antd";
-import {Link} from "react-router-dom";
-import dayjs from "dayjs";
 import {FiMail} from "react-icons/fi";
 import {LuPhone} from "react-icons/lu";
 import {IoLocationOutline} from "react-icons/io5";
@@ -14,16 +7,16 @@ import ContactCard from "../components/contactCard.jsx";
 import Carousel from "../components/carousel.jsx";
 import {BlocksRenderer} from '@strapi/blocks-react-renderer';
 import {useCompanyInfo} from "../api/hooks.js";
+import {MdEmail} from "react-icons/md";
 
 
 const HomePage = () => {
     const { rani } = useCompanyInfo()
     const [posts, setPosts] = useState([]);
     const [services, setServices] = useState([]);
-
     return (
         <>
-            <Carousel/>
+            <Carousel homeSubText={rani?.homeSubText} homeMainText={rani?.homeMainText} images={rani?.homeImages?.data?.map(img => img?.attributes?.formats?.large?.url)}/>
             {/* 2ND SECTION */}
             <section
                 className="justify-center w-full px-6 py-12 h-fit md:px-28 md:py-24 md:flex md:gap-16 md:items-center">
@@ -193,11 +186,11 @@ const HomePage = () => {
                         <h2 className="m-0 text-4xl">Latest News</h2>
                         <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>
                         <ContactCard icon={<FiMail className='w-5 h-5 text-white'/>} title={'Address'}
-                                     description={'5010 Avenue of the Moon, New York, NY 10018 US'}/>
+                                     description={`${rani?.district}, ${rani?.province}, ${rani?.country}`}/>
                         <ContactCard icon={<LuPhone className='w-5 h-5 text-white'/>} title={'Phone'}
-                                     description={'212 386 5575'}/>
-                        <ContactCard icon={<IoLocationOutline className='w-5 h-5 text-white'/>} title={'Email'}
-                                     description={'info@consultingwp.com'}/>
+                                     description={rani?.phoneNumber}/>
+                        <ContactCard icon={<MdEmail className='w-5 h-5 text-white'/>} title={'Email'}
+                                     description={rani?.email}/>
 
                     </div>
                     <div className="relative z-50 flex flex-col items-start w-full space-y-3 ">

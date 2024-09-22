@@ -403,6 +403,54 @@ export const GET_COMPANY_INFO = gql`
     }
 `;
 
+// export const getCompanyInfoQuery = gql`
+//     query Rani {
+//         rani {
+//             data {
+//                 id
+//                 attributes {
+//                     name
+//                     companyOverview
+//                     phoneNumber
+//                     email
+//                     ourMission
+//                     aboutUs
+//                     country
+//                     province
+//                     district
+//                     createdAt
+//                     updatedAt
+//                     publishedAt
+//                     logo {
+//                         data {
+//                             id
+//                             attributes {
+//                                 name
+//                                 alternativeText
+//                                 caption
+//                                 width
+//                                 height
+//                                 formats
+//                                 hash
+//                                 ext
+//                                 mime
+//                                 size
+//                                 url
+//                                 previewUrl
+//                                 provider
+//                                 provider_metadata
+//                                 createdAt
+//                                 updatedAt
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//
+// `;
+
 export const getCompanyInfoQuery = gql`
     query Rani {
         rani {
@@ -418,10 +466,78 @@ export const getCompanyInfoQuery = gql`
                     country
                     province
                     district
+                    openHours
+                    homeMainText
+                    homeSubText
                     createdAt
                     updatedAt
                     publishedAt
                     logo {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                                provider_metadata
+                                createdAt
+                                updatedAt
+                            }
+                        }
+                    }
+                    contactImage {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                                provider_metadata
+                            }
+                        }
+                    }
+                    homeImages {
+                        data {
+                            id
+                            attributes {
+                                name
+                                alternativeText
+                                caption
+                                width
+                                height
+                                formats
+                                hash
+                                ext
+                                mime
+                                size
+                                url
+                                previewUrl
+                                provider
+                                provider_metadata
+                            }
+                        }
+                    }
+                    aboutUsImage {
                         data {
                             id
                             attributes {

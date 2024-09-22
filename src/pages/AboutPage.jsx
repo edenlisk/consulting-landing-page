@@ -2,10 +2,7 @@ import {FaRegFilePdf} from "react-icons/fa6";
 import {IoCall} from "react-icons/io5";
 import {Link} from "react-router-dom";
 import {CgSpinner} from "react-icons/cg";
-import {achievements} from "../components/ArraysObj";
 import {SidenavCard, TimelineCard} from "../components/Card";
-import {aboutNavs} from "../components/NavbarList";
-import {useQuery} from "@apollo/client";
 import {useEffect, useState} from "react";
 import {message} from "antd";
 import {useCompanyHistory, useCompanyInfo} from "../api/hooks.js";
@@ -50,15 +47,16 @@ const About = () => {
                 </div> : <>
                     {/* FIRST GRID */}
                     <div className="flex flex-col gap-4 lg:col-span-9">
+
                         <img
-                            src="https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2020/08/slide-2-1.jpg"
+                            src={rani?.aboutUsImage?.data?.attributes?.url}
                             alt="team standing"
                         />
 
                         <div className="w-full">
                             <ul className="py-6 ">
 
-                                {history.length && history?.map(({attributes}, index) => {
+                                {history.length ? history?.map(({attributes}, index) => {
                                     return (
                                         <TimelineCard key={index}
                                                       title={attributes.title}
@@ -66,14 +64,15 @@ const About = () => {
                                                       description={attributes.description}
                                         />
                                     )
-                                })}
+                                }): null}
                             </ul>
                         </div>
                         <div className="flex flex-col gap-6">
                             <p className="text-4xl font-bold">
                                 Company Overview
                             </p>
-                            <BlocksRenderer content={rani.companyOverview}/>
+                            {rani?.companyOverview ? <BlocksRenderer content={rani.companyOverview}/> : null }
+
                             {/*{company.companyOverview && company.companyOverview.map((item, index) => {*/}
                             {/*    return <p key={index}>{item}</p>*/}
                             {/*})}*/}
@@ -134,11 +133,11 @@ const About = () => {
                         {/*    })}*/}
                         {/*</ul>*/}
 
-                        <div
-                            className="flex items-center gap-2 p-4 text-white bg-orange-400 rounded-md hover:bg-blue-950">
-                            <FaRegFilePdf/>
-                            <p>Company presentation</p>
-                        </div>
+                        {/*<div*/}
+                        {/*    className="flex items-center gap-2 p-4 text-white bg-orange-400 rounded-md hover:bg-blue-950">*/}
+                        {/*    <FaRegFilePdf/>*/}
+                        {/*    <p>Company presentation</p>*/}
+                        {/*</div>*/}
 
                         <div className="flex flex-col gap-3 p-4 text-white bg-blue-950">
                             <p className="font-bold">How can we help you?</p>
