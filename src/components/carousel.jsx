@@ -6,7 +6,7 @@ import { LazyLoadComponent, LazyLoadImage } from "react-lazy-load-image-componen
 import { Blurhash } from "react-blurhash";
 import { useNavigate } from "react-router-dom";
 
-const Carousel = () => {
+const Carousel = ({images, homeMainText, homeSubText}) => {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay()]);
   const navigate = useNavigate();
 
@@ -36,13 +36,13 @@ const Carousel = () => {
         <div className="absolute top-0 w-full px-4 py-24 space-y-6 font-semibold text-white h-fit lg:px-28">
           <div className="flex items-center gap-3 py-1">
             <span className="w-[70px] p-[1.8px] rounded-full bg-red-500"></span>
-            <p className="text-lg">Meet Rani Mining Company</p>
+            <p className="text-lg">Meet Soemc Ltd Company</p>
           </div>
           <p className="w-full py-1 text-5xl md:text-6xl md:w-3/4">
-            Elevate business operations with Mining Process
+            {homeMainText}
           </p>
           <p className="py-1 text-lg">
-            We know how to achieve the highest standards most productively
+            {homeSubText}
           </p>
           <div className="flex items-center gap-6 space-y-4">
             <button
@@ -90,33 +90,34 @@ const Carousel = () => {
       )}
           </section> */}
         {/* 1ST SLIDE  */}
-        <section className="relative flex flex-col items-center justify-center embla__slide">
-          <CarouselInfo
-            img={
-              "https://moderndiplomacy.eu/wp-content/uploads/2023/12/business-office-1068x712.jpg"
-            }
-            alt={"people-in-office"}
-            link={"/services"}
-          />
-        </section>
+        {images?.length && images.map((img, index) => (
+            <section key={index} className="relative flex flex-col items-center justify-center embla__slide">
+              <CarouselInfo
+                  img={img}
+                  alt={"people-in-office"}
+                  link={"/services"}
+              />
+            </section>
+        ))}
+
         {/* 2ND SLIDE */}
-        <section className="relative flex flex-col items-center justify-center embla__slide">
-          <CarouselInfo
-            img={
-              "https://images.unsplash.com/photo-1510851896000-498520af2236?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8b2ZmaWNlJTIwbmlnaHR8ZW58MHx8MHx8fDA%3D"
-            }
-            alt={"office"}
-            link={"/services"}
-          />
-        </section>
-        {/* 3RD SLIDE */}
-        <section className="relative flex flex-col items-center justify-center embla__slide">
-          <CarouselInfo
-            img={"https://mineralseducationcoalition.org/wp-content/uploads/miner3.jpg"}
-            alt={"mining"}
-            link={"/services"}
-          />
-        </section>
+        {/*<section className="relative flex flex-col items-center justify-center embla__slide">*/}
+        {/*  <CarouselInfo*/}
+        {/*      img={*/}
+        {/*        "https://images.unsplash.com/photo-1510851896000-498520af2236?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8b2ZmaWNlJTIwbmlnaHR8ZW58MHx8MHx8fDA%3D"*/}
+        {/*    }*/}
+        {/*    alt={"office"}*/}
+        {/*    link={"/services"}*/}
+        {/*  />*/}
+        {/*</section>*/}
+        {/*/!* 3RD SLIDE *!/*/}
+        {/*<section className="relative flex flex-col items-center justify-center embla__slide">*/}
+        {/*  <CarouselInfo*/}
+        {/*    img={"https://mineralseducationcoalition.org/wp-content/uploads/miner3.jpg"}*/}
+        {/*    alt={"mining"}*/}
+        {/*    link={"/services"}*/}
+        {/*  />*/}
+        {/*</section>*/}
       </div>
     </div>
   );

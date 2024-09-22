@@ -66,7 +66,7 @@ const Layout = () => {
                     <li className="flex justify-start items-center gap-1">
                         <BsClock className="text-2xl text-white font-semibold"/>
                         <p className="text-lg text-white font-semibold">
-                            Mon - Sat 8.00 - 18.00
+                            {rani?.openHours}
                         </p>
                     </li>
                 </ul>

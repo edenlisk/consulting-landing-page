@@ -45,7 +45,7 @@ const Contacts = () => {
         <section className="flex flex-col w-full h-full gap-6 p-6 lg:px-32 lg:gap-20 bg-zinc-50">
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
                 <div
-                    className="w-full min-h-96 bg-cover bg-[url('https://consulting.stylemixthemes.com/valencia/wp-content/uploads/sites/53/2021/08/building.jpeg')]"></div>
+                    className={`w-full min-h-96 bg-cover bg-[url('https://res.cloudinary.com/dz8uxhn9j/image/upload/v1727018435/Whats_App_Image_2024_09_22_at_10_48_38_6adb17f536.jpg')]`}></div>
                 <div className="w-full min-h-96 bg-blue-950"></div>
                 <div className="relative flex flex-col w-full gap-6 p-12 text-white min-h-96 bg-blue-950">
                     <div
