@@ -1,8 +1,6 @@
 import {ApolloClient, createHttpLink, from, gql, InMemoryCache} from "@apollo/client";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
-// https://consulting-landing-page-api.onrender.com
-// 'http://localhost:1337/graphql'
 const BASE_URL = 'https://soemcltd.onrender.com/graphql';
 const httpLink = createHttpLink({uri: BASE_URL});
 const uploadLink = createUploadLink({
