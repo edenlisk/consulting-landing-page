@@ -46,6 +46,7 @@ const Layout = () => {
                 <span className="md:hidden z-20">
           <Hamburger
               style={{color: 'white'}}
+              className="text-white"
               size={27}
               toggled={isMobileMenu}
               toggle={() => {
