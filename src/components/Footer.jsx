@@ -30,20 +30,6 @@ const COMPANY_INFO = gql`
 const Footer = () => {
     const { socialMedia } = useSocialMedias();
     const { rani } = useCompanyInfo();
-    // const [company, setCompany] = useState({
-    //     socials: [],
-    //     name: ''
-    // })
-    // useEffect(() => {
-    //     if (data) {
-    //         const { socials, name } = data.company;
-    //         setCompany(prevState => ({
-    //             ...prevState,
-    //             socials,
-    //             name
-    //         }))
-    //     } else if (error) return message.error(error.message);
-    // }, [data, error]);
     return (
         <footer className="  w-full bg-blue-950 py-12 px-6 lg:px-28 text-white">
             <div className=" grid grid-cols-1 md:grid-cols-3">
@@ -52,7 +38,7 @@ const Footer = () => {
                     <div className=""></div>
                     <div className="flex gap-4 items-center">
                         <ul className="flex flex-wrap items-center gap-4 text-black">
-                            {socialMedia.length && socialMedia.map(({attributes}, index) => {
+                            {socialMedia.length ? socialMedia.map(({attributes}, index) => {
                                 let icon;
                                 if (attributes.name?.includes('facebook')) {
                                     icon = <GrFacebookOption/>;
@@ -70,22 +56,7 @@ const Footer = () => {
                                         {icon}
                                     </Link>
                                 )
-                            })}
-                            {/*<li className="p-2 bg-white rounded-full text-start">*/}
-                            {/*<GrFacebookOption/>*/}
-                            {/*</li>*/}
-                            {/*<li className="p-2 bg-white rounded-full text-start">*/}
-                            {/*    <GrTwitter/>*/}
-                            {/*</li>*/}
-                            {/*<li className="p-2 bg-white rounded-full text-start">*/}
-                            {/*    <GrLinkedinOption/>*/}
-                            {/*</li>*/}
-                            {/*<li className="p-2 bg-white rounded-full text-start">*/}
-                            {/*    <IoLogoGoogleplus/>*/}
-                            {/*</li>*/}
-                            {/*<li className="p-2 bg-white rounded-full text-start">*/}
-                            {/*    <GrSkype/>*/}
-                            {/*</li>*/}
+                            }) : null}
                         </ul>
                     </div>
                 </div>

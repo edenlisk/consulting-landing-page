@@ -50,8 +50,8 @@ export const ServiceCard = ({img, title, link, description, handleModal}) => {
                 <p className="py-2 text-xl font-semibold ">
                     {title}
                 </p>
-                {/*<p>{description}</p>*/}
-                <BlocksRenderer content={description}/>
+                {description && <BlocksRenderer content={description}/>}
+
                 <Link onClick={handleModal} className="flex items-center w-full gap-1 font-semibold">
                     <p>Read more</p>
                     <GoChevronRight/>
@@ -68,16 +68,15 @@ export const ProfileCard = ({img, title, name, link, description, handleModal}) 
             <img
                 src={img}
                 alt="people in office"
-                className="w-full h-[190px] object-cover rounded-tr-3xl rounded-bl-3xl bg-center"
+                className="w-full h-full object-cover rounded-tr-3xl rounded-bl-3xl bg-center"
 
             />
             <div className="flex flex-col gap-1 ">
                 <p className="text-xl">
                     {name}
                 </p>
-                <p className="pb-2 text-md text-[#9c9c9c]">{name}</p>
+                <p className="pb-2 text-md text-[#9c9c9c]">{title}</p>
                 <BlocksRenderer content={description}/>
-                {/*<p className="text-md">{description}</p>*/}
                 <Link onClick={handleModal}
                       className="flex items-center w-full gap-1 pt-2 font-semibold hover:text-orange-600">
                     <p>View Profile</p>
@@ -107,7 +106,6 @@ export const TimelineCard = ({title, year, description}) => {
 export const SidenavCard = ({title, link}) => {
     const {pathname} = useLocation();
     const arr = pathname.split('/').filter((x) => x).pop().replace(/-/g, ' ');
-    console.log(arr)
     return (
 
         <Link to={`/services/${link}`}

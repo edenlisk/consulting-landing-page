@@ -1,4 +1,3 @@
-import {FaRegFilePdf} from "react-icons/fa6";
 import {IoCall} from "react-icons/io5";
 import {Link} from "react-router-dom";
 import {CgSpinner} from "react-icons/cg";
@@ -16,27 +15,6 @@ const About = () => {
         if (historyError) return message.error(historyError.message);
         if (raniError) return message.error(raniError.message);
     }, [raniError, historyError]);
-    // const { data, error,loading } = useQuery(GET_COMPANY_INFO);
-    // const [company, setCompany] = useState({
-    //     history: [],
-    //     companyOverview: [],
-    //     ourMission: [],
-    // })
-
-    // useEffect(() => {
-    //     if (history) console.log(history)
-    // }, [history]);
-
-    // useEffect(() => {
-    //     if (data) {
-    //         setCompany(prevState => (
-    //             {...prevState, history: data.company.history,
-    //                 companyOverview: data.company.companyOverview.split('---'),
-    //                 ourMission: data.company.ourMission.split('---')
-    //             }));
-    //     }
-    //     if (error) message.error(error.message);
-    // }, [data, error]);
 
     return (
         <section className="grid w-full h-full grid-cols-1 gap-2 p-6 lg:grid-cols-12 lg:px-32">
@@ -46,9 +24,11 @@ const About = () => {
                     <p className="text-lg">Loading...</p>
                 </div> : <>
                     {/* FIRST GRID */}
-                    <div className="flex flex-col gap-4 lg:col-span-9">
+                    <div className="flex items-center flex-col gap-4 lg:col-span-9">
 
                         <img
+                            width={500}
+                            height={500}
                             src={rani?.aboutUsImage?.data?.attributes?.url}
                             alt="team standing"
                         />
@@ -108,12 +88,6 @@ const About = () => {
                                     {/*    Automate your business, so you can leave for days, weeks, or even months at a time*/}
                                     {/*</li>*/}
                                 </ul>
-                            </div>
-                            <div className="space-y-2">
-                                <p className="text-lg font-bold">
-                                    How we work
-                                </p>
-                                <img src="" alt=""/>
                             </div>
                         </div>
                     </div>
