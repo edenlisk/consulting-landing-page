@@ -45,7 +45,7 @@ const Team = () => {
                                 <ProfileCard key={index}
                                              name={attributes.fullName}
                                              title={attributes.position}
-                                             description={attributes.background?.slice(0, 2)}
+                                             description={attributes.background?.slice(0, 1)}
                                              img={attributes.profile?.data?.attributes?.formats?.small?.url}
                                              handleModal={() => showModal({
                                                  name: attributes.fullName,
