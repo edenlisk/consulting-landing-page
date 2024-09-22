@@ -92,8 +92,8 @@ const Services = () => {
                     </button>
                 </div>
                 <div className="relative p-4 border-2 border-zinc-300 testimonial">
+                    <p className="text-bold">Mineral Pricing and Accountancy:</p>
                     <p className='p-4 align-top'>
-                        Mineral Pricing and Accountancy
                         We offer specialized pricing strategies and accountancy services tailored to the mineral trading industry.
                         Our financial experts provide insights into market trends and help clients optimize their pricing models for maximum profitability.
                     </p>
