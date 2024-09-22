@@ -8,51 +8,39 @@ import Carousel from "../components/carousel.jsx";
 import {BlocksRenderer} from '@strapi/blocks-react-renderer';
 import {useCompanyInfo} from "../api/hooks.js";
 import {MdEmail} from "react-icons/md";
+import {useNavigate} from "react-router-dom";
 
 
 const HomePage = () => {
-    const { rani } = useCompanyInfo()
+    const {rani} = useCompanyInfo()
     const [posts, setPosts] = useState([]);
     const [services, setServices] = useState([]);
+    const navigate = useNavigate();
     return (
         <>
-            <Carousel homeSubText={rani?.homeSubText} homeMainText={rani?.homeMainText} images={rani?.homeImages?.data?.map(img => img?.attributes?.formats?.large?.url)}/>
+            <Carousel homeSubText={rani?.homeSubText} homeMainText={rani?.homeMainText}
+                      images={rani?.homeImages?.data?.map(img => img?.attributes?.formats?.large?.url)}/>
             {/* 2ND SECTION */}
             <section
                 className="justify-center w-full px-6 py-12 h-fit md:px-28 md:py-24 md:flex md:gap-16 md:items-center">
-                <div
-                    className="w-full h-[300px] mb-10 md:h-[400px] lg:h-[300px] bg-[url('https://dbspazio.io/wp-content/uploads/2023/03/img-about.jpg')] bg-cover bg-center font-semibold relative">
-                    {/* TO ADD IMAGE CONTAINER TO BE USED AS IF IT WAS A BACKGROUND */}
-                    <span
-                        className="absolute z-30 flex flex-col items-center gap-2 p-4 bg-white rounded shadow-lg md:flex-row drop-shadow -top-6 right-8">
-            <p>Innovation</p>
-          </span>
-                    <span
-                        className="absolute z-30 flex flex-col items-center gap-2 px-2 bg-white rounded shadow md:flex-row py-14 top-24 -left-8">
-            <p>Experts</p>
-          </span>
-                    <span
-                        className="absolute z-30 flex flex-col items-center gap-2 p-4 bg-white rounded shadow md:flex-row -bottom-6 right-24">
-            <p>Human-focused</p>
-          </span>
-                    <span
-                        className="absolute hidden px-20 py-10 bg-red-800 rounded md:block -bottom-6 -left-4 -z-10"></span>
+                <div>
+                    {rani?.aboutUsImage?.data?.attributes?.url ? <img src={rani?.aboutUsImage?.data?.attributes?.url} alt=""/> : null}
                 </div>
                 <div className="md:w-[90%] flex justify-start flex-col gap-4">
-                    <h2 className="text-4xl font-semibold">about us</h2>
+                    <h2 className="text-4xl font-semibold">About us</h2>
                     <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>
                     <p className="text-xl font-semibold">
                         Above all, we believe that real change is possible and that tomorrow
                         doesn’t have to be like today
                     </p>
-                    {rani?.companyOverview && <BlocksRenderer content={rani?.companyOverview}/>}
+                    {rani?.companyOverview && <BlocksRenderer content={rani?.companyOverview.slice(0, 2)}/>}
                     {/*<p className="text-md ">*/}
                     {/*    Solving social problems requires leaders from foundations,*/}
                     {/*    businesses, nonprofits, and governments to reimagine the systems and*/}
                     {/*    relationships that shape our world. We strive for a deep*/}
                     {/*    understanding of how to create social change.*/}
                     {/*</p>*/}
-                    <div className="flex items-center gap-2">
+                    <div onClick={() => navigate('/about-us')} className="flex items-center gap-2">
                         <p className="md:text-lg">Read more</p>
                         <FiArrowRight className="text-xl text-orange-500 hover:text-blue-950"/>
                     </div>
@@ -155,25 +143,7 @@ const HomePage = () => {
                 </div>
             </section>
 
-            {/* 7TH PAGE CONTACTS */}
-            {/*<section className="hidden w-full px-6 py-12 space-y-6 md:block h-fit md:px-28 md:py-24">*/}
-            {/*    <h2 className="m-0 text-4xl">Latest News</h2>*/}
-            {/*    <div className="w-[90px] p-[1.8px] rounded-full bg-red-500"></div>*/}
-            {/*    <ul className="w-full grid-cols-1 h-fit md:grid md:grid-cols-12 gap-y-6 ">*/}
-            {/*        {posts && posts.map(({image, title, createdAt, id}) => {*/}
-            {/*            return (*/}
-            {/*                <NewsCard key={id}*/}
-            {/*                          img={image.filePath}*/}
-            {/*                          title={title}*/}
-            {/*                          link={`/news/${id}`}*/}
-            {/*                          date={dayjs(createdAt).format('DD MMM YYYY')}*/}
-            {/*                />*/}
-            {/*            )*/}
-            {/*        })}*/}
-            {/*    </ul>*/}
-            {/*</section>*/}
 
-            {/* 8TH PAGE CONTACTS */}
 
             <section
                 className="relative items-center justify-center w-full gap-3 px-6 py-12 bg-center bg-cover h-fit md:px-28 md:py-24">

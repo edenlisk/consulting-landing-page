@@ -90,7 +90,7 @@ const Carousel = ({images, homeMainText, homeSubText}) => {
       )}
           </section> */}
         {/* 1ST SLIDE  */}
-        {images?.length && images.map((img, index) => (
+        {images?.length ? images.map((img, index) => (
             <section key={index} className="relative flex flex-col items-center justify-center embla__slide">
               <CarouselInfo
                   img={img}
@@ -98,7 +98,7 @@ const Carousel = ({images, homeMainText, homeSubText}) => {
                   link={"/services"}
               />
             </section>
-        ))}
+        )) : null}
 
         {/* 2ND SLIDE */}
         {/*<section className="relative flex flex-col items-center justify-center embla__slide">*/}

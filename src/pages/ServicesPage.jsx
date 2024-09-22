@@ -17,19 +17,8 @@ import {BlocksRenderer} from "@strapi/blocks-react-renderer";
 
 const Services = () => {
     const {services, servicesLoading, servicesError} = useServices();
-    // const {data, loading, error} = useQuery(GET_SERVICES);
-    // const [services, setServices] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [modalContent, setModalContent] = useState({title: '', description: '', image: ''});
-    //
-    // useEffect(() => {
-    //     if (data) {
-    //         console.log('services:', data);
-    //         setServices(data.services);
-    //     } else if (error) {
-    //         return message.error(error.message);
-    //     }
-    // }, [data, error]);
 
     useEffect(() => {
         if (servicesError) return message.error(servicesError.message);
@@ -60,7 +49,7 @@ const Services = () => {
                             </div>):<>
                 
                 {
-                    services.length && services.map(({attributes}, index) => {
+                    services.length ? services.map(({attributes}, index) => {
                         return (
                             <ServiceCard key={index}
                                          title={attributes.title}
@@ -74,7 +63,7 @@ const Services = () => {
                             />
                             
                         )
-                    })
+                    }) : null
                 }
                 </>}
             </ul>
@@ -86,10 +75,10 @@ const Services = () => {
                 {/*    ))}*/}
                 {/*</ul>*/}
 
-                <div className="flex items-center gap-2 p-4 text-white bg-orange-400 rounded-md hover:bg-blue-950">
-                    <FaRegFilePdf/>
-                    <p>Company presentation</p>
-                </div>
+                {/*<div className="flex items-center gap-2 p-4 text-white bg-orange-400 rounded-md hover:bg-blue-950">*/}
+                {/*    <FaRegFilePdf/>*/}
+                {/*    <p>Company presentation</p>*/}
+                {/*</div>*/}
 
                 <div className="flex flex-col gap-3 p-4 text-white bg-blue-950">
                     <p className="font-bold">How can we help you?</p>
@@ -103,8 +92,11 @@ const Services = () => {
                     </button>
                 </div>
                 <div className="relative p-4 border-2 border-zinc-300 testimonial">
-                    <p className='p-4 align-top'>Rani Mining Company really helped us achieve our financial goals. The slick presentation along with
-                        fantastic readability ensures that our financial standing is stable.</p>
+                    <p className='p-4 align-top'>
+                        Mineral Pricing and Accountancy
+                        We offer specialized pricing strategies and accountancy services tailored to the mineral trading industry.
+                        Our financial experts provide insights into market trends and help clients optimize their pricing models for maximum profitability.
+                    </p>
                         <BiSolidQuoteLeft className='absolute right-0 w-16 h-16 text-orange-600 -bottom-2' />
                 </div>
             </div>
@@ -117,7 +109,6 @@ const Services = () => {
             >
                 <img src={modalContent.image ? modalContent.image : servicesArray[0].img} alt="Service"
                      className="object-cover w-full h-64 mb-4"/>
-                {/*<p>{modalContent.description}</p>*/}
                 <BlocksRenderer content={modalContent.description}/>
             </Modal>
         </section>

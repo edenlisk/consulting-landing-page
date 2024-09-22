@@ -18,16 +18,9 @@ import {PiUsersFill} from "react-icons/pi";
 import {FiEdit2} from "react-icons/fi";
 import {GoSearch} from "react-icons/go";
 import {FiTrash} from "react-icons/fi";
-import RichTextEditor from "../../../components/RichTextEditor.jsx";
 import {useMutation, useQuery} from "@apollo/client";
 import {ADD_SERVICE, DELETE_SERVICE, GET_SERVICES, UPDATE_SERVICE} from "../../../api/graphql.js";
-import ReactHtmlParser from 'html-react-parser';
 
-const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-    },
-};
 
 const ServicesPage = () => {
     const {data: servicesData, error, loading: dataload} = useQuery(GET_SERVICES);
@@ -39,7 +32,6 @@ const ServicesPage = () => {
     const [Input, setInput] = useState(false);
     const [files, setFile] = useState(null);
     const [sideInfo, setSideInfo] = useState({title: '', serviceId: '', description: '', filePath: ''})
-    const [placement, setPlacement] = useState('right');
 
     useEffect(() => {
         if (servicesData) {
