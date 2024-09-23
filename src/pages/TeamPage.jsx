@@ -46,7 +46,7 @@ const Team = () => {
                                              name={attributes.fullName}
                                              title={attributes.position}
                                              description={attributes.background?.slice(0, 1)}
-                                             img={attributes.profile?.data?.attributes?.formats?.small?.url}
+                                             img={attributes.profile?.data?.attributes?.url}
                                              handleModal={() => showModal({
                                                  name: attributes.fullName,
                                                  description: attributes.background,
